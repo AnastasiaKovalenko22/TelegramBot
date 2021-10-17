@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Bot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/joja.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ноги+ягодицы.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/пресс.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/руки+грудь+спина.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/упражнения на все тело.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Bot.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/Telegram.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/WorkoutMaker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/joja.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ноги+ягодицы.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/пресс.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/руки+грудь+спина.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/упражнения на все тело.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1z69iXEJh19lw5Nz5VmhKgpDzsb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.45747125" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\java tools\projects\Telegram\src\main\resources" />
+      <recent name="E:\java tools\projects\Telegram\src\main\java" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Application" />
+      <module name="Telegram" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Bot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Bot" />
+      <module name="Telegram" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Telegram" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Bot" />
+        <item itemvalue="Application.Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="" />
+      <created>1633457797706</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633457797706</updated>
+      <workItem from="1633457799298" duration="418000" />
+      <workItem from="1633872475439" duration="4716000" />
+      <workItem from="1633879008108" duration="3952000" />
+      <workItem from="1634379488068" duration="551000" />
+      <workItem from="1634380133610" duration="6182000" />
+      <workItem from="1634397124733" duration="4858000" />
+      <workItem from="1634402737749" duration="3872000" />
+      <workItem from="1634454152293" duration="2690000" />
+      <workItem from="1634456875328" duration="187000" />
+      <workItem from="1634457080545" duration="14568000" />
+    </task>
+    <task id="LOCAL-00001" summary="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
+      <created>1634467736016</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1634467736016</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
+    <option name="LAST_COMMIT_MESSAGE" value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="756" y="190" key="#Deployment" timestamp="1634471523535">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="756" y="190" key="#Deployment/0.0.1920.1040@0.0.1920.1040" timestamp="1634471523535" />
+    <state x="421" y="313" key="#Notifications" timestamp="1634470457345">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="421" y="313" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1634470457345" />
+    <state x="552" y="180" key="#Project_Structure" timestamp="1633878146144">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="180" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1633878146144" />
+    <state x="765" y="238" key="#com.intellij.ide.util.MemberChooser" timestamp="1634388697468">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="238" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1634388697468" />
+    <state x="598" y="117" key="CommitChangelistDialog2" timestamp="1634471593775">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="598" y="117" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1634471593775" />
+    <state x="184" y="85" key="DiffContextDialog" timestamp="1634467594079">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634467594079" />
+    <state x="740" y="277" key="FileChooserDialogImpl" timestamp="1634471842292">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="277" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1634471842292" />
+    <state x="770" y="624" key="Github.ShareDialog" timestamp="1634471217504">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="770" y="624" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634471217504" />
+    <state width="1876" height="123" key="GridCell.Tab.0.bottom" timestamp="1634468863218">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="123" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634468863218" />
+    <state width="1876" height="123" key="GridCell.Tab.0.center" timestamp="1634468863218">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="123" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634468863218" />
+    <state width="1876" height="123" key="GridCell.Tab.0.left" timestamp="1634468863218">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="123" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634468863218" />
+    <state width="1876" height="123" key="GridCell.Tab.0.right" timestamp="1634468863218">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="123" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634468863218" />
+    <state width="1876" height="342" key="GridCell.Tab.1.bottom" timestamp="1634406431896">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="342" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634406431896" />
+    <state width="1876" height="342" key="GridCell.Tab.1.center" timestamp="1634406431896">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="342" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634406431896" />
+    <state width="1876" height="342" key="GridCell.Tab.1.left" timestamp="1634406431896">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="342" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634406431896" />
+    <state width="1876" height="342" key="GridCell.Tab.1.right" timestamp="1634406431896">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="342" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634406431896" />
+    <state x="490" y="177" key="Maven.ArtifactSearchDialog" timestamp="1634395437426">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="490" y="177" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634395437426" />
+    <state x="360" y="219" key="SettingsEditor" timestamp="1634471197005">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="360" y="219" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1634471197005" />
+    <state x="667" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1634457114126">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="667" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634457114126" />
+    <state x="771" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1634468893365">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="771" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1634468893365" />
+    <state x="524" y="258" width="871" height="558" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1634406189297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="524" y="258" width="871" height="558" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1634406189297" />
+    <state x="342" y="223" key="new project wizard" timestamp="1634380034126">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="342" y="223" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1634380034126" />
+    <state x="472" y="368" key="run.anything.popup" timestamp="1634404577018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="472" y="368" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634404577018" />
+  </component>
+</project>
