@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Bot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/joja.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ноги+ягодицы.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/пресс.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/руки+грудь+спина.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/упражнения на все тело.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/Bot.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/Telegram.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/WorkoutMaker.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/joja.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/ноги+ягодицы.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/пресс.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/руки+грудь+спина.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/упражнения на все тело.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/WorkoutMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WorkoutMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Bot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WorkoutMaker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/WorkoutMaker.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +49,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TelegramBotBase" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -73,33 +63,64 @@
       <recent name="E:\java tools\projects\Telegram\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Application" />
+  <component name="RunManager" selected="JUnit.WorkoutMakerTests.createWorkout_ForAdvanced_LegsAndArms">
+    <configuration name="WorkoutMakerTests.createWorkout_ForAdvanced_Legs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Telegram" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WorkoutMakerTests" />
+      <option name="METHOD_NAME" value="createWorkout_ForAdvanced_Legs" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Bot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Bot" />
+    <configuration name="WorkoutMakerTests.createWorkout_ForAdvanced_LegsAndArms" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Telegram" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WorkoutMakerTests" />
+      <option name="METHOD_NAME" value="createWorkout_ForAdvanced_LegsAndArms" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="WorkoutMakerTests.createWorkout_ForAmateur_ArmsAndPress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Telegram" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WorkoutMakerTests" />
+      <option name="METHOD_NAME" value="createWorkout_ForAmateur_ArmsAndPress" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WorkoutMakerTests.createWorkout_ForAmateur_Legs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Telegram" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WorkoutMakerTests" />
+      <option name="METHOD_NAME" value="createWorkout_ForAmateur_Legs" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WorkoutMakerTests.createWorkout_ForBeginner_LegsAndPress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Telegram" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WorkoutMakerTests" />
+      <option name="METHOD_NAME" value="createWorkout_ForBeginner_LegsAndPress" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Bot" />
-        <item itemvalue="Application.Application" />
+        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAdvanced_LegsAndArms" />
+        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAmateur_ArmsAndPress" />
+        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForBeginner_LegsAndPress" />
+        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAdvanced_Legs" />
+        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAmateur_Legs" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +143,9 @@
       <workItem from="1634402737749" duration="3872000" />
       <workItem from="1634454152293" duration="2690000" />
       <workItem from="1634456875328" duration="187000" />
-      <workItem from="1634457080545" duration="14568000" />
+      <workItem from="1634457080545" duration="16054000" />
+      <workItem from="1634473366677" duration="5975000" />
+      <workItem from="1634480156468" duration="112000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
       <created>1634467736016</created>
@@ -154,6 +177,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="180" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1633878146144" />
+    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1634477634395">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634477634395" />
     <state x="765" y="238" key="#com.intellij.ide.util.MemberChooser" timestamp="1634388697468">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -166,30 +193,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="184" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634467594079" />
-    <state x="740" y="277" key="FileChooserDialogImpl" timestamp="1634471842292">
+    <state x="740" y="277" key="FileChooserDialogImpl" timestamp="1634473509173">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="277" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1634471842292" />
+    <state x="740" y="277" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1634473509173" />
     <state x="770" y="624" key="Github.ShareDialog" timestamp="1634471217504">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="770" y="624" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634471217504" />
-    <state width="1876" height="123" key="GridCell.Tab.0.bottom" timestamp="1634468863218">
+    <state width="1876" height="522" key="GridCell.Tab.0.bottom" timestamp="1634479362205">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="123" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634468863218" />
-    <state width="1876" height="123" key="GridCell.Tab.0.center" timestamp="1634468863218">
+    <state width="1876" height="522" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634479362205" />
+    <state width="1876" height="522" key="GridCell.Tab.0.center" timestamp="1634479362205">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="123" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634468863218" />
-    <state width="1876" height="123" key="GridCell.Tab.0.left" timestamp="1634468863218">
+    <state width="1876" height="522" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634479362205" />
+    <state width="1876" height="522" key="GridCell.Tab.0.left" timestamp="1634479362205">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="123" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634468863218" />
-    <state width="1876" height="123" key="GridCell.Tab.0.right" timestamp="1634468863218">
+    <state width="1876" height="522" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634479362205" />
+    <state width="1876" height="522" key="GridCell.Tab.0.right" timestamp="1634479362205">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="123" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634468863218" />
+    <state width="1876" height="522" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634479362205" />
     <state width="1876" height="342" key="GridCell.Tab.1.bottom" timestamp="1634406431896">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -214,10 +241,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="360" y="219" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1634471197005" />
-    <state x="667" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1634457114126">
+    <state x="667" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1634480156498">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634457114126" />
+    <state x="667" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634480156498" />
     <state x="771" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1634468893365">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1,4 +1,5 @@
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Arrays;
  *
  * @author Анастасия Коваленко
  */
+@NoArgsConstructor
 public class WorkoutMaker {
     private static final ArrayList<String> legsExercises = new ArrayList<>(Arrays.asList(new String[]{"Приседания", "Приседания плие", "Пружинящие приседания", "Приседания с выпрыгиванием", "Приседания с шагом", "Разведение ног в стороны в приседе", "Приседания с поворотом на 180° прыжком", "Приседания на 1 ноге", "Статика в приседе", "Выпады вперед", "Выпады назад", "Болгарские выпады", "Выпады со сменой ног прыжком", "Ягодичный мост",
             "Ягодичный мост с разведением ног в стороны", "Становая тяга", "Мертвая тяга", "Отведение ноги назад стоя", "Отведение ноги назад в упоре на четвереньках", "Отведение ноги назад лежа", "Отведение ноги в сторону в упоре на четвереньках", "Зашагивание на возвышенность", "Удар ногой вперед"}));
@@ -26,22 +28,39 @@ public class WorkoutMaker {
     @Getter
     private String [] targetGroups;
 
-    public String CreateWorkout() {
-        int targetGroupsCount = targetGroups.length;
+    public WorkoutMaker(String lvl, String [] groups){
+        level = lvl;
+        targetGroups = groups;
+    }
+
+    public int setExercisesCountInRound(){
         int exercisesCountInRound;
-        int roundsCount;
         if (level.equals("новичок")){
             exercisesCountInRound = 6;
-            roundsCount = 1;
-        }
-        else if (level.equals("любитель")){
-            exercisesCountInRound = 8;
-            roundsCount = 2;
         }
         else {
             exercisesCountInRound = 8;
+        }
+        return  exercisesCountInRound;
+    }
+
+    public int setRoundsCount(){
+        int roundsCount;
+        if (level.equals("новичок")){
+            roundsCount = 1;
+        }
+        else if (level.equals("любитель")){
+            roundsCount = 2;
+        }
+        else {
             roundsCount = 3;
         }
+        return  roundsCount;
+    }
+
+    public ArrayList<String> createWorkout() {
+        int targetGroupsCount = targetGroups.length;
+        int exercisesCountInRound = setExercisesCountInRound();
         ArrayList<String> workout = new ArrayList<>();
         ArrayList<String> targetGroupEx1;
         ArrayList<String> targetGroupEx2;
@@ -65,12 +84,17 @@ public class WorkoutMaker {
             else {
                 targetGroupEx2 = armsExercises;
             }
-            MakeExersiceList(exercisesCountInRound/2, targetGroupEx1, workout);
-            MakeExersiceList(exercisesCountInRound/2, targetGroupEx2, workout);
+            makeExersiceList(exercisesCountInRound/2, targetGroupEx1, workout);
+            makeExersiceList(exercisesCountInRound/2, targetGroupEx2, workout);
+            return workout;
         }
-        else {
-            MakeExersiceList(exercisesCountInRound, targetGroupEx1, workout);
-        }
+        makeExersiceList(exercisesCountInRound, targetGroupEx1, workout);
+        return workout;
+    }
+
+    public String getStringWorkout(ArrayList<String> workout){
+        int roundsCount = setRoundsCount();
+        int exercisesCountInRound = setExercisesCountInRound();
         String strWorkout = "Ваша тренировка: " + "\n" + "Количество раундов: " + roundsCount + "\n" + "Количество упражнений в раунде: " + exercisesCountInRound + "\n" + "Упражнения: " + "\n";
         for (int i = 0; i < workout.size(); i++) {
             strWorkout += (i+1)  + ")" + " " + workout.get(i) + "\n";
@@ -80,7 +104,7 @@ public class WorkoutMaker {
         return strWorkout;
     }
 
-    public void MakeExersiceList(int exercisesCount, ArrayList<String> exercises, ArrayList<String> workout){
+    public void makeExersiceList(int exercisesCount, ArrayList<String> exercises, ArrayList<String> workout){
         int i = 0;
         while (i < exercisesCount) {
             int randomIndex = (int) Math.floor(Math.random() * exercises.size());

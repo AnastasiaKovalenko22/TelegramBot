@@ -127,9 +127,10 @@ public class Bot extends TelegramLongPollingBot {
                             .chatId(message.getChatId().toString())
                             .build());
                     workoutMaker.setTargetGroups(msgArr);
-                    String workout = workoutMaker.CreateWorkout();
+                    ArrayList<String> workout = workoutMaker.createWorkout();
+                    String strWorkout = workoutMaker.getStringWorkout(workout);
                     execute(SendMessage.builder()
-                            .text(workout)
+                            .text(strWorkout)
                             .chatId(message.getChatId().toString())
                             .build());
                 }
@@ -142,9 +143,10 @@ public class Bot extends TelegramLongPollingBot {
                             .chatId(message.getChatId().toString())
                             .build());
                     workoutMaker.setTargetGroups(msgArr);
-                    String workout = workoutMaker.CreateWorkout();
+                    ArrayList<String> workout = workoutMaker.createWorkout();
+                    String strWorkout = workoutMaker.getStringWorkout(workout);
                     execute(SendMessage.builder()
-                            .text(workout)
+                            .text(strWorkout)
                             .chatId(message.getChatId().toString())
                             .build());
                 }
