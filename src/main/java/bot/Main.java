@@ -1,3 +1,6 @@
+package bot;
+
+import bot.Bot;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;

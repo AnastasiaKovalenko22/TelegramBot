@@ -6,6 +6,7 @@
  * @author Анастасия Коваленко
  */
 
+import bot.WorkoutMaker;
 import org.junit.Assert;
 import org.junit.Test;
 

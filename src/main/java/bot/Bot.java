@@ -1,3 +1,5 @@
+package bot;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
