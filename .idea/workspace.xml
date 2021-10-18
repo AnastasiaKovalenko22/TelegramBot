@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bot/WorkoutMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/WorkoutMaker.java" afterDir="false" />
-    </list>
+    <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -197,22 +193,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="770" y="624" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1634471217504" />
-    <state width="1876" height="186" key="GridCell.Tab.0.bottom" timestamp="1634548219699">
+    <state width="1876" height="186" key="GridCell.Tab.0.bottom" timestamp="1634552417643">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="186" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634548219699" />
-    <state width="1876" height="186" key="GridCell.Tab.0.center" timestamp="1634548219699">
+    <state width="1876" height="186" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634552417643" />
+    <state width="1876" height="186" key="GridCell.Tab.0.center" timestamp="1634552417643">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="186" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634548219699" />
-    <state width="1876" height="186" key="GridCell.Tab.0.left" timestamp="1634548219689">
+    <state width="1876" height="186" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634552417643" />
+    <state width="1876" height="186" key="GridCell.Tab.0.left" timestamp="1634552417643">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="186" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634548219689" />
-    <state width="1876" height="186" key="GridCell.Tab.0.right" timestamp="1634548219699">
+    <state width="1876" height="186" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634552417643" />
+    <state width="1876" height="186" key="GridCell.Tab.0.right" timestamp="1634552417643">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="186" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634548219699" />
+    <state width="1876" height="186" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634552417643" />
     <state width="1876" height="342" key="GridCell.Tab.1.bottom" timestamp="1634406431896">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -257,5 +253,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="472" y="368" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634404577018" />
+    <state x="824" y="201" width="672" height="678" key="search.everywhere.popup" timestamp="1634550999624">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="824" y="201" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634550999624" />
   </component>
 </project>
