@@ -103,11 +103,11 @@ public class WorkoutMaker {
             else {
                 targetGroupEx2 = armsExercises;
             }
-            makeExersiceList(exercisesCountInRound/2, targetGroupEx1, workout);
-            makeExersiceList(exercisesCountInRound/2, targetGroupEx2, workout);
+            makeExerciseList(exercisesCountInRound/2, targetGroupEx1, workout);
+            makeExerciseList(exercisesCountInRound/2, targetGroupEx2, workout);
             return workout;
         }
-        makeExersiceList(exercisesCountInRound, targetGroupEx1, workout);
+        makeExerciseList(exercisesCountInRound, targetGroupEx1, workout);
         return workout;
     }
 
@@ -130,7 +130,7 @@ public class WorkoutMaker {
     }
 
     /** функция создания списка упражнений */
-    public void makeExersiceList(int exercisesCount, ArrayList<String> exercises, ArrayList<String> workout){
+    public void makeExerciseList(int exercisesCount, ArrayList<String> exercises, ArrayList<String> workout){
         int i = 0;
         while (i < exercisesCount) {
             int randomIndex = (int) Math.floor(Math.random() * exercises.size());
