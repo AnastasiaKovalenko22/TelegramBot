@@ -131,37 +131,38 @@ public class Bot extends TelegramLongPollingBot {
                     .chatId(message.getChatId().toString())
                     .build());
         }
-        String [] msgArr = msg.split(", ");
-        ArrayList<String> possibleGroups = new ArrayList<>(Arrays.asList( new String []{"ноги + ягодицы", "руки + грудь + спина", "пресс"}));
-        int msgLength = msgArr.length;
-        if (msgLength == 1){
-            if (possibleGroups.contains(msgArr[0])){
-                execute(SendMessage.builder()
-                        .text("Вы выбрали следующую группу мышц: " + msg)
-                        .chatId(message.getChatId().toString())
-                        .build());
-                workoutMaker.setTargetGroups(msgArr);
-                ArrayList<String> workout = workoutMaker.createWorkout();
-                String strWorkout = workoutMaker.getStringWorkout(workout);
-                execute(SendMessage.builder()
-                        .text(strWorkout)
-                        .chatId(message.getChatId().toString())
-                        .build());
-            }
-        }
-        else if (msgLength == 2){
-            if(possibleGroups.contains(msgArr[0]) && possibleGroups.contains(msgArr[1])){
-                execute(SendMessage.builder()
-                        .text("Вы выбрали следующие группы мышц: " + msg)
-                        .chatId(message.getChatId().toString())
-                        .build());
-                workoutMaker.setTargetGroups(msgArr);
-                ArrayList<String> workout = workoutMaker.createWorkout();
-                String strWorkout = workoutMaker.getStringWorkout(workout);
-                execute(SendMessage.builder()
-                        .text(strWorkout)
-                        .chatId(message.getChatId().toString())
-                        .build());
+        else {
+            String[] msgArr = msg.split(", ");
+            ArrayList<String> possibleGroups = new ArrayList<>(Arrays.asList(new String[]{"ноги + ягодицы", "руки + грудь + спина", "пресс"}));
+            int msgLength = msgArr.length;
+            if (msgLength == 1) {
+                if (possibleGroups.contains(msgArr[0])) {
+                    execute(SendMessage.builder()
+                            .text("Вы выбрали следующую группу мышц: " + msg)
+                            .chatId(message.getChatId().toString())
+                            .build());
+                    workoutMaker.setTargetGroups(msgArr);
+                    ArrayList<String> workout = workoutMaker.createWorkout();
+                    String strWorkout = workoutMaker.getStringWorkout(workout);
+                    execute(SendMessage.builder()
+                            .text(strWorkout)
+                            .chatId(message.getChatId().toString())
+                            .build());
+                }
+            } else if (msgLength == 2) {
+                if (possibleGroups.contains(msgArr[0]) && possibleGroups.contains(msgArr[1])) {
+                    execute(SendMessage.builder()
+                            .text("Вы выбрали следующие группы мышц: " + msg)
+                            .chatId(message.getChatId().toString())
+                            .build());
+                    workoutMaker.setTargetGroups(msgArr);
+                    ArrayList<String> workout = workoutMaker.createWorkout();
+                    String strWorkout = workoutMaker.getStringWorkout(workout);
+                    execute(SendMessage.builder()
+                            .text(strWorkout)
+                            .chatId(message.getChatId().toString())
+                            .build());
+                }
             }
         }
     }
