@@ -20,40 +20,51 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.io.File;
 
 /**
- * Класс Bot
+ * Класс Bot - класс, отвечающий за сущность бота, обрабтку сообщений пользователя
  * <p>
  * 16.10.2021
  *
  * @author Анастасия Коваленко
+ * @author Ксения Шорохова
  */
 
 
 public class Bot extends TelegramLongPollingBot {
 
+    /** Поле имя бота - username в телеграме */
     @Setter
     @Getter
     private String botName;
 
+    /** Поле токен бота в телеграме для контроля над ботом */
     @Setter
     private String botToken;
 
+    /** Поле сборщика тренировки */
     private WorkoutMaker workoutMaker = new WorkoutMaker();
 
+    /** Конструктор - создание нового объекта с определенными значениями
+     * @param botName - username бота в телеграме
+     * @param botToken - токен бота в телеграме
+     */
     public Bot(String botName, String botToken) {
         this.botName = botName;
         this.botToken = botToken;
     }
 
+    /** Функция получения значения поля {@link Bot#botName} */
     @Override
     public String getBotUsername() {
         return botName;
     }
 
+    /** Фнкция получения значения поля {@link Bot#botToken} */
     @Override
     public String getBotToken() {
         return botToken;
     }
 
+    /** Процедура обработки обновлений */
     @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
@@ -72,6 +83,10 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
+    /** Процедура обработки сообщений пользователя, содержащих команду
+     * @param message - сообщение пользователя
+     * @param commandEntity - команда
+     * */
     @SneakyThrows
     private void handleCommandMessage(Message message, Optional<MessageEntity> commandEntity) {
         String command = message.getText().substring(commandEntity.get().getOffset(), commandEntity.get().getLength());
@@ -100,6 +115,7 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
+    /** Процедура обработки сообщений пользователя, не содержащих команду */
     @SneakyThrows
     private void handleNonCommandMessage(Message message){
         String msg = message.getText();
