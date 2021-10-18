@@ -22,7 +22,7 @@ public class WorkoutMakerTests {
     private static final ArrayList<String> armsExercises = new ArrayList<>(Arrays.asList(new String[]{"Отжимания классические (можно с колен)", "Отжимания широким хватом", "Отжимания узким хватом", "Обратные отжимания", "Отведение рук в стороны (с гантелями)", "Сгибание рук на бицепс (с гантелями)", "Тяга к груди", "Тяга за голову", "Тяга к поясу в наклоне", "Тяга в планке", "Тяга к подбородку", "Разведение рук в наклоне", "Разгибание рук на трицепс в наклоне", "Гиперэкстензия", "Жим лежа", "Жим сидя", "Жим стоя", "Разгибание рук из-за головы", "Ходьба руками в планку и обратно"}));
 
     @Test
-    public void createWorkout_ForBeginner_Press() {
+    public void createWorkoutForBeginnerPress() {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
@@ -33,7 +33,7 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkout_ForBeginner_Legs() {
+    public void createWorkoutForBeginnerLegs() {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"ноги + ягодицы"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
@@ -44,7 +44,7 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkout_ForBeginner_Arms() {
+    public void createWorkoutForBeginnerArms() {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
@@ -55,7 +55,7 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkout_ForAmateur_Arms() {
+    public void createWorkoutForAmateurArms() {
         workoutMaker = new WorkoutMaker("любитель", new String[]{"руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
@@ -66,7 +66,7 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkout_ForAmateur_Press() {
+    public void createWorkoutForAmateurPress() {
         workoutMaker = new WorkoutMaker("любитель", new String[]{"пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
@@ -77,7 +77,7 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkout_ForAdvanced_Legs() {
+    public void createWorkoutForAdvancedLegs() {
         workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги + ягодицы"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
@@ -88,7 +88,7 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkout_ForBeginner_LegsAndPress(){
+    public void createWorkoutForBeginnerLegsAndPress(){
         workoutMaker = new WorkoutMaker("новичок", new String[]{"ноги + ягодицы", "пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         for (int i = 0; i < 6; i ++){
@@ -100,7 +100,7 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkout_ForAmateur_ArmsAndPress(){
+    public void createWorkoutForAmateurArmsAndPress(){
         workoutMaker = new WorkoutMaker("любитель", new String[]{"руки + грудь + спина", "пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         for (int i = 0; i < 8; i ++){
@@ -112,7 +112,7 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkout_ForAdvanced_LegsAndArms(){
+    public void createWorkoutForAdvancedLegsAndArms(){
         workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги + ягодицы","руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         for (int i = 0; i < 8; i ++){
@@ -122,4 +122,38 @@ public class WorkoutMakerTests {
                 Assert.assertTrue(armsExercises.contains(workout.get(i)));
         }
     }
+
+    @Test
+    public void calculateRightTimeForBegginer(){
+        workoutMaker = new WorkoutMaker("новичок", new String[]{"ноги + ягодицы","руки + грудь + спина"});
+        ArrayList<String> workout = workoutMaker.createWorkout();
+        String strWorkout = workoutMaker.getStringWorkout(workout);
+        int len = strWorkout.length();
+        String time = strWorkout.substring(len-2);
+        Assert.assertTrue(time.equals("23"));
+        }
+
+    @Test
+    public void calculateRightTimeForAmateur() {
+        workoutMaker = new WorkoutMaker("любитель", new String[]{"пресс", "руки + грудь + спина"});
+        ArrayList<String> workout = workoutMaker.createWorkout();
+        String strWorkout = workoutMaker.getStringWorkout(workout);
+        int len = strWorkout.length();
+        String time = strWorkout.substring(len - 2);
+        Assert.assertTrue(time.equals("64"));
+    }
+
+    @Test
+    public void calculateRightTimeForAdvanced() {
+        workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги + ягодицы", "пресс"});
+        ArrayList<String> workout = workoutMaker.createWorkout();
+        String strWorkout = workoutMaker.getStringWorkout(workout);
+        int len = strWorkout.length();
+        String time = strWorkout.substring(len - 2);
+        Assert.assertTrue(time.equals("97"));
+    }
+
 }
+
+
+
