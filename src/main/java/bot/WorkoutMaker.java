@@ -83,7 +83,7 @@ public class WorkoutMaker {
         ArrayList<String> workout = new ArrayList<>();
         ArrayList<String> targetGroupEx1;
         ArrayList<String> targetGroupEx2;
-        if (targetGroups[0].equals("ноги + ягодицы")) {
+        if (targetGroups[0].equals("ноги")) {
             targetGroupEx1 = legsExercises;
         }
         else if (targetGroups[0].equals("пресс")) {
@@ -94,7 +94,7 @@ public class WorkoutMaker {
         }
 
         if (targetGroupsCount == 2) {
-            if (targetGroups[1].equals("ноги + ягодицы")) {
+            if (targetGroups[1].equals("ноги")) {
                 targetGroupEx2 = legsExercises;
             }
             else if (targetGroups[1].equals("пресс")) {
