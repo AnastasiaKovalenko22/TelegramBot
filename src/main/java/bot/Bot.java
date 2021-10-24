@@ -102,7 +102,7 @@ public class Bot extends TelegramLongPollingBot {
                         .text(botMessage.toString())
                         .chatId(message.getChatId().toString())
                         .build());
-                return;
+                break;
             case "/start_training":
                 botMessage = new StringBuilder();
                 botMessage.append("Выберите уровень сложности(варианты ответа: новичок, любитель, продвинутый)\nновичок : 1 раунд 6 циклов\nлюбитель : 2 раунда по 8 циклов\n");
@@ -111,7 +111,13 @@ public class Bot extends TelegramLongPollingBot {
                         .text(botMessage.toString())
                         .chatId(message.getChatId().toString())
                         .build());
-                return;
+                break;
+            default:
+                execute(SendMessage.builder()
+                        .text("Извините, я вас не понял :(, попробуйте еще раз")
+                        .chatId(message.getChatId().toString())
+                        .build());
+                break;
         }
     }
 
@@ -149,6 +155,12 @@ public class Bot extends TelegramLongPollingBot {
                             .chatId(message.getChatId().toString())
                             .build());
                 }
+                else{
+                    execute(SendMessage.builder()
+                            .text("Извините, я вас не понял :(, попробуйте еще раз")
+                            .chatId(message.getChatId().toString())
+                            .build());
+                }
             } else if (msgLength == 2) {
                 if (possibleGroups.contains(msgArr[0]) && possibleGroups.contains(msgArr[1])) {
                     execute(SendMessage.builder()
@@ -160,6 +172,12 @@ public class Bot extends TelegramLongPollingBot {
                     String strWorkout = workoutMaker.getStringWorkout(workout);
                     execute(SendMessage.builder()
                             .text(strWorkout)
+                            .chatId(message.getChatId().toString())
+                            .build());
+                }
+                else{
+                    execute(SendMessage.builder()
+                            .text("Извините, я вас не понял :(, попробуйте еще раз")
                             .chatId(message.getChatId().toString())
                             .build());
                 }
