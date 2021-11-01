@@ -6,13 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/Bot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bot/WorkoutMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/WorkoutMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/WorkoutMakerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/WorkoutMakerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -55,7 +69,7 @@
       <recent name="E:\java tools\projects\Telegram\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.WorkoutMakerTests.calculateRightTimeForBegginer">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bot.Main" />
       <module name="Telegram" />
@@ -105,9 +119,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.WorkoutMakerTests.calculateRightTimeForBegginer" />
         <item itemvalue="JAR Application.TabataFitnessBot.jar" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAdvanced_LegsAndArms" />
         <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAmateur_ArmsAndPress" />
       </list>
@@ -156,15 +170,50 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
     <option name="LAST_COMMIT_MESSAGE" value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1876" height="186" key="GridCell.Tab.0.bottom" timestamp="1635093431584">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635093431584" />
+    <state width="1876" height="186" key="GridCell.Tab.0.center" timestamp="1635093431584">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635093431584" />
+    <state width="1876" height="186" key="GridCell.Tab.0.left" timestamp="1635093431584">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635093431584" />
+    <state width="1876" height="186" key="GridCell.Tab.0.right" timestamp="1635093431584">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635093431584" />
+    <state width="1876" height="186" key="GridCell.Tab.1.bottom" timestamp="1635090131534">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635090131534" />
+    <state width="1876" height="186" key="GridCell.Tab.1.center" timestamp="1635090131534">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635090131534" />
+    <state width="1876" height="186" key="GridCell.Tab.1.left" timestamp="1635090131534">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635090131534" />
+    <state width="1876" height="186" key="GridCell.Tab.1.right" timestamp="1635090131534">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635090131534" />
   </component>
 </project>

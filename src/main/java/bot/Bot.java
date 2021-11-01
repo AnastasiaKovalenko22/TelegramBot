@@ -5,19 +5,12 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.MessageEntity;
-import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.*;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.io.File;
+import java.util.*;
 
 /**
  * Класс Bot - класс, отвечающий за сущность бота, обрабтку сообщений пользователя
@@ -27,8 +20,6 @@ import java.io.File;
  * @author Анастасия Коваленко
  * @author Ксения Шорохова
  */
-
-
 public class Bot extends TelegramLongPollingBot {
 
     /** Поле имя бота - username в телеграме */
@@ -68,7 +59,10 @@ public class Bot extends TelegramLongPollingBot {
     @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage()) {
+        if(update.hasCallbackQuery()){
+            handleCallback(update.getCallbackQuery());
+        }
+        else if (update.hasMessage()) {
             Message message = update.getMessage();
             if (message.hasText() && message.hasEntities()){
                 Optional<MessageEntity> commandEntity =
@@ -77,8 +71,8 @@ public class Bot extends TelegramLongPollingBot {
                     handleCommandMessage(message, commandEntity);
                 }
             }
-            else if (message.hasText()){
-                handleNonCommandMessage(message);
+            else{
+                handleUnclearMessage(message);
             }
         }
     }
@@ -102,67 +96,79 @@ public class Bot extends TelegramLongPollingBot {
                         .text(botMessage.toString())
                         .chatId(message.getChatId().toString())
                         .build());
-                return;
+                break;
             case "/start_training":
                 botMessage = new StringBuilder();
-                botMessage.append("Выберите уровень сложности(варианты ответа: новичок, любитель, продвинутый)\nновичок : 1 раунд 6 циклов\nлюбитель : 2 раунда по 8 циклов\n");
-                botMessage.append("продвинутый : 3 раунда по 8 циклов\nНапишите выбранный уровень.");
+                botMessage.append("Выберите уровень сложности\nновичок : 1 раунд 6 циклов\nлюбитель : 2 раунда по 8 циклов\n");
+                botMessage.append("продвинутый : 3 раунда по 8 циклов");
+                List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+                String [] levels = new String[]{"новичок", "любитель", "продвинутый"};
+                for (String level : levels){
+                    buttons.add(Arrays.asList(InlineKeyboardButton.builder().text(level).callbackData("chosen level: " + level).build()));
+                }
                 execute(SendMessage.builder()
                         .text(botMessage.toString())
                         .chatId(message.getChatId().toString())
+                        .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
                         .build());
-                return;
+                break;
+            default:
+                handleUnclearMessage(message);
+                break;
         }
     }
 
-    /** Процедура обработки сообщений пользователя, не содержащих команду */
+    /**Процедура обработки непонятных боту сообщений
+     * @param message - сообщение пользователя
+     * */
     @SneakyThrows
-    private void handleNonCommandMessage(Message message){
-        String msg = message.getText();
-        if (msg.equals("новичок") || msg.equals("любитель") || msg.equals("продвинутый")){
-            workoutMaker.setLevel(msg);
-            execute(SendMessage.builder()
-                    .text("Вы выбрали уровень " + msg)
-                    .chatId(message.getChatId().toString())
-                    .build());
-            execute(SendMessage.builder()
-                    .text("Выберите целевую группу мышц(варианты ответа: ноги + ягодицы, руки + грудь + спина, пресс)" + "\n" +
-                            "Напишите выбранную группу мышц(максимум можно указать две группы, разделив запятой и пробелом пример: пресс, ноги + ягодицы).")
-                    .chatId(message.getChatId().toString())
-                    .build());
-        }
-        String [] msgArr = msg.split(", ");
-        ArrayList<String> possibleGroups = new ArrayList<>(Arrays.asList( new String []{"ноги + ягодицы", "руки + грудь + спина", "пресс"}));
-        int msgLength = msgArr.length;
-        if (msgLength == 1){
-            if (possibleGroups.contains(msgArr[0])){
+    private void handleUnclearMessage(Message message){
+        execute(SendMessage.builder()
+                .text("Извините, я вас не понял :(, попробуйте еще раз")
+                .chatId(message.getChatId().toString())
+                .build());
+    }
+
+    /**Процедура обработки нажатия на кнопки
+     * @param callbackQuery - обратный вызов
+     * */
+    @SneakyThrows
+    private void handleCallback(CallbackQuery callbackQuery){
+        Message message = callbackQuery.getMessage();
+        String[] params = callbackQuery.getData().split(": ");
+        String name = params[0];
+        String  value = params[1];
+        switch (name){
+            case "chosen level":
+                List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+                String [] groups = new String[]{"ноги", "пресс", "руки + грудь + спина",
+                        "пресс, руки + грудь + спина", "ноги, пресс", "ноги, руки + грудь + спина"};
+                for (String group : groups){
+                    buttons.add(Arrays.asList(InlineKeyboardButton.builder().text(group).callbackData("chosen group: " + group).build()));
+                }
+                workoutMaker.setLevel(value);
                 execute(SendMessage.builder()
-                        .text("Вы выбрали следующую группу мышц: " + msg)
+                        .text("Вы выбрали уровень " + value)
                         .chatId(message.getChatId().toString())
                         .build());
-                workoutMaker.setTargetGroups(msgArr);
+                execute(SendMessage.builder()
+                        .text("Выберите целевую группу мышц")
+                        .chatId(message.getChatId().toString())
+                        .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
+                        .build());
+                break;
+            case "chosen group":
+                execute(SendMessage.builder()
+                        .text("Вы выбрали следующую группу мышц: " + value)
+                        .chatId(message.getChatId().toString())
+                        .build());
+                workoutMaker.setTargetGroups(value.split(", "));
                 ArrayList<String> workout = workoutMaker.createWorkout();
                 String strWorkout = workoutMaker.getStringWorkout(workout);
                 execute(SendMessage.builder()
                         .text(strWorkout)
                         .chatId(message.getChatId().toString())
                         .build());
-            }
-        }
-        else if (msgLength == 2){
-            if(possibleGroups.contains(msgArr[0]) && possibleGroups.contains(msgArr[1])){
-                execute(SendMessage.builder()
-                        .text("Вы выбрали следующие группы мышц: " + msg)
-                        .chatId(message.getChatId().toString())
-                        .build());
-                workoutMaker.setTargetGroups(msgArr);
-                ArrayList<String> workout = workoutMaker.createWorkout();
-                String strWorkout = workoutMaker.getStringWorkout(workout);
-                execute(SendMessage.builder()
-                        .text(strWorkout)
-                        .chatId(message.getChatId().toString())
-                        .build());
-            }
         }
     }
 }
