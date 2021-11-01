@@ -83,7 +83,7 @@ public class WorkoutMaker {
         ArrayList<String> workout = new ArrayList<>();
         ArrayList<String> targetGroupEx1;
         ArrayList<String> targetGroupEx2;
-        if (targetGroups[0].equals("ноги + ягодицы")) {
+        if (targetGroups[0].equals("ноги")) {
             targetGroupEx1 = legsExercises;
         }
         else if (targetGroups[0].equals("пресс")) {
@@ -94,7 +94,7 @@ public class WorkoutMaker {
         }
 
         if (targetGroupsCount == 2) {
-            if (targetGroups[1].equals("ноги + ягодицы")) {
+            if (targetGroups[1].equals("ноги")) {
                 targetGroupEx2 = legsExercises;
             }
             else if (targetGroups[1].equals("пресс")) {
@@ -103,11 +103,11 @@ public class WorkoutMaker {
             else {
                 targetGroupEx2 = armsExercises;
             }
-            makeExersiceList(exercisesCountInRound/2, targetGroupEx1, workout);
-            makeExersiceList(exercisesCountInRound/2, targetGroupEx2, workout);
+            makeExerciseList(exercisesCountInRound/2, targetGroupEx1, workout);
+            makeExerciseList(exercisesCountInRound/2, targetGroupEx2, workout);
             return workout;
         }
-        makeExersiceList(exercisesCountInRound, targetGroupEx1, workout);
+        makeExerciseList(exercisesCountInRound, targetGroupEx1, workout);
         return workout;
     }
 
@@ -130,7 +130,7 @@ public class WorkoutMaker {
     }
 
     /** функция создания списка упражнений */
-    public void makeExersiceList(int exercisesCount, ArrayList<String> exercises, ArrayList<String> workout){
+    public void makeExerciseList(int exercisesCount, ArrayList<String> exercises, ArrayList<String> workout){
         int i = 0;
         while (i < exercisesCount) {
             int randomIndex = (int) Math.floor(Math.random() * exercises.size());
