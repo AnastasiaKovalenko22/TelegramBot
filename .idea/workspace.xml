@@ -7,7 +7,6 @@
     <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bot/WorkoutMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/WorkoutMaker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,11 +37,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1z69iXEJh19lw5Nz5VmhKgpDzsb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -69,7 +67,7 @@
       <recent name="E:\java tools\projects\Telegram\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bot.Main" />
       <module name="Telegram" />
@@ -119,14 +117,15 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAmateur_ArmsAndPress" />
+        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAdvanced_LegsAndArms" />
         <item itemvalue="JUnit.WorkoutMakerTests.calculateRightTimeForBegginer" />
         <item itemvalue="JAR Application.TabataFitnessBot.jar" />
-        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAdvanced_LegsAndArms" />
-        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAmateur_ArmsAndPress" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -151,6 +150,10 @@
       <workItem from="1634480156468" duration="112000" />
       <workItem from="1634494257058" duration="5913000" />
       <workItem from="1634543559930" duration="1572000" />
+      <workItem from="1635777204628" duration="184000" />
+      <workItem from="1635777407860" duration="12000" />
+      <workItem from="1635777451874" duration="24000" />
+      <workItem from="1635777530846" duration="1098000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
       <created>1634467736016</created>
@@ -163,20 +166,19 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />

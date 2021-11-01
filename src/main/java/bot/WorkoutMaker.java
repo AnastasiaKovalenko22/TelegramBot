@@ -111,24 +111,6 @@ public class WorkoutMaker {
         return workout;
     }
 
-    /** функция создания строкового представления тренировки для отправки сообщения пользователю */
-    public String getStringWorkout(ArrayList<String> workout){
-        int roundsCount = setRoundsCount();
-        int exercisesCountInRound = setExercisesCountInRound();
-        StringBuilder strWorkout = new StringBuilder();
-        strWorkout.append("Ваша тренировка:\nКоличество раундов: ");
-        strWorkout.append(roundsCount);
-        strWorkout.append("\nКоличество упражнений в раунде: ");
-        strWorkout.append(exercisesCountInRound);
-        strWorkout.append("\nУпражнения:\n");
-        for (int i = 0; i < workout.size(); i++) {
-            strWorkout.append((i+1)  + ") " + workout.get(i) + "\n");
-        }
-        int time = ((230*exercisesCountInRound + 10*(exercisesCountInRound - 1))*roundsCount + 60*(roundsCount - 1)) / 60;
-        strWorkout.append("Приблизительная длительность тренировки в минутах: " + time);
-        return strWorkout.toString();
-    }
-
     /** функция создания списка упражнений */
     public void makeExerciseList(int exercisesCount, ArrayList<String> exercises, ArrayList<String> workout){
         int i = 0;
