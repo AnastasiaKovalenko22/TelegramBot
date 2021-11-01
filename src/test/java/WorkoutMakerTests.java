@@ -26,8 +26,8 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
-        for (String item:
-             workout) {
+        for (String item :
+                workout) {
             Assert.assertTrue(pressExercises.contains(item));
         }
     }
@@ -37,7 +37,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"ноги + ягодицы"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(legsExercises.contains(item));
         }
@@ -48,7 +48,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(armsExercises.contains(item));
         }
@@ -59,7 +59,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("любитель", new String[]{"руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(armsExercises.contains(item));
         }
@@ -70,7 +70,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("любитель", new String[]{"пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(pressExercises.contains(item));
         }
@@ -81,17 +81,17 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги + ягодицы"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(legsExercises.contains(item));
         }
     }
 
     @Test
-    public void createWorkoutForBeginnerLegsAndPress(){
+    public void createWorkoutForBeginnerLegsAndPress() {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"ноги + ягодицы", "пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
-        for (int i = 0; i < 6; i ++){
+        for (int i = 0; i < 6; i++) {
             if (i < 3)
                 Assert.assertTrue(legsExercises.contains(workout.get(i)));
             else
@@ -100,10 +100,10 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkoutForAmateurArmsAndPress(){
+    public void createWorkoutForAmateurArmsAndPress() {
         workoutMaker = new WorkoutMaker("любитель", new String[]{"руки + грудь + спина", "пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
-        for (int i = 0; i < 8; i ++){
+        for (int i = 0; i < 8; i++) {
             if (i < 4)
                 Assert.assertTrue(armsExercises.contains(workout.get(i)));
             else
@@ -112,48 +112,14 @@ public class WorkoutMakerTests {
     }
 
     @Test
-    public void createWorkoutForAdvancedLegsAndArms(){
-        workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги + ягодицы","руки + грудь + спина"});
+    public void createWorkoutForAdvancedLegsAndArms() {
+        workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги + ягодицы", "руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
-        for (int i = 0; i < 8; i ++){
+        for (int i = 0; i < 8; i++) {
             if (i < 4)
                 Assert.assertTrue(legsExercises.contains(workout.get(i)));
             else
                 Assert.assertTrue(armsExercises.contains(workout.get(i)));
         }
     }
-
-    @Test
-    public void calculateRightTimeForBegginer(){
-        workoutMaker = new WorkoutMaker("новичок", new String[]{"ноги + ягодицы","руки + грудь + спина"});
-        ArrayList<String> workout = workoutMaker.createWorkout();
-        String strWorkout = workoutMaker.getStringWorkout(workout);
-        int len = strWorkout.length();
-        String time = strWorkout.substring(len-2);
-        Assert.assertTrue(time.equals("23"));
-        }
-
-    @Test
-    public void calculateRightTimeForAmateur() {
-        workoutMaker = new WorkoutMaker("любитель", new String[]{"пресс", "руки + грудь + спина"});
-        ArrayList<String> workout = workoutMaker.createWorkout();
-        String strWorkout = workoutMaker.getStringWorkout(workout);
-        int len = strWorkout.length();
-        String time = strWorkout.substring(len - 2);
-        Assert.assertTrue(time.equals("64"));
-    }
-
-    @Test
-    public void calculateRightTimeForAdvanced() {
-        workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги + ягодицы", "пресс"});
-        ArrayList<String> workout = workoutMaker.createWorkout();
-        String strWorkout = workoutMaker.getStringWorkout(workout);
-        int len = strWorkout.length();
-        String time = strWorkout.substring(len - 2);
-        Assert.assertTrue(time.equals("97"));
-    }
-
 }
-
-
-
