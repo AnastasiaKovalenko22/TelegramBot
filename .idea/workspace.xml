@@ -65,6 +65,7 @@
       <recent name="E:\java tools\projects\Telegram\src\main\java" />
     </key>
   </component>
+
   <component name="RunManager" selected="JAR Application.TabataFitnessBot.jar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bot.Main" />
@@ -167,15 +168,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
     <option name="LAST_COMMIT_MESSAGE" value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1876" height="186" key="GridCell.Tab.0.bottom" timestamp="1634566426181">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634566426181" />
+    <state width="1876" height="186" key="GridCell.Tab.0.center" timestamp="1634566426181">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634566426181" />
+    <state width="1876" height="186" key="GridCell.Tab.0.left" timestamp="1634566426181">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634566426181" />
+    <state width="1876" height="186" key="GridCell.Tab.0.right" timestamp="1634566426181">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="186" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634566426181" />
   </component>
 </project>

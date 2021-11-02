@@ -209,9 +209,6 @@ public class Bot extends TelegramLongPollingBot {
             case "stop":
                 sendTextMessage("Тренировка завершена!", chatId);
                 break;
-        }
-    }
-
     /**
      * Процедура отправки пользователю текстового сообщения
      * @param text - текст сообщения
