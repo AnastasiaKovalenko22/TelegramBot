@@ -42,8 +42,8 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
-        for (String item:
-             workout) {
+        for (String item :
+                workout) {
             Assert.assertTrue(pressExercises.contains(item));
         }
     }
@@ -56,7 +56,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"ноги"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(legsExercises.contains(item));
         }
@@ -70,7 +70,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("новичок", new String[]{"руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(armsExercises.contains(item));
         }
@@ -84,7 +84,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("любитель", new String[]{"руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(armsExercises.contains(item));
         }
@@ -98,7 +98,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("любитель", new String[]{"пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(pressExercises.contains(item));
         }
@@ -112,7 +112,7 @@ public class WorkoutMakerTests {
         workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги"});
         ArrayList<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
-        for (String item:
+        for (String item :
                 workout) {
             Assert.assertTrue(legsExercises.contains(item));
         }
@@ -125,7 +125,7 @@ public class WorkoutMakerTests {
     public void createWorkoutForBeginnerLegsAndPress(){
         workoutMaker = new WorkoutMaker("новичок", new String[]{"ноги", "пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
-        for (int i = 0; i < 6; i ++){
+        for (int i = 0; i < 6; i++) {
             if (i < 3)
                 Assert.assertTrue(legsExercises.contains(workout.get(i)));
             else
@@ -137,10 +137,10 @@ public class WorkoutMakerTests {
      * Тест на корректность сборки тренировки для любителя на руки и пресс
      */
     @Test
-    public void createWorkoutForAmateurArmsAndPress(){
+    public void createWorkoutForAmateurArmsAndPress() {
         workoutMaker = new WorkoutMaker("любитель", new String[]{"руки + грудь + спина", "пресс"});
         ArrayList<String> workout = workoutMaker.createWorkout();
-        for (int i = 0; i < 8; i ++){
+        for (int i = 0; i < 8; i++) {
             if (i < 4)
                 Assert.assertTrue(armsExercises.contains(workout.get(i)));
             else
@@ -155,7 +155,7 @@ public class WorkoutMakerTests {
     public void createWorkoutForAdvancedLegsAndArms(){
         workoutMaker = new WorkoutMaker("продвинутый", new String[]{"ноги","руки + грудь + спина"});
         ArrayList<String> workout = workoutMaker.createWorkout();
-        for (int i = 0; i < 8; i ++){
+        for (int i = 0; i < 8; i++) {
             if (i < 4)
                 Assert.assertTrue(legsExercises.contains(workout.get(i)));
             else
@@ -163,6 +163,3 @@ public class WorkoutMakerTests {
         }
     }
 }
-
-
-
