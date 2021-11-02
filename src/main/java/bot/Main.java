@@ -1,6 +1,5 @@
 package bot;
 
-import bot.Bot;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
@@ -12,6 +11,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
  * 17.10.2021
  *
  * @author Анастасия Коваленко
+ * @author Ксения Шорохова
  */
 public class Main {
     @SneakyThrows
