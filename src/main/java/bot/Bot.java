@@ -143,21 +143,21 @@ public class Bot extends TelegramLongPollingBot {
      * @param callbackQuery - обратный вызов
      */
     @SneakyThrows
-    private void handleCallback(CallbackQuery callbackQuery){
+    private void handleCallback(CallbackQuery callbackQuery) {
         Message message = callbackQuery.getMessage();
         String[] params = callbackQuery.getData().split(": ");
         String name = params[0];
         String value = "";
-        if(params.length == 2) {
+        if (params.length == 2) {
             value = params[1];
         }
         String chatId = message.getChatId().toString();
-        switch (name){
+        switch (name) {
             case "chosen level":
                 List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-                String [] groups = new String[]{"ноги", "пресс", "руки + грудь + спина",
+                String[] groups = new String[]{"ноги", "пресс", "руки + грудь + спина",
                         "пресс, руки + грудь + спина", "ноги, пресс", "ноги, руки + грудь + спина"};
-                for (String group : groups){
+                for (String group : groups) {
                     buttons.add(Arrays.asList(InlineKeyboardButton.builder().text(group).callbackData("chosen group: " + group).build()));
                 }
                 users.get(chatId).getWorkoutMaker().setLevel(value);
@@ -184,7 +184,7 @@ public class Bot extends TelegramLongPollingBot {
                 buttons = new ArrayList<>();
                 buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start exercise").build(),
                         InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                sendMessageWithButtons((users.get(chatId).getCurrentExercise() + 1) + " упражнение: "+
+                sendMessageWithButtons((users.get(chatId).getCurrentExercise() + 1) + " упражнение: " +
                         users.get(chatId).getExerciseName() + " Начать ?", chatId, buttons);
                 break;
             case "start exercise":
@@ -209,6 +209,8 @@ public class Bot extends TelegramLongPollingBot {
             case "stop":
                 sendTextMessage("Тренировка завершена!", chatId);
                 break;
+        }
+    }
     /**
      * Процедура отправки пользователю текстового сообщения
      * @param text - текст сообщения

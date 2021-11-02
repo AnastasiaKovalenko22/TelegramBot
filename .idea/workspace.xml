@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
+    <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/Bot.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,7 +67,6 @@
       <recent name="E:\java tools\projects\Telegram\src\main\java" />
     </key>
   </component>
-
   <component name="RunManager" selected="JAR Application.TabataFitnessBot.jar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bot.Main" />
@@ -168,13 +169,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
