@@ -18,7 +18,7 @@ import java.util.Arrays;
 @NoArgsConstructor
 public class WorkoutMaker {
 
-    /** поле - список упражнений на ноги и ягодицы */
+    /** поле - список упражнений на ноги*/
     private static final ArrayList<String> legsExercises = new ArrayList<>(Arrays.asList(new String[]{"Приседания", "Приседания плие", "Пружинящие приседания", "Приседания с выпрыгиванием", "Приседания с шагом", "Разведение ног в стороны в приседе", "Приседания с поворотом на 180° прыжком", "Приседания на 1 ноге", "Статика в приседе", "Выпады вперед", "Выпады назад", "Болгарские выпады", "Выпады со сменой ног прыжком", "Ягодичный мост",
             "Ягодичный мост с разведением ног в стороны", "Становая тяга", "Мертвая тяга", "Отведение ноги назад стоя", "Отведение ноги назад в упоре на четвереньках", "Отведение ноги назад лежа", "Отведение ноги в сторону в упоре на четвереньках", "Зашагивание на возвышенность", "Удар ногой вперед"}));
 
@@ -83,7 +83,7 @@ public class WorkoutMaker {
         ArrayList<String> workout = new ArrayList<>();
         ArrayList<String> targetGroupEx1;
         ArrayList<String> targetGroupEx2;
-        if (targetGroups[0].equals("ноги + ягодицы")) {
+        if (targetGroups[0].equals("ноги")) {
             targetGroupEx1 = legsExercises;
         }
         else if (targetGroups[0].equals("пресс")) {
@@ -94,7 +94,7 @@ public class WorkoutMaker {
         }
 
         if (targetGroupsCount == 2) {
-            if (targetGroups[1].equals("ноги + ягодицы")) {
+            if (targetGroups[1].equals("ноги")) {
                 targetGroupEx2 = legsExercises;
             }
             else if (targetGroups[1].equals("пресс")) {
@@ -109,24 +109,6 @@ public class WorkoutMaker {
         }
         makeExerciseList(exercisesCountInRound, targetGroupEx1, workout);
         return workout;
-    }
-
-    /** функция создания строкового представления тренировки для отправки сообщения пользователю */
-    public String getStringWorkout(ArrayList<String> workout){
-        int roundsCount = setRoundsCount();
-        int exercisesCountInRound = setExercisesCountInRound();
-        StringBuilder strWorkout = new StringBuilder();
-        strWorkout.append("Ваша тренировка:\nКоличество раундов: ");
-        strWorkout.append(roundsCount);
-        strWorkout.append("\nКоличество упражнений в раунде: ");
-        strWorkout.append(exercisesCountInRound);
-        strWorkout.append("\nУпражнения:\n");
-        for (int i = 0; i < workout.size(); i++) {
-            strWorkout.append((i+1)  + ") " + workout.get(i) + "\n");
-        }
-        int time = ((230*exercisesCountInRound + 10*(exercisesCountInRound - 1))*roundsCount + 60*(roundsCount - 1)) / 60;
-        strWorkout.append("Приблизительная длительность тренировки в минутах: " + time);
-        return strWorkout.toString();
     }
 
     /** функция создания списка упражнений */
