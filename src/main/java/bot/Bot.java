@@ -175,26 +175,11 @@ public class Bot extends TelegramLongPollingBot {
             case "start workout":
                 users.get(chatId).setWorkout(users.get(chatId).getWorkoutMaker().createWorkout());
                 buttons = new ArrayList<>();
-                buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start round").build(),
-                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                sendMessageWithButtons("Начать " + users.get(chatId).getCurrentRound() + " раунд?",
-                        chatId, buttons);
-                break;
-            case "start round":
-                buttons = new ArrayList<>();
-                buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start exercise").build(),
-                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                sendMessageWithButtons((users.get(chatId).getCurrentExercise() + 1) + " упражнение: "+
-                        users.get(chatId).getExerciseName() + " Начать ?", chatId, buttons);
-                break;
-            case "start exercise":
-                buttons = new ArrayList<>();
                 buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
                         InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                sendMessageWithButtons("Начать " + users.get(chatId).getCurrentApproach() + " подход?",
+                sendMessageWithButtons(users.get(chatId).getCurrentRound() + " раунд! 1 упражнение: " + users.get(chatId).getExerciseName() + "! Начать?",
                         chatId, buttons);
                 break;
-
             case "start approach":
                 sendTextMessage("Paботаем!", chatId);
                 users.get(chatId).doExercise();
