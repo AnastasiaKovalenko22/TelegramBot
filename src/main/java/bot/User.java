@@ -16,6 +16,10 @@ import java.util.*;
  */
 public class User {
      /**
+      * Константа - количество подходов
+      */
+     private final int approachCount = 2;
+     /**
       * Поле id чата пользователя и бота
       */
      @Setter
@@ -86,41 +90,9 @@ public class User {
           Timer timer = new Timer();
           timer.schedule(new TimerTask() {
                public void run() {
-                    String text = "";
-                    if(currentApproach < 8){
-                         currentApproach ++;
-                         text = "20 секунд прошло! Начать отдых между подходами 10 секунд?";
-                    }
-                    else if (currentExercise < workout.size() - 1) {
-                         currentApproach = 1;
-                         currentExercise ++;
-                         text = "20 секунд прошло! Начать отдых между упражнениями 10 секунд?";
-                    }
-                    else if (currentRound < workoutMaker.setRoundsCount()) {
-                         currentApproach = 1;
-                         currentExercise = 0;
-                         currentRound ++;
-                         text = "20 секунд прошло! Начать отдых между раундами 60 секунд?";
-                    }
-                    else {
-                         currentApproach = 1;
-                         currentExercise = 0;
-                         currentRound = 1;
-                         text = "Тренировка завершена!";
-                    }
-                    if(!text.equals("Тренировка завершена!")) {
-                         String [] textWords = text.split(" ");
-                         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-                         buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start rest: " + textWords[textWords.length - 2]).build(),
-                                 InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                         bot.sendMessageWithButtons(text, chatId, buttons);
-                    }
-                    else {
-                         bot.sendTextMessage(text, chatId);
-                    }
-
+                    startRest();
                }
-          }, 20*1000);
+          }, 1*1000);
 
      }
 
@@ -132,30 +104,69 @@ public class User {
           Timer timer = new Timer();
           timer.schedule(new TimerTask(){
                public void run(){
-                    String text = "";
-                    if(currentApproach > 1){
-                         text = "10 секунд прошло! Начать " + currentApproach + " подход?";
-                         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-                         buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
-                                 InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                         bot.sendMessageWithButtons(text, chatId, buttons);
-                    }
-                    else if (currentExercise > 0){
-                         text = "10 секунд прошло! " + (currentExercise + 1) + " упражнение " + getExerciseName() + " Начать?";
-                         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-                         buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start exercise").build(),
-                                 InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                         bot.sendMessageWithButtons(text, chatId, buttons);
-                    }
-                    else{
-                         text = "60 секунд прошло! Начать " + currentRound + " раунд?";
-                         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-                         buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start round").build(),
-                                 InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                         bot.sendMessageWithButtons(text, chatId, buttons);
-                    }
+                    startWork();
                }
 
-          }, restTime*1000);
+          }, 1*1000);
+     }
+
+     private void startRest(){
+          String text = "";
+          if(currentApproach < approachCount){
+               currentApproach ++;
+               text = "20 секунд прошло! Начать отдых между подходами 10 секунд?";
+          }
+          else if (currentExercise < workout.size() - 1) {
+               currentApproach = 1;
+               currentExercise ++;
+               text = "20 секунд прошло! Начать отдых между упражнениями 10 секунд?";
+          }
+          else if (currentRound < workoutMaker.setRoundsCount()) {
+               currentApproach = 1;
+               currentExercise = 0;
+               currentRound ++;
+               text = "20 секунд прошло! Начать отдых между раундами 60 секунд?";
+          }
+          else {
+               currentApproach = 1;
+               currentExercise = 0;
+               currentRound = 1;
+               text = "Тренировка завершена!";
+          }
+          if(!text.equals("Тренировка завершена!")) {
+               String [] textWords = text.split(" ");
+               List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+               buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start rest: " + textWords[textWords.length - 2]).build(),
+                       InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
+               bot.sendMessageWithButtons(text, chatId, buttons);
+          }
+          else {
+               bot.sendTextMessage(text, chatId);
+          }
+     }
+
+     private void startWork(){
+          String text = "";
+          if(currentApproach > 1){
+               text = "10 секунд прошло! Начать " + currentApproach + " подход?";
+               List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+               buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
+                       InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
+               bot.sendMessageWithButtons(text, chatId, buttons);
+          }
+          else if (currentExercise > 0){
+               text = "10 секунд прошло! " + (currentExercise + 1) + " упражнение: " + getExerciseName() + "! Начать?";
+               List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+               buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
+                       InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
+               bot.sendMessageWithButtons(text, chatId, buttons);
+          }
+          else{
+               text = "60 секунд прошло! " + currentRound + " раунд! 1 упражнение: " + getExerciseName() + "! Начать?";
+               List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+               buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
+                       InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
+               bot.sendMessageWithButtons(text, chatId, buttons);
+          }
      }
 }
