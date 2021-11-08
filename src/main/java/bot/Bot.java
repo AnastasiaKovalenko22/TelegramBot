@@ -114,7 +114,7 @@ public class Bot extends TelegramLongPollingBot {
                 break;
             case "/start":
                 if (users.containsKey(chatId)){
-                    users.get(chatId).getTimerForRemaining().cancel();
+                    users.get(chatId).getTimerForNotifying().cancel();
                 }
                 users.put(chatId, new User(chatId));
                 users.get(chatId).setBot(this);
@@ -165,7 +165,7 @@ public class Bot extends TelegramLongPollingBot {
                 }
                 users.get(chatId).getWorkoutMaker().setLevel(value);
                 users.get(chatId).setLevel(value);
-                users.get(chatId).setRemainder();
+                users.get(chatId).setNotifications();
                 sendTextMessage("Вы выбрали уровень " + value, chatId);
                 sendMessageWithButtons("Выберите целевую группу мышц", chatId, buttons);
                 break;

@@ -1,6 +1,7 @@
 package bot;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.checkerframework.checker.units.qual.A;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -16,6 +17,7 @@ import java.util.*;
  * @author Анастасия Коваленко
  * @author Ксения Шорохова
  */
+@NoArgsConstructor
 public class User {
     /**
      * Константа - количество подходов
@@ -123,7 +125,7 @@ public class User {
      */
     @Getter
     @Setter
-    private Timer timerForRemaining = new Timer();
+    private Timer timerForNotifying = new Timer();
 
 
     /**
@@ -165,6 +167,23 @@ public class User {
      * Процедура отправки поьзователю сообщений о завершении рабочего времени
      */
     private void startRest() {
+        String text = getTextForStartRestMessage();
+        if (!text.equals("Тренировка завершена!")) {
+            String[] textWords = text.split(" ");
+            List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+            buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start rest: " + textWords[textWords.length - 2]).build(),
+                    InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
+            bot.sendMessageWithButtons(text, chatId, buttons);
+        } else {
+            bot.sendTextMessage(text, chatId);
+        }
+    }
+
+    /**
+     * Функция получения текста сообщения о завершении работы и начале отдыха
+     * @return - строка - текст сообщения
+     */
+    public String getTextForStartRestMessage(){
         String text = "";
         if (currentApproach < APPROACH_COUNT) {
             currentApproach++;
@@ -184,21 +203,20 @@ public class User {
             currentRound = 1;
             text = "Тренировка завершена!";
             finishedWorkoutCount++;
-            if(workoutMaker.getTargetGroups().length == 2){
-                trainedGroups += workoutMaker.getTargetGroups()[0] + ", " + workoutMaker.getTargetGroups()[1] + "; ";
-            }
-            else{
-                trainedGroups += workoutMaker.getTargetGroups()[0] + "; ";
-            }
+            addTrainedGroup();
         }
-        if (!text.equals("Тренировка завершена!")) {
-            String[] textWords = text.split(" ");
-            List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-            buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start rest: " + textWords[textWords.length - 2]).build(),
-                    InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-            bot.sendMessageWithButtons(text, chatId, buttons);
-        } else {
-            bot.sendTextMessage(text, chatId);
+        return text;
+    }
+
+    /**
+     * Процедура добавления очередной группы мышц, на которую выполнена тренировка в {@link User#trainedGroups}
+     */
+    private void addTrainedGroup(){
+        if(workoutMaker.getTargetGroups().length == 2){
+            trainedGroups += workoutMaker.getTargetGroups()[0] + ", " + workoutMaker.getTargetGroups()[1] + "; ";
+        }
+        else{
+            trainedGroups += workoutMaker.getTargetGroups()[0] + "; ";
         }
     }
 
@@ -206,22 +224,13 @@ public class User {
      * Процедура отправки пользователю сообщений о завершении времени отдыха
      */
     private void startWork() {
-        String text = "";
-        if (currentApproach > 1) {
-            text = "10 секунд прошло! Начать " + currentApproach + " подход?";
+        String text = getTextForStartWorkMessage();
+        if(currentApproach > 1) {
             List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
             buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
                     InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
             bot.sendMessageWithButtons(text, chatId, buttons);
-        } else if (currentExercise > 0) {
-            text = "10 секунд прошло! " + (currentExercise + 1) + " упражнение: " + getExerciseName() + "! Начать?";
-            List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-            buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
-                    InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build(),
-                    InlineKeyboardButton.builder().text("техника выполнения").callbackData("tech").build()));
-            bot.sendMessageWithButtons(text, chatId, buttons);
-        } else {
-            text = "60 секунд прошло! " + currentRound + " раунд! 1 упражнение: " + getExerciseName() + "! Начать?";
+        } else{
             List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
             buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
                     InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build(),
@@ -231,37 +240,60 @@ public class User {
     }
 
     /**
-     * Процедура отправки уведомлений о количестве оставшихся тренировок на неделе пользователю
+     * Функция получения текста сообщения о завершении отдыха и начале работы
+     * @return - строка - текст сообщения
      */
-    public void setRemainder() {
-        timerForRemaining.scheduleAtFixedRate(new TimerTask() {
+    public String getTextForStartWorkMessage(){
+        String text = "";
+        if (currentApproach > 1) {
+            text = "10 секунд прошло! Начать " + currentApproach + " подход?";
+        } else if (currentExercise > 0) {
+            text = "10 секунд прошло! " + (currentExercise + 1) + " упражнение: " + getExerciseName() + "! Начать?";
+        } else {
+            text = "60 секунд прошло! " + currentRound + " раунд! 1 упражнение: " + getExerciseName() + "! Начать?";
+        }
+        return text;
+    }
+
+    /**
+     * Процедура переодической отправки уведомлений о количестве оставшихся тренировок на неделе пользователю
+     */
+    public void setNotifications() {
+        timerForNotifying.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                if (weeklyWorkoutCount - finishedWorkoutCount > 0) {
-                    if(trainedGroups.equals("")) {
-                        bot.sendTextMessage("Привет! На этой неделе осталось тренировок: " + (weeklyWorkoutCount - finishedWorkoutCount), chatId);
-                    }
-                    else{
-                        bot.sendTextMessage("Привет! На этой неделе осталось тренировок: " + (weeklyWorkoutCount - finishedWorkoutCount) +
-                                " Ты уже делал тренировку на " + trainedGroups + "рекомендую выбрать дргую групп мышц", chatId);
-                    }
-                }
-                if(getDay().equals("воскресенье")){
-                    finishedWorkoutCount = 0;
-                    trainedGroups = "";
-                }
+                notifyUser();
             }
-        }, 10 * 1000, 10 * 1000); //24*60*60*1000
+        }, 24*60*60*1000, 24*60*60*1000); //24*60*60*1000 вместо обоих 10*1000
     }
 
     /**
      * Функция получения текущего дня недели
      * @return - строка - название дня недели
      */
-    private String getDay(){
+    public String getDay(){
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         Locale rus = new Locale("ru", "RU");
         String dayOfWeek = new SimpleDateFormat("EEEE", rus).format(date.getTime());
         return  dayOfWeek;
+    }
+
+    /**
+     * Процедура отправки уведомления пользователю
+     */
+    private void notifyUser(){
+        if (weeklyWorkoutCount - finishedWorkoutCount > 0) {
+            if(trainedGroups.equals("")) {
+                bot.sendTextMessage("Привет! На этой неделе осталось тренировок: " + (weeklyWorkoutCount - finishedWorkoutCount), chatId);
+            }
+            else{
+                bot.sendTextMessage("Привет! На этой неделе осталось тренировок: " + (weeklyWorkoutCount - finishedWorkoutCount) +
+                        " Ты уже делал тренировку на " + trainedGroups + "рекомендую выбрать дргую групп мышц", chatId);
+            }
+        }
+        if(getDay().equals("воскресенье")){
+            finishedWorkoutCount = 0;
+            trainedGroups = "";
+        }
     }
 }
