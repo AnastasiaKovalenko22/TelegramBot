@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
+
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/Bot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/User.java" afterDir="false" />
+
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,60 +72,65 @@
       <recent name="E:\java tools\projects\Telegram\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.TabataFitnessBot.jar">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="bot.Main" />
-      <module name="Telegram" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="bot.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WorkoutMakerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+
+  <component name="RunManager" selected="JUnit.UserTests">
+    <configuration name="UserTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+
       <module name="Telegram" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WorkoutMakerTests" />
+      <option name="MAIN_CLASS_NAME" value="UserTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WorkoutMakerTests.calculateRightTimeForBegginer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserTests.getTextForStartMessageReturnsCorrectTextWhenRestBetweenRounds" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Telegram" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WorkoutMakerTests" />
-      <option name="METHOD_NAME" value="calculateRightTimeForBegginer" />
+      <option name="MAIN_CLASS_NAME" value="UserTests" />
+      <option name="METHOD_NAME" value="getTextForStartMessageReturnsCorrectTextWhenRestBetweenRounds" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WorkoutMakerTests.createWorkout_ForAdvanced_LegsAndArms" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartAproach" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Telegram" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WorkoutMakerTests" />
-      <option name="METHOD_NAME" value="createWorkout_ForAdvanced_LegsAndArms" />
+      <option name="MAIN_CLASS_NAME" value="UserTests" />
+      <option name="METHOD_NAME" value="getTextForStartWorkMessageReturnsCorrectTextWhenStartAproach" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TabataFitnessBot.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/target/TabataFitnessBot.jar" />
-      <method v="2" />
+    <configuration name="UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartExercise" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Telegram" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserTests" />
+      <option name="METHOD_NAME" value="getTextForStartWorkMessageReturnsCorrectTextWhenStartExercise" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartRound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Telegram" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserTests" />
+      <option name="METHOD_NAME" value="getTextForStartWorkMessageReturnsCorrectTextWhenStartRound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.TabataFitnessBot.jar" />
-        <item itemvalue="JUnit.WorkoutMakerTests" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.WorkoutMakerTests.calculateRightTimeForBegginer" />
-        <item itemvalue="JUnit.WorkoutMakerTests.createWorkout_ForAdvanced_LegsAndArms" />
+        <item itemvalue="JUnit.UserTests" />
+        <item itemvalue="JUnit.UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartRound" />
+        <item itemvalue="JUnit.UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartExercise" />
+        <item itemvalue="JUnit.UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartAproach" />
+        <item itemvalue="JUnit.UserTests.getTextForStartMessageReturnsCorrectTextWhenRestBetweenRounds" />
       </list>
     </recent_temporary>
   </component>
@@ -150,6 +160,9 @@
       <workItem from="1634494257058" duration="5913000" />
       <workItem from="1634543559930" duration="1572000" />
       <workItem from="1635837695409" duration="1275000" />
+      <workItem from="1636187700338" duration="8351000" />
+      <workItem from="1636376105023" duration="361000" />
+      <workItem from="1636386073898" duration="7288000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
       <created>1634467736016</created>
@@ -179,23 +192,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
     <option name="LAST_COMMIT_MESSAGE" value="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1876" height="186" key="GridCell.Tab.0.bottom" timestamp="1634566426181">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1876" height="186" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634566426181" />
-    <state width="1876" height="186" key="GridCell.Tab.0.center" timestamp="1634566426181">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1876" height="186" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634566426181" />
-    <state width="1876" height="186" key="GridCell.Tab.0.left" timestamp="1634566426181">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1876" height="186" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634566426181" />
-    <state width="1876" height="186" key="GridCell.Tab.0.right" timestamp="1634566426181">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1876" height="186" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634566426181" />
   </component>
 </project>

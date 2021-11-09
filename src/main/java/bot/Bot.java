@@ -113,6 +113,9 @@ public class Bot extends TelegramLongPollingBot {
                 sendTextMessage(botMessage.toString(), chatId);
                 break;
             case "/start":
+                if (users.containsKey(chatId)){
+                    users.get(chatId).getTimerForNotifying().cancel();
+                }
                 users.put(chatId, new User(chatId));
                 users.get(chatId).setBot(this);
                 botMessage = new StringBuilder();
@@ -161,6 +164,8 @@ public class Bot extends TelegramLongPollingBot {
                     buttons.add(Arrays.asList(InlineKeyboardButton.builder().text(group).callbackData("chosen group: " + group).build()));
                 }
                 users.get(chatId).getWorkoutMaker().setLevel(value);
+                users.get(chatId).setLevel(value);
+                users.get(chatId).setNotifications();
                 sendTextMessage("Вы выбрали уровень " + value, chatId);
                 sendMessageWithButtons("Выберите целевую группу мышц", chatId, buttons);
                 break;
@@ -175,26 +180,12 @@ public class Bot extends TelegramLongPollingBot {
             case "start workout":
                 users.get(chatId).setWorkout(users.get(chatId).getWorkoutMaker().createWorkout());
                 buttons = new ArrayList<>();
-                buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start round").build(),
-                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                sendMessageWithButtons("Начать " + users.get(chatId).getCurrentRound() + " раунд?",
-                        chatId, buttons);
-                break;
-            case "start round":
-                buttons = new ArrayList<>();
-                buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start exercise").build(),
-                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                sendMessageWithButtons((users.get(chatId).getCurrentExercise() + 1) + " упражнение: " +
-                        users.get(chatId).getExerciseName() + " Начать ?", chatId, buttons);
-                break;
-            case "start exercise":
-                buttons = new ArrayList<>();
                 buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
-                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-                sendMessageWithButtons("Начать " + users.get(chatId).getCurrentApproach() + " подход?",
+                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build(),
+                        InlineKeyboardButton.builder().text("техника выполнения").callbackData("tech").build()));
+                sendMessageWithButtons(users.get(chatId).getCurrentRound() + " раунд! 1 упражнение: " + users.get(chatId).getExerciseName() + "! Начать?",
                         chatId, buttons);
                 break;
-
             case "start approach":
                 sendTextMessage("Paботаем!", chatId);
                 users.get(chatId).doExercise();
@@ -211,31 +202,31 @@ public class Bot extends TelegramLongPollingBot {
                 break;
         }
     }
-    /**
-     * Процедура отправки пользователю текстового сообщения
-     * @param text - текст сообщения
-     * @param chatId - ID чата, в который нужно отправить сообщение
-     */
-    @SneakyThrows
-    public void sendTextMessage(String text, String chatId){
-        execute(SendMessage.builder()
-                .text(text)
-                .chatId(chatId)
-                .build());
-    }
+            /**
+             * Процедура отправки пользователю текстового сообщения
+             * @param text - текст сообщения
+             * @param chatId - ID чата, в который нужно отправить сообщение
+             */
+            @SneakyThrows
+            public void sendTextMessage(String text, String chatId){
+                execute(SendMessage.builder()
+                        .text(text)
+                        .chatId(chatId)
+                        .build());
+            }
 
-    /**
-     * Процедура отправки пользователю сообщения с кнопками для ответа
-     * @param text - текст сообщения
-     * @param chatId - ID чата, в который нужно отправить сообщение
-     * @param buttons - список кнопок
-     */
-    @SneakyThrows
-    public void sendMessageWithButtons(String text, String chatId, List<List<InlineKeyboardButton>> buttons){
-        execute(SendMessage.builder()
-                .text(text)
-                .chatId(chatId)
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
-                .build());
-    }
+            /**
+             * Процедура отправки пользователю сообщения с кнопками для ответа
+             * @param text - текст сообщения
+             * @param chatId - ID чата, в который нужно отправить сообщение
+             * @param buttons - список кнопок
+             */
+            @SneakyThrows
+            public void sendMessageWithButtons(String text, String chatId, List<List<InlineKeyboardButton>> buttons){
+                execute(SendMessage.builder()
+                        .text(text)
+                        .chatId(chatId)
+                        .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
+                        .build());
+            }
 }
