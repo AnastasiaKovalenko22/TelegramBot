@@ -114,7 +114,7 @@ public class Bot extends TelegramLongPollingBot {
                 break;
             case "/start":
                 if (users.containsKey(chatId)){
-                    users.get(chatId).getTimer().cancel();
+                    users.get(chatId).getTimerForNotifying().cancel();
                 }
                 users.put(chatId, new User(chatId));
                 users.get(chatId).setBot(this);
@@ -165,7 +165,7 @@ public class Bot extends TelegramLongPollingBot {
                 }
                 users.get(chatId).getWorkoutMaker().setLevel(value);
                 users.get(chatId).setLevel(value);
-                users.get(chatId).setRemainder();
+                users.get(chatId).setNotifications();
                 sendTextMessage("Вы выбрали уровень " + value, chatId);
                 sendMessageWithButtons("Выберите целевую группу мышц", chatId, buttons);
                 break;
@@ -181,7 +181,8 @@ public class Bot extends TelegramLongPollingBot {
                 users.get(chatId).setWorkout(users.get(chatId).getWorkoutMaker().createWorkout());
                 buttons = new ArrayList<>();
                 buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
-                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
+                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build(),
+                        InlineKeyboardButton.builder().text("техника выполнения").callbackData("tech").build()));
                 sendMessageWithButtons(users.get(chatId).getCurrentRound() + " раунд! 1 упражнение: " + users.get(chatId).getExerciseName() + "! Начать?",
                         chatId, buttons);
                 break;
