@@ -7,7 +7,8 @@
     <list default="true" id="b54c81c4-1def-4726-84ae-04cd4e46679e" name="Default Changelist" comment="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bot/WorkoutMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bot/WorkoutMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/WorkoutMakerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/WorkoutMakerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +45,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1z69iXEJh19lw5Nz5VmhKgpDzsb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -61,7 +70,8 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.45747125" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -69,63 +79,70 @@
       <recent name="E:\java tools\projects\Telegram\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.UserTests">
-    <configuration name="UserTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JAR Application.TabataFitnessBot.jar">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="bot.Main" />
       <module name="Telegram" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UserTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTests.getTextForStartMessageReturnsCorrectTextWhenRestBetweenRounds" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Translator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="bot.Translator" />
       <module name="Telegram" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UserTests" />
-      <option name="METHOD_NAME" value="getTextForStartMessageReturnsCorrectTextWhenRestBetweenRounds" />
-      <option name="TEST_OBJECT" value="method" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartAproach" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="YoutubeApi" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="youtubeApi.YoutubeApi" />
       <module name="Telegram" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UserTests" />
-      <option name="METHOD_NAME" value="getTextForStartWorkMessageReturnsCorrectTextWhenStartAproach" />
-      <option name="TEST_OBJECT" value="method" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartExercise" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="YoutubeApiController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="bot.YoutubeApiController" />
       <module name="Telegram" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UserTests" />
-      <option name="METHOD_NAME" value="getTextForStartWorkMessageReturnsCorrectTextWhenStartExercise" />
-      <option name="TEST_OBJECT" value="method" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartRound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Telegram" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UserTests" />
-      <option name="METHOD_NAME" value="getTextForStartWorkMessageReturnsCorrectTextWhenStartRound" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="TabataFitnessBot.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/TabataFitnessBot.jar" />
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserTests" />
-        <item itemvalue="JUnit.UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartRound" />
-        <item itemvalue="JUnit.UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartExercise" />
-        <item itemvalue="JUnit.UserTests.getTextForStartWorkMessageReturnsCorrectTextWhenStartAproach" />
-        <item itemvalue="JUnit.UserTests.getTextForStartMessageReturnsCorrectTextWhenRestBetweenRounds" />
+        <item itemvalue="JAR Application.TabataFitnessBot.jar" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.YoutubeApiController" />
+        <item itemvalue="Application.Translator" />
+        <item itemvalue="Application.YoutubeApi" />
       </list>
     </recent_temporary>
   </component>
@@ -158,6 +175,9 @@
       <workItem from="1636187700338" duration="8351000" />
       <workItem from="1636376105023" duration="361000" />
       <workItem from="1636386073898" duration="7288000" />
+      <workItem from="1636969594305" duration="20032000" />
+      <workItem from="1637067885422" duration="131000" />
+      <workItem from="1637149256326" duration="16466000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит.&#10;Реализован сбор параметров для создания тренировки и создание тренировки с использованием списков упражнений.">
       <created>1634467736016</created>
