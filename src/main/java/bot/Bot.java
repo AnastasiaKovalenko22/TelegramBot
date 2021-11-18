@@ -42,7 +42,12 @@ public class Bot extends TelegramLongPollingBot {
     /**
      * Поле словарь пользователей (ключ - id чата, значение - экземпляр класса пользователь)
      */
-    private HashMap<String, User> users = new HashMap<>();
+    private Map<String, User> users = new HashMap<>();
+
+    /**
+     * Поле контроллера YouTubeApi
+     */
+    private YoutubeApiController youtubeApiController = new YoutubeApiController();
 
     /**
      *  Конструктор - создание нового объекта с определенными значениями
@@ -194,6 +199,10 @@ public class Bot extends TelegramLongPollingBot {
                 sendTextMessage("Отдых!", chatId);
                 users.get(chatId).rest(Integer.parseInt(value));
                 break;
+            case "tech":
+                String text = youtubeApiController.getVideos("упражнение+" + users.get(chatId).getExerciseName().replaceAll(" ", "+"));
+                sendTextMessage(text, chatId);
+                break;
             case "cancel":
                 sendTextMessage("Тренировка отменена!", chatId);
                 break;
@@ -202,31 +211,31 @@ public class Bot extends TelegramLongPollingBot {
                 break;
         }
     }
-            /**
-             * Процедура отправки пользователю текстового сообщения
-             * @param text - текст сообщения
-             * @param chatId - ID чата, в который нужно отправить сообщение
-             */
-            @SneakyThrows
-            public void sendTextMessage(String text, String chatId){
-                execute(SendMessage.builder()
-                        .text(text)
-                        .chatId(chatId)
-                        .build());
-            }
+    /**
+     * Процедура отправки пользователю текстового сообщения
+     * @param text - текст сообщения
+     * @param chatId - ID чата, в который нужно отправить сообщение
+     */
+    @SneakyThrows
+    public void sendTextMessage(String text, String chatId){
+        execute(SendMessage.builder()
+                .text(text)
+                .chatId(chatId)
+                .build());
+    }
 
-            /**
-             * Процедура отправки пользователю сообщения с кнопками для ответа
-             * @param text - текст сообщения
-             * @param chatId - ID чата, в который нужно отправить сообщение
-             * @param buttons - список кнопок
-             */
-            @SneakyThrows
-            public void sendMessageWithButtons(String text, String chatId, List<List<InlineKeyboardButton>> buttons){
-                execute(SendMessage.builder()
-                        .text(text)
-                        .chatId(chatId)
-                        .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
-                        .build());
-            }
+    /**
+     * Процедура отправки пользователю сообщения с кнопками для ответа
+     * @param text - текст сообщения
+     * @param chatId - ID чата, в который нужно отправить сообщение
+     * @param buttons - список кнопок
+     */
+    @SneakyThrows
+    public void sendMessageWithButtons(String text, String chatId, List<List<InlineKeyboardButton>> buttons){
+        execute(SendMessage.builder()
+                .text(text)
+                .chatId(chatId)
+                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
+                .build());
+    }
 }
