@@ -30,7 +30,12 @@ public class YoutubeApiController{
     private static final String YOUTUBE_SEARCH_URL_KEY = "&key=AIzaSyAr-Ldoe67-ByfDlWRrj3Rx2iTCObxVe6A";
 
     /**
-     * Функция получения видео по ключевом слову
+     * Константа - ссылка на видео
+     */
+    public static final String YOUTUBE_WATCH_VIDEO_URL = "https://www.youtube.com/watch?v=";
+
+    /**
+     * Функция получения видео по ключевому слову
      * @param keyword - ключевое слово для поиска
      * @return - строка - список ссылок на найденные видео
      * @throws IOException
@@ -58,7 +63,7 @@ public class YoutubeApiController{
             Matcher matcher = pattern.matcher(el);
             if(matcher.find()) {
                 String videoId = el.substring(matcher.start(), matcher.end());
-                links += "https://www.youtube.com/watch?v=" + videoId.substring(12, videoId.length()-1) + "\n";
+                links += YOUTUBE_WATCH_VIDEO_URL + videoId.substring(12, videoId.length()-1) + "\n";
             }
         }
         return links;
