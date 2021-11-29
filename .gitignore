@@ -8,7 +8,8 @@ classes/
 .idea
 
 #properties
-*.properties
+Telegram.properties
+VK.propeties
 
 # Log file
 *.log
