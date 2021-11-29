@@ -5,6 +5,11 @@ import lombok.SneakyThrows;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+import java.util.Collections;
+import java.util.NavigableSet;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 
 /**
  * Класс Main
@@ -16,8 +21,8 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
  */
 public class Main {
     @SneakyThrows
-    public static void main (String[] args){
-        Thread telegramThread = new Thread(new Runnable(){
+    public static void main(String[] args) {
+        Thread telegramThread = new Thread(new Runnable() {
             @SneakyThrows
             @Override
             public void run() {
@@ -28,5 +33,6 @@ public class Main {
         });
         telegramThread.start();
         new BotsLongPoll(new VkBot()).run();
+
     }
 }

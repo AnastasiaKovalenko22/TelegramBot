@@ -7,10 +7,6 @@ classes/
 #Idea
 .idea
 
-#properties
-Telegram.properties
-VK.properties
-
 # Log file
 *.log
 

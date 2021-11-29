@@ -1,7 +1,6 @@
 package bot;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -45,6 +44,12 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot{
     /**
      *  Функция получения значения поля {@link TelegramBot#botName}
      */
+
+    /**
+     * Поле калькулятора статистики
+     */
+    private StatisticCalculator calculator = StatisticCalculator.getInstance();
+
     @Override
     public String getBotUsername() {
         Properties prop = new Properties();
