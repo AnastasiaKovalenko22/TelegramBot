@@ -9,7 +9,7 @@ classes/
 
 #properties
 Telegram.properties
-VK.propeties
+VK.properties
 
 # Log file
 *.log

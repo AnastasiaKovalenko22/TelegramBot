@@ -26,7 +26,6 @@ public class Main {
                 telegramBotsApi.registerBot(telegramBot);
             }
         });
-        //"@tabata_fitness_bot","2050374412:AAH27CnBGW1KDUMVkKaPmq1MCPr9RgpDx5c"
         telegramThread.start();
         new BotsLongPoll(new VkBot()).run();
     }
