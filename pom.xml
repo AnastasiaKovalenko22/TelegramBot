@@ -74,5 +74,24 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vk.api</groupId>
+            <artifactId>sdk</artifactId>
+            <version>1.0.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yvasyliev</groupId>
+            <artifactId>java-vk-bots-longpoll-api</artifactId>
+            <version>1.2.3</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
 </project>
