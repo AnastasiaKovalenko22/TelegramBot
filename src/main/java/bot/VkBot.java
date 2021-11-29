@@ -50,6 +50,11 @@ public class VkBot extends LongPollBot implements ChatBot{
      */
     private YoutubeApiController youtubeApiController = new YoutubeApiController();
 
+    /**
+     * Поле калькулятора статистики
+     */
+    private StatisticCalculator calculator = StatisticCalculator.getInstance();
+
 
     /**
      * Функция получения ключа доступа

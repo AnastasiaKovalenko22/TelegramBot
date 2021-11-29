@@ -125,6 +125,10 @@ public class User {
     @Setter
     private Timer timerForNotifying = new Timer();
 
+    /**
+     * Поле калькулятора статистики
+     */
+    private StatisticCalculator calculator = StatisticCalculator.getInstance();
 
     /**
      * Функция получения названия упражнения
