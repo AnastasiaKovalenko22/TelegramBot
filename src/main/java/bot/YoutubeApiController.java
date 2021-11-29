@@ -46,15 +46,15 @@ public class YoutubeApiController{
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String inputLine = in.readLine();
         StringBuffer response = new StringBuffer();
-        while (inputLine != null) {
-            response.append(inputLine);
-            inputLine = in.readLine();
+        try (BufferedReader in =
+                    new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            String inputLine = in.readLine();
+            while (inputLine != null) {
+                response.append(inputLine);
+                inputLine = in.readLine();
+            }
         }
-        in.close();
-
         String[] responseBlocks = response.toString().split("\"id\":");
         Pattern pattern = Pattern.compile("\"videoId\": \".+?\"");
         String links = "";
