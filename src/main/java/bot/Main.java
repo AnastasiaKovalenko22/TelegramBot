@@ -1,13 +1,9 @@
 package bot;
 
+import api.longpoll.bots.BotsLongPoll;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 
 /**
@@ -21,8 +17,16 @@ import java.util.Locale;
 public class Main {
     @SneakyThrows
     public static void main (String[] args){
-        Bot myBot = new Bot("@tabata_fitness_bot","2050374412:AAH27CnBGW1KDUMVkKaPmq1MCPr9RgpDx5c");
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-        telegramBotsApi.registerBot(myBot);
+        Thread telegramThread = new Thread(new Runnable(){
+            @SneakyThrows
+            @Override
+            public void run() {
+                TelegramBot telegramBot = new TelegramBot();
+                TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+                telegramBotsApi.registerBot(telegramBot);
+            }
+        });
+        telegramThread.start();
+        new BotsLongPoll(new VkBot()).run();
     }
 }
