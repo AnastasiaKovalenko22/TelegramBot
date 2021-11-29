@@ -7,6 +7,9 @@ classes/
 #Idea
 .idea
 
+#properties
+*.properties
+
 # Log file
 *.log
 
