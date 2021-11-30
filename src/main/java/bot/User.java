@@ -3,8 +3,6 @@ package bot;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.A;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -35,7 +33,7 @@ public class User {
      */
     @Setter
     @Getter
-    private Bot bot;
+    private ChatBot bot;
 
     /**
      * Поле индекс текущего упражнения
@@ -127,6 +125,10 @@ public class User {
     @Setter
     private Timer timerForNotifying = new Timer();
 
+    /**
+     * Поле калькулятора статистики
+     */
+    private StatisticCalculator calculator = StatisticCalculator.getInstance();
 
     /**
      * Функция получения названия упражнения
@@ -159,7 +161,6 @@ public class User {
             public void run() {
                 startWork();
             }
-
         }, restTime * 1000);
     }
 
@@ -170,10 +171,11 @@ public class User {
         String text = getTextForStartRestMessage();
         if (!text.equals("Тренировка завершена!")) {
             String[] textWords = text.split(" ");
-            List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-            buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start rest: " + textWords[textWords.length - 2]).build(),
-                    InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-            bot.sendMessageWithButtons(text, chatId, buttons);
+            String[] options = new String[]{"начать", "завершить тренировку"};
+            Map<String, String> callbacks = new HashMap<>();
+            callbacks.put("начать", "{\"start rest\":\"" + textWords[textWords.length - 2] + "\"}");
+            callbacks.put("завершить тренировку", "{\"stop\":\"stop\"}");
+            bot.sendMessageWithButtons(text, chatId, options, callbacks);
         } else {
             bot.sendTextMessage(text, chatId);
         }
@@ -226,16 +228,18 @@ public class User {
     private void startWork() {
         String text = getTextForStartWorkMessage();
         if(currentApproach > 1) {
-            List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-            buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
-                    InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build()));
-            bot.sendMessageWithButtons(text, chatId, buttons);
+            String[] options = new String[]{"начать", "завершить тренировку"};
+            Map<String, String> callbacks = new HashMap<>();
+            callbacks.put("начать", "{\"start approach\":\"start\"}");
+            callbacks.put("завершить тренировку", "{\"stop\":\"stop\"}");
+            bot.sendMessageWithButtons(text, chatId, options, callbacks);
         } else{
-            List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-            buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
-                    InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build(),
-                    InlineKeyboardButton.builder().text("техника выполнения").callbackData("tech").build()));
-            bot.sendMessageWithButtons(text, chatId, buttons);
+            String[] options = new String[]{"начать", "завершить тренировку", "техника выполнения"};
+            Map<String, String> callbacks = new HashMap<>();
+            callbacks.put("начать", "{\"start approach\":\"start\"}");
+            callbacks.put("завершить тренировку", "{\"stop\":\"stop\"}");
+            callbacks.put("техника выполнения", "{\"tech\":\"show\"}");
+            bot.sendMessageWithButtons(text, chatId, options, callbacks);
         }
     }
 
@@ -288,7 +292,7 @@ public class User {
             }
             else{
                 bot.sendTextMessage("Привет! На этой неделе осталось тренировок: " + (weeklyWorkoutCount - finishedWorkoutCount) +
-                        " Ты уже делал тренировку на " + trainedGroups + "рекомендую выбрать дргую групп мышц", chatId);
+                        " Вы уже делали тренировку на " + trainedGroups + "рекомендую выбрать дргую групп мышц", chatId);
             }
         }
         if(getDay().equals("воскресенье")){

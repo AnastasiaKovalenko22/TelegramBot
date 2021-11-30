@@ -1,7 +1,6 @@
 package bot;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -10,34 +9,27 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 
+import java.io.IOException;
 import java.util.*;
 
 /**
- * Класс Bot - класс, отвечающий за сущность бота, обрабтку сообщений пользователя
+ * Класс Bot - класс, отвечающий за сущность бота в Телеграм
  * <p>
  * 16.10.2021
  *
  * @author Анастасия Коваленко
  * @author Ксения Шорохова
  */
-public class Bot extends TelegramLongPollingBot {
+public class TelegramBot extends TelegramLongPollingBot implements ChatBot{
     /**
      *  Поле имя бота - username в телеграме
      */
-    @Setter
-    @Getter
     private String botName;
 
     /**
      *  Поле токен бота в телеграме для контроля над ботом
      */
-    @Setter
     private String botToken;
-
-    /**
-     *  Поле сборщик тренировки
-     */
-    private WorkoutMaker workoutMaker = new WorkoutMaker();
 
     /**
      * Поле словарь пользователей (ключ - id чата, значение - экземпляр класса пользователь)
@@ -50,28 +42,40 @@ public class Bot extends TelegramLongPollingBot {
     private YoutubeApiController youtubeApiController = new YoutubeApiController();
 
     /**
-     *  Конструктор - создание нового объекта с определенными значениями
-     * @param botName - username бота в телеграме
-     * @param botToken - токен бота в телеграме
+     *  Функция получения значения поля {@link TelegramBot#botName}
      */
-    public Bot(String botName, String botToken) {
-        this.botName = botName;
-        this.botToken = botToken;
-    }
 
     /**
-     *  Функция получения значения поля {@link Bot#botName}
+     * Поле калькулятора статистики
      */
+    private StatisticCalculator calculator = StatisticCalculator.getInstance();
+
     @Override
     public String getBotUsername() {
+        Properties prop = new Properties();
+        try {
+            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream("Telegram.properties"));
+            botName = prop.getProperty("botName");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка при загрузке файла конфигурации");
+        }
         return botName;
     }
 
     /**
-     *  Функция получения значения поля {@link Bot#botToken}
+     *  Функция получения значения поля {@link TelegramBot#botToken}
      */
     @Override
     public String getBotToken() {
+        Properties prop = new Properties();
+        try {
+            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream("Telegram.properties"));
+            botToken = prop.getProperty("botToken");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка при загрузке файла конфигурации");
+        }
         return botToken;
     }
 
@@ -126,12 +130,12 @@ public class Bot extends TelegramLongPollingBot {
                 botMessage = new StringBuilder();
                 botMessage.append("Выберите уровень сложности\nновичок : 1 раунд 6 циклов\nлюбитель : 2 раунда по 8 циклов\n");
                 botMessage.append("продвинутый : 3 раунда по 8 циклов");
-                List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
                 String [] levels = new String[]{"новичок", "любитель", "продвинутый"};
+                Map<String, String> callbacks = new HashMap<>();
                 for (String level : levels){
-                    buttons.add(Arrays.asList(InlineKeyboardButton.builder().text(level).callbackData("chosen level: " + level).build()));
+                    callbacks.put(level, "{\"chosen level\":\"" + level + "\"}");
                 }
-                sendMessageWithButtons(botMessage.toString(), chatId, buttons);
+                sendMessageWithButtons(botMessage.toString(), chatId, levels, callbacks);
                 break;
             default:
                 handleUnclearMessage(message);
@@ -153,43 +157,43 @@ public class Bot extends TelegramLongPollingBot {
     @SneakyThrows
     private void handleCallback(CallbackQuery callbackQuery) {
         Message message = callbackQuery.getMessage();
-        String[] params = callbackQuery.getData().split(": ");
-        String name = params[0];
-        String value = "";
-        if (params.length == 2) {
-            value = params[1];
-        }
+        String callbackData = callbackQuery.getData();
+        String[] params = callbackData.split(":\"");
+        String name = params[0].substring(2, params[0].length() - 1);
+        String value = params[1].substring(0, params[1].length() - 2);
         String chatId = message.getChatId().toString();
         switch (name) {
             case "chosen level":
-                List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-                String[] groups = new String[]{"ноги", "пресс", "руки + грудь + спина",
-                        "пресс, руки + грудь + спина", "ноги, пресс", "ноги, руки + грудь + спина"};
+                String[] groups = new String[]{"ноги", "пресс", "руки+грудь+спина",
+                        "пресс, руки+грудь+спина", "ноги, пресс", "ноги, руки+грудь+спина"};
+                Map<String, String> callbacks = new HashMap<>();
                 for (String group : groups) {
-                    buttons.add(Arrays.asList(InlineKeyboardButton.builder().text(group).callbackData("chosen group: " + group).build()));
+                    callbacks.put(group, "{\"chosen group\":\"" + group + "\"}");
                 }
                 users.get(chatId).getWorkoutMaker().setLevel(value);
                 users.get(chatId).setLevel(value);
                 users.get(chatId).setNotifications();
                 sendTextMessage("Вы выбрали уровень " + value, chatId);
-                sendMessageWithButtons("Выберите целевую группу мышц", chatId, buttons);
+                sendMessageWithButtons("Выберите целевую группу мышц", chatId, groups, callbacks);
                 break;
             case "chosen group":
                 sendTextMessage("Вы выбрали следующую группу мышц: " + value, chatId);
                 users.get(chatId).getWorkoutMaker().setTargetGroups(value.split(", "));
-                buttons = new ArrayList<>();
-                buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start workout").build(),
-                        InlineKeyboardButton.builder().text("отменить").callbackData("cancel").build()));
-                sendMessageWithButtons("Начать тренировку ?", chatId, buttons);
+                String [] options = new String[]{"начать", "отменить"};
+                callbacks = new HashMap<>();
+                callbacks.put("начать", "{\"start workout\":\"start\"}");
+                callbacks.put("отменить", "{\"cancel\":\"cancel\"}");
+                sendMessageWithButtons("Начать тренировку ?", chatId, options, callbacks);
                 break;
             case "start workout":
                 users.get(chatId).setWorkout(users.get(chatId).getWorkoutMaker().createWorkout());
-                buttons = new ArrayList<>();
-                buttons.add(Arrays.asList(InlineKeyboardButton.builder().text("начать").callbackData("start approach").build(),
-                        InlineKeyboardButton.builder().text("завершить тренировку").callbackData("stop").build(),
-                        InlineKeyboardButton.builder().text("техника выполнения").callbackData("tech").build()));
+                options = new String[]{"начать", "завершить тренировку", "техника выполнения"};
+                callbacks = new HashMap<>();
+                callbacks.put("начать", "{\"start approach\":\"start\"}");
+                callbacks.put("завершить тренировку", "{\"stop\":\"stop\"}");
+                callbacks.put("техника выполнения","{\"tech\":\"show\"}");
                 sendMessageWithButtons(users.get(chatId).getCurrentRound() + " раунд! 1 упражнение: " + users.get(chatId).getExerciseName() + "! Начать?",
-                        chatId, buttons);
+                        chatId, options, callbacks);
                 break;
             case "start approach":
                 sendTextMessage("Paботаем!", chatId);
@@ -217,6 +221,7 @@ public class Bot extends TelegramLongPollingBot {
      * @param chatId - ID чата, в который нужно отправить сообщение
      */
     @SneakyThrows
+    @Override
     public void sendTextMessage(String text, String chatId){
         execute(SendMessage.builder()
                 .text(text)
@@ -228,14 +233,30 @@ public class Bot extends TelegramLongPollingBot {
      * Процедура отправки пользователю сообщения с кнопками для ответа
      * @param text - текст сообщения
      * @param chatId - ID чата, в который нужно отправить сообщение
-     * @param buttons - список кнопок
      */
     @SneakyThrows
-    public void sendMessageWithButtons(String text, String chatId, List<List<InlineKeyboardButton>> buttons){
+    @Override
+    public void sendMessageWithButtons(String text, String chatId, String[] options, Map<String, String> callbacks){
+        List<List<InlineKeyboardButton>> buttons = makeButtons(options, callbacks);
         execute(SendMessage.builder()
                 .text(text)
                 .chatId(chatId)
                 .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
                 .build());
+    }
+
+    /**
+     * Функция создания кнопок
+     * @param options - подписи кнопок
+     * @param callbacks - коллбэки
+     * @return - список рядов кнопок
+     */
+    private List<List<InlineKeyboardButton>> makeButtons(String[] options, Map<String, String> callbacks){
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+        for (String text:
+                options) {
+            buttons.add(Arrays.asList(InlineKeyboardButton.builder().text(text).callbackData(callbacks.get(text)).build()));
+        }
+        return buttons;
     }
 }
