@@ -1,14 +1,12 @@
 package bot;
 
 import api.longpoll.bots.BotsLongPoll;
-import lombok.SneakyThrows;
+import api.longpoll.bots.exceptions.BotsLongPollException;
+import api.longpoll.bots.exceptions.BotsLongPollHttpException;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-import java.util.Collections;
-import java.util.NavigableSet;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 
 /**
@@ -20,19 +18,32 @@ import java.util.TreeSet;
  * @author Ксения Шорохова
  */
 public class Main {
-    @SneakyThrows
     public static void main(String[] args) {
         Thread telegramThread = new Thread(new Runnable() {
-            @SneakyThrows
             @Override
             public void run() {
                 TelegramBot telegramBot = new TelegramBot();
-                TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-                telegramBotsApi.registerBot(telegramBot);
+                TelegramBotsApi telegramBotsApi = null;
+                try {
+                    telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    telegramBotsApi.registerBot(telegramBot);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
             }
         });
         telegramThread.start();
-        new BotsLongPoll(new VkBot()).run();
+        try {
+            new BotsLongPoll(new VkBot()).run();
+        } catch (BotsLongPollHttpException e) {
+            e.printStackTrace();
+        } catch (BotsLongPollException e) {
+            e.printStackTrace();
+        }
 
     }
 }

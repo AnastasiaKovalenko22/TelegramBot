@@ -1,6 +1,5 @@
 package bot;
 
-import java.util.HashMap;
 import java.util.Map;
 /**
  * Интерфейс чат-бота
