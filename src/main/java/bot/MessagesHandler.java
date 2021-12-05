@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Класс MessagesHandler
+ * Класс MessagesHandler - класс, отвечающий за обработку сообщений пользователя
  * <p>
  * 04.12.2021
  *
@@ -76,12 +76,23 @@ public class MessagesHandler {
      * Поле контроллера YouTubeApi
      */
     private YoutubeApiController youtubeApiController = new YoutubeApiController();
-
+    /**
+     * поле бот
+     */
     private ChatBot bot;
 
+    /**
+     * конструктор - создание нового объекта
+     * @param bot - бот, к которому привязан обработчик
+     */
     public MessagesHandler(ChatBot bot){
         this.bot = bot;
     }
+
+    /**
+     * конструктор по умолчанию
+     */
+    public MessagesHandler(){}
 
     /** Процедура обработки сообщений пользователя, содержащих команду
      * @param command - сообщение пользователя, текстовая команда
@@ -182,8 +193,10 @@ public class MessagesHandler {
         bot.sendTextMessage(MISUNDERSTAND_MESSAGE, chatId);
     }
 
-
-
+    /**
+     * Процедура установки таймера для работы
+     * @param chatId - ID чата пользователя
+     */
     private void doExercise(String chatId) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -196,6 +209,7 @@ public class MessagesHandler {
 
     /**
      * Процедура отправки поьзователю сообщений о завершении рабочего времени
+     * @param chatId - ID чата пользователя
      */
     private void startRest(String chatId) {
         String text = getTextForStartRestMessage(chatId);
@@ -211,6 +225,11 @@ public class MessagesHandler {
         }
     }
 
+    /**
+     * Процедура создания таймера для отдыха
+     * @param restTime - время отдыха
+     * @param chatId - ID чата пользователя
+     */
     private void rest(int restTime, String chatId) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -220,6 +239,10 @@ public class MessagesHandler {
         }, restTime * 1000);
     }
 
+    /**
+     * Процедура отправки пользователю сообщения о завершении отдыха и начале работы
+     * @param chatId - ID чата пользователя
+     */
     private void startWork(String chatId) {
         String text = getTextForStartWorkMessage(chatId);
         if(users.get(chatId).getCurrentApproach() > 1) {
@@ -308,6 +331,10 @@ public class MessagesHandler {
         }
     }
 
+    /**
+     * Процедура установки таймера для уведомлений
+     * @param chatId - ID чата пользователя
+     */
     private void setNotifications(String chatId) {
         users.get(chatId).getTimerForNotifying().scheduleAtFixedRate(new TimerTask() {
             public void run() {
@@ -320,7 +347,7 @@ public class MessagesHandler {
      * Функция получения текущего дня недели
      * @return - строка - название дня недели
      */
-    private String getDay(){
+    public String getDay(){
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         Locale rus = new Locale("ru", "RU");

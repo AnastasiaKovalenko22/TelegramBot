@@ -14,6 +14,53 @@ import org.junit.Test;
 import java.util.List;
 
 public class WorkoutMakerTests {
+    /**
+     * Тест на некорректную группу мышц
+     */
+    @Test
+    public void NotCorrectGroup() {
+        boolean throwException = false;
+        try {
+            WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{"уши"});
+        } catch (IllegalArgumentException e) {
+            throwException = true;
+        } finally {
+            Assert.assertTrue(throwException);
+        }
+
+    }
+
+    /**
+     * Тест на некорректный уровень
+     */
+    @Test
+    public void NotCorrectLevel() {
+        boolean throwException = false;
+        try {
+            WorkoutMaker workoutMaker = new WorkoutMaker("superchel", new String[]{WorkoutMaker.getArmsGroup()});
+        } catch (IllegalArgumentException e) {
+            throwException = true;
+        } finally {
+            Assert.assertTrue(throwException);
+        }
+
+    }
+
+    /**
+     * Тест на пустой массив групп мышц
+     */
+    @Test
+    public void EmptyGroupsArray() {
+        boolean throwException = false;
+        try {
+            WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{});
+        } catch (IllegalArgumentException e) {
+            throwException = true;
+        } finally {
+            Assert.assertTrue(throwException);
+        }
+
+    }
 
     /**
      * Тест на корректность сборки тренировки для новичка на пресс
@@ -103,7 +150,7 @@ public class WorkoutMakerTests {
      * Тест на корректность сборки тренировки для новичка на ноги и пресс
      */
     @Test
-    public void createWorkoutForBeginnerLegsAndPress(){
+    public void createWorkoutForBeginnerLegsAndPress() {
         WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{WorkoutMaker.getLegsGroup(), WorkoutMaker.getPressGroup()});
         List<String> workout = workoutMaker.createWorkout();
         for (int i = 0; i < 6; i++) {
@@ -133,7 +180,7 @@ public class WorkoutMakerTests {
      * Тест на корректность сборки тренировки для продвинутого на ноги и руки
      */
     @Test
-    public void createWorkoutForAdvancedLegsAndArms(){
+    public void createWorkoutForAdvancedLegsAndArms() {
         WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getAdvancedLevel(), new String[]{WorkoutMaker.getLegsGroup(), WorkoutMaker.getArmsGroup()});
         List<String> workout = workoutMaker.createWorkout();
         for (int i = 0; i < 8; i++) {

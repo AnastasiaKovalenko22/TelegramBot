@@ -17,6 +17,7 @@ public class YoutubeApiControllerTests {
 
     /**
      * Тест на корректные ссылки для упражнений на ноги
+     *
      * @throws IOException
      */
     @Test
@@ -26,14 +27,15 @@ public class YoutubeApiControllerTests {
         int randomIndex = (int) Math.floor(Math.random() * WorkoutMaker.getLegsExercises().size());
         String keyword = "упражнение+" + WorkoutMaker.getLegsExercises().get(randomIndex).replaceAll(" ", "+");
         String[] links = youtubeApiController.getVideos(keyword).split("\n");
-        for (String link:
-             links) {
+        for (String link :
+                links) {
             Assert.assertTrue("ссылка " + link + " не валидная", validator.isValid(link));
         }
     }
 
     /**
      * Тест на корректные ссылки для упражнений на пресс
+     *
      * @throws IOException
      */
     @Test
@@ -43,7 +45,7 @@ public class YoutubeApiControllerTests {
         int randomIndex = (int) Math.floor(Math.random() * WorkoutMaker.getPressExercises().size());
         String keyword = "упражнение+" + WorkoutMaker.getPressExercises().get(randomIndex).replaceAll(" ", "+");
         String[] links = youtubeApiController.getVideos(keyword).split("\n");
-        for (String link:
+        for (String link :
                 links) {
             Assert.assertTrue("ссылка " + link + " не валидная", validator.isValid(link));
         }
@@ -51,6 +53,7 @@ public class YoutubeApiControllerTests {
 
     /**
      * Тест на корректные ссылки для упражнений на руки
+     *
      * @throws IOException
      */
     @Test
@@ -60,7 +63,7 @@ public class YoutubeApiControllerTests {
         int randomIndex = (int) Math.floor(Math.random() * WorkoutMaker.getArmsExercises().size());
         String keyword = "упражнение+" + WorkoutMaker.getArmsExercises().get(randomIndex).replaceAll(" ", "+");
         String[] links = youtubeApiController.getVideos(keyword).split("\n");
-        for (String link:
+        for (String link :
                 links) {
             Assert.assertTrue("ссылка " + link + " не валидная", validator.isValid(link));
         }

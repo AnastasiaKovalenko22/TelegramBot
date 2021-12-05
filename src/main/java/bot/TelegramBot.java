@@ -19,26 +19,37 @@ import java.util.*;
  * @author Анастасия Коваленко
  * @author Ксения Шорохова
  */
-public class TelegramBot extends TelegramLongPollingBot implements ChatBot{
-    private static final String CONFIG_FILENAME = "Telegram.properties";
-    private static final String CONFIG_BOT_NAME_VARIABLE = "botName";
-    private static final String CONFIG_BOT_TOKEN_VARIABLE = "botToken";
-    private static final String BOT_COMMAND_ENTITY_TYPE = "bot_command";
+public class TelegramBot extends TelegramLongPollingBot implements ChatBot {
     /**
-     *  Поле имя бота - username в телеграме
+     * константа - имя конфигурационного файла
+     */
+    private static final String CONFIG_FILENAME = "Telegram.properties";
+    /**
+     * константа - название переменной, хранящей имя бота в конфигурационном файле
+     */
+    private static final String CONFIG_BOT_NAME_VARIABLE = "botName";
+    /**
+     * константа - название переменной, хранящей токен бота в конфигурационном файле
+     */
+    private static final String CONFIG_BOT_TOKEN_VARIABLE = "botToken";
+
+    /**
+     * Поле имя бота - username в телеграме
      */
     private String botName;
 
     /**
-     *  Поле токен бота в телеграме для контроля над ботом
+     * Поле токен бота в телеграме для контроля над ботом
      */
     private String botToken;
-
+    /**
+     * Обработчик сообшений
+     */
     private MessagesHandler messagesHandler = new MessagesHandler(this);
 
 
     /**
-     *  Функция получения значения поля {@link TelegramBot#botName}
+     * Функция получения значения поля {@link TelegramBot#botName}
      */
     @Override
     public String getBotUsername() {
@@ -53,7 +64,7 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot{
     }
 
     /**
-     *  Функция получения значения поля {@link TelegramBot#botToken}
+     * Функция получения значения поля {@link TelegramBot#botToken}
      */
     @Override
     public String getBotToken() {
@@ -68,29 +79,27 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot{
     }
 
     /**
-     *  Процедура обработки обновлений
+     * Процедура обработки обновлений
      */
     @Override
     public void onUpdateReceived(Update update) {
-        if(update.hasCallbackQuery()){
+        if (update.hasCallbackQuery()) {
             CallbackQuery callbackQuery = update.getCallbackQuery();
             Message message = callbackQuery.getMessage();
             String callbackData = callbackQuery.getData();
             String chatId = message.getChatId().toString();
             messagesHandler.handleCallback(callbackData, chatId);
-        }
-        else if (update.hasMessage()) {
+        } else if (update.hasMessage()) {
             Message message = update.getMessage();
             String chatId = message.getChatId().toString();
-            if (message.hasText() && message.hasEntities()){
+            if (message.hasText() && message.hasEntities()) {
                 Optional<MessageEntity> commandEntity =
-                        message.getEntities().stream().filter(e -> BOT_COMMAND_ENTITY_TYPE.equals(e.getType())).findFirst();
+                        message.getEntities().stream().filter(e -> "bot_command".equals(e.getType())).findFirst();
                 String command = message.getText().substring(commandEntity.get().getOffset(), commandEntity.get().getLength());
-                if(commandEntity.isPresent()){
+                if (commandEntity.isPresent()) {
                     messagesHandler.handleCommandMessage(command, chatId);
                 }
-            }
-            else{
+            } else {
                 messagesHandler.handleUnclearMessage(chatId);
             }
         }
@@ -98,11 +107,12 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot{
 
     /**
      * Процедура отправки пользователю текстового сообщения
-     * @param text - текст сообщения
+     *
+     * @param text   - текст сообщения
      * @param chatId - ID чата, в который нужно отправить сообщение
      */
     @Override
-    public void sendTextMessage(String text, String chatId){
+    public void sendTextMessage(String text, String chatId) {
         try {
             execute(SendMessage.builder()
                     .text(text)
@@ -115,11 +125,12 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot{
 
     /**
      * Процедура отправки пользователю сообщения с кнопками для ответа
-     * @param text - текст сообщения
+     *
+     * @param text   - текст сообщения
      * @param chatId - ID чата, в который нужно отправить сообщение
      */
     @Override
-    public void sendMessageWithButtons(String text, String chatId, String[] options, Map<String, String> callbacks){
+    public void sendMessageWithButtons(String text, String chatId, String[] options, Map<String, String> callbacks) {
         List<List<InlineKeyboardButton>> buttons = makeButtons(options, callbacks);
         try {
             execute(SendMessage.builder()
@@ -134,13 +145,14 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot{
 
     /**
      * Функция создания кнопок
-     * @param options - подписи кнопок
+     *
+     * @param options   - подписи кнопок
      * @param callbacks - коллбэки
      * @return - список рядов кнопок
      */
-    private List<List<InlineKeyboardButton>> makeButtons(String[] options, Map<String, String> callbacks){
+    private List<List<InlineKeyboardButton>> makeButtons(String[] options, Map<String, String> callbacks) {
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-        for (String text:
+        for (String text :
                 options) {
             buttons.add(Arrays.asList(InlineKeyboardButton.builder().text(text).callbackData(callbacks.get(text)).build()));
         }

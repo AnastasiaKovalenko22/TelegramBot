@@ -24,9 +24,20 @@ import java.util.*;
  * @author Анастасия Коваленко
  * @author Ксения Шорохова
  */
-public class VkBot extends LongPollBot implements ChatBot{
+public class VkBot extends LongPollBot implements ChatBot {
+    /**
+     * константа - имя конфигурационного файла
+     */
     private static final String CONFIG_FILENAME = "VK.properties";
+
+    /**
+     * константа - название переменной, хранящей токен бота в конфигурационном файле
+     */
     private static final String CONFIG_ACCESS_TOKEN_VARIABLE = "access_token";
+
+    /**
+     * константа - имя переменной, хранящее ID сообщества в VK в конфигурационном файле
+     */
     private static final String CONFIG_GROUP_ID_VARIABLE = "group_id";
 
     /**
@@ -37,17 +48,22 @@ public class VkBot extends LongPollBot implements ChatBot{
      * Поле - интерфейс для взаимодействия с VK-API с помощью запросов
      */
     private VkApiClient vk = new VkApiClient(transportClient);
-
+    /**
+     * поле генератора рандомных значений
+     */
     private Random random = new Random();
     /**
-     *
+     * поле авторизации сообществ
      */
     private GroupActor actor = new GroupActor(getGroupId(), getAccessToken());
-
+    /**
+     * поле обработчика сообщений
+     */
     private MessagesHandler messagesHandler = new MessagesHandler(this);
 
     /**
      * Функция получения ключа доступа
+     *
      * @return - ключ доступа
      */
     @Override
@@ -65,6 +81,7 @@ public class VkBot extends LongPollBot implements ChatBot{
 
     /**
      * Функция получения id группы ВКонтакте
+     *
      * @return - id группы
      */
     @Override
@@ -82,17 +99,17 @@ public class VkBot extends LongPollBot implements ChatBot{
 
     /**
      * Процедура обработки поступающих сообщений
+     *
      * @param messageEvent - событие поступления сообщения
      */
     @Override
-    public void onMessageNew(MessageNewEvent messageEvent){
+    public void onMessageNew(MessageNewEvent messageEvent) {
         Message message = messageEvent.getMessage();
         String callback = message.getPayload();
         String chatId = message.getPeerId().toString();
-        if (callback != null){
+        if (callback != null) {
             messagesHandler.handleCallback(callback, chatId);
-        }
-        else{
+        } else {
             String text = message.getText();
             messagesHandler.handleCommandMessage(text, chatId);
         }
@@ -100,7 +117,8 @@ public class VkBot extends LongPollBot implements ChatBot{
 
     /**
      * Процедура отправки текстового сообщения ползователю
-     * @param text - текст сообщения
+     *
+     * @param text   - текст сообщения
      * @param chatId - id чата
      */
     @Override
@@ -116,9 +134,10 @@ public class VkBot extends LongPollBot implements ChatBot{
 
     /**
      * Процедура отправки сообщений с кнопками
-     * @param text - текст сообщения
-     * @param chatId - id чата
-     * @param options - подписи кнопок
+     *
+     * @param text      - текст сообщения
+     * @param chatId    - id чата
+     * @param options   - подписи кнопок
      * @param callbacks - коллбэки
      */
     @Override
@@ -136,14 +155,15 @@ public class VkBot extends LongPollBot implements ChatBot{
 
     /**
      * Функция создания кнопок
-     * @param options - подписи кнопок
+     *
+     * @param options   - подписи кнопок
      * @param callbacks - коллбэки
      * @return - список рядов кнопок
      */
-    private List<List<KeyboardButton>> makeButtons(String[] options, Map<String, String> callbacks){
+    private List<List<KeyboardButton>> makeButtons(String[] options, Map<String, String> callbacks) {
         List<List<KeyboardButton>> buttons = new ArrayList<>();
-        for (String option:
-             options) {
+        for (String option :
+                options) {
             buttons.add(Arrays.asList(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel(option).setType(TemplateActionTypeNames.TEXT).setPayload(callbacks.get(option)))));
         }
         return buttons;

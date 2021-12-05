@@ -41,7 +41,9 @@ public class User {
      * Поле уровень сложности
      */
     private String level;
-
+    /**
+     * Поле количества раундов
+     */
     private int roundsCount;
 
     /**
@@ -59,10 +61,15 @@ public class User {
      */
     private String trainedGroups = "";
 
-    public User(){}
+    /**
+     * конструктор по умолчанию
+     */
+    public User() {
+    }
 
     /**
      * Процедура присваивания значения полю {@link User#level} и полю {@link User#weeklyWorkoutCount}
+     *
      * @param level - уровень сложности
      */
     public void setLevel(String level) {
@@ -78,96 +85,163 @@ public class User {
         }
         if (level.equals(WorkoutMaker.getMediumLevel())) {
             roundsCount = 2;
-        }else {
+        } else {
             roundsCount = 3;
         }
     }
 
-    public String getLevel(){
+    /**
+     * функция получения значения поля уровень
+     *
+     * @return значение поле{@link User#level}
+     */
+    public String getLevel() {
         return level;
     }
-
-    public int getWeeklyWorkoutCount(){
+    /**
+     * функция получения значения поля количество тренировок в неделю
+     *
+     * @return значение поле{@link User#weeklyWorkoutCount}
+     */
+    public int getWeeklyWorkoutCount() {
         return weeklyWorkoutCount;
     }
-    public int getFinishedWorkoutCount(){
+    /**
+     * функция получения значения поля количество выполненных тренировок в неделю
+     *
+     * @return значение поле{@link User#finishedWorkoutCount}
+     */
+    public int getFinishedWorkoutCount() {
         return finishedWorkoutCount;
     }
-    public void setFinishedWorkoutCount(int value){
-        if (value >= 0){
+
+    /**
+     * Процедура присваивания значения полю количество выполненных тренировок
+     * @param value - присваиваемое значение
+     */
+    public void setFinishedWorkoutCount(int value) {
+        if (value >= 0) {
             finishedWorkoutCount = value;
-        }
-        else{
+        } else {
             throw new IllegalArgumentException();
         }
     }
-    public String getTrainedGroups(){
+    /**
+     * функция получения значения поля уже тренированные группы мышц
+     *
+     * @return значение поле{@link User#trainedGroups}
+     */
+    public String getTrainedGroups() {
         return trainedGroups;
     }
-    public void setTrainedGroups(String value){
+
+    /**
+     * Процедура присваивания значения полю тренированным группам мышц
+     * @param value - присваевоемое значение
+     */
+    public void setTrainedGroups(String value) {
         trainedGroups = value;
     }
-
-    public void setWorkout(List<String> value){
+    /**
+     * Процедура присваивания значения полю тренировка
+     * @param value - присваевоемое значение
+     */
+    public void setWorkout(List<String> value) {
         workout = value;
     }
 
-    public List<String> getWorkout(){
+    /**
+     * функция получения значения поля тренировка
+     *
+     * @return значение поле{@link User#workout}
+     */
+    public List<String> getWorkout() {
         return workout;
     }
-
-    public int getCurrentRound(){
+    /**
+     * функция получения значения поля текущий раунд
+     *
+     * @return значение поле{@link User#currentRound}
+     */
+    public int getCurrentRound() {
         return currentRound;
     }
 
-
-    public void setCurrentApproach(int value){
+    /**
+     * Процедура присваивания значения полю текущий подход
+     * @param value - присваевоемое значение
+     */
+    public void setCurrentApproach(int value) {
         if (value <= 8 && value >= 1) {
             currentApproach = value;
-        }
-        else
+        } else
             throw new IllegalArgumentException();
     }
-
-    public int getCurrentExercise(){
+    /**
+     * функция получения значения поля текущее упражнение
+     *
+     * @return значение поле{@link User#currentExercise}
+     */
+    public int getCurrentExercise() {
         return currentExercise;
     }
 
-    public void setCurrentExercise(int value){
+    /**
+     * Процедура присваивания значения полю текущее упражнение
+     * @param value - присваевоемое значение
+     */
+    public void setCurrentExercise(int value) {
         if (value <= 7 && value >= 0) {
             currentApproach = value;
-        }
-        else
+        } else
             throw new IllegalArgumentException();
     }
-
-    public void setCurrentRound(int value){
+    /**
+     * Процедура присваивания значения полю текущий раунд
+     * @param value - присваевоемое значение
+     */
+    public void setCurrentRound(int value) {
         if (value <= 3 && value >= 1) {
             currentApproach = value;
-        }
-        else
+        } else
             throw new IllegalArgumentException();
     }
-
-    public int getRoundsCount(){
+    /**
+     * функция получения значения поля количество раундов
+     *
+     * @return значение поле{@link User#roundsCount}
+     */
+    public int getRoundsCount() {
         return roundsCount;
     }
 
-    public void setTargetGroups(String[] value){
-        for (String group:
-             value) {
-            if (!(group.equals(WorkoutMaker.getPressGroup()) || group.equals(WorkoutMaker.getArmsGroup()) || group.equals(WorkoutMaker.getLegsGroup()))){
+    /**
+     * Процедура присваивания значения полю целевые группы мышц
+     * @param value - присваевоемое знаечение
+     */
+    public void setTargetGroups(String[] value) {
+        for (String group :
+                value) {
+            if (!(group.equals(WorkoutMaker.getPressGroup()) || group.equals(WorkoutMaker.getArmsGroup()) || group.equals(WorkoutMaker.getLegsGroup()))) {
                 throw new IllegalArgumentException();
             }
         }
         targetGroups = value;
     }
-
-    public int getCurrentApproach(){
+    /**
+     * функция получения значения поля текущий подход
+     *
+     * @return значение поле{@link User#currentApproach}
+     */
+    public int getCurrentApproach() {
         return currentApproach;
     }
-
-    public String[] getTargetGroups(){
+    /**
+     * функция получения значения поля целевые группы мышц
+     *
+     * @return значение поле{@link User#targetGroups}
+     */
+    public String[] getTargetGroups() {
         return targetGroups;
     }
 
@@ -184,7 +258,11 @@ public class User {
         return workout.get(currentExercise);
     }
 
-    public Timer getTimerForNotifying(){
+    /**
+     * функция получения уведомлений
+     * @return значение поле{@link User#timerForNotifying}
+     */
+    public Timer getTimerForNotifying() {
         return timerForNotifying;
     }
 }
