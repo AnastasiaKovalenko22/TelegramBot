@@ -18,6 +18,8 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
  * @author Ксения Шорохова
  */
 public class Main {
+    public static String PORT = System.getenv("PORT");
+    public static String SERVER_URL = System.getenv("SERVER_URL");
     public static void main(String[] args) {
         Thread telegramThread = new Thread(new Runnable() {
             @Override
