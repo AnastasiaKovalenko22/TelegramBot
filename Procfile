@@ -1,1 +1,1 @@
-worker: java -jar target/TabataFitnessBot.jar
+worker: java -jar target/TabataFitnesBot-1.0-SNAPSHOT-jar-with-dependencies.jar
