@@ -21,19 +21,6 @@ import java.util.*;
  */
 public class TelegramBot extends TelegramLongPollingBot implements ChatBot {
     /**
-     * константа - имя конфигурационного файла
-     */
-    private static final String CONFIG_FILENAME = "Telegram.properties";
-    /**
-     * константа - название переменной, хранящей имя бота в конфигурационном файле
-     */
-    private static final String CONFIG_BOT_NAME_VARIABLE = "botName";
-    /**
-     * константа - название переменной, хранящей токен бота в конфигурационном файле
-     */
-    private static final String CONFIG_BOT_TOKEN_VARIABLE = "botToken";
-
-    /**
      * Поле имя бота - username в телеграме
      */
     private String botName;
@@ -53,14 +40,7 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot {
      */
     @Override
     public String getBotUsername() {
-        Properties prop = new Properties();
-        try {
-            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream(CONFIG_FILENAME));
-            botName = prop.getProperty(CONFIG_BOT_NAME_VARIABLE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return botName;
+        return System.getenv("TG_BOT_NAME");
     }
 
     /**
@@ -68,14 +48,7 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot {
      */
     @Override
     public String getBotToken() {
-        Properties prop = new Properties();
-        try {
-            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream(CONFIG_FILENAME));
-            botToken = prop.getProperty(CONFIG_BOT_TOKEN_VARIABLE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return botToken;
+        return System.getenv("TG_BOT_TOKEN");
     }
 
     /**

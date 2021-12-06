@@ -26,21 +26,6 @@ import java.util.*;
  */
 public class VkBot extends LongPollBot implements ChatBot {
     /**
-     * константа - имя конфигурационного файла
-     */
-    private static final String CONFIG_FILENAME = "VK.properties";
-
-    /**
-     * константа - название переменной, хранящей токен бота в конфигурационном файле
-     */
-    private static final String CONFIG_ACCESS_TOKEN_VARIABLE = "access_token";
-
-    /**
-     * константа - имя переменной, хранящее ID сообщества в VK в конфигурационном файле
-     */
-    private static final String CONFIG_GROUP_ID_VARIABLE = "group_id";
-
-    /**
      * Поле - интерфейс для предачи запросов к VK-API
      */
     private TransportClient transportClient = new HttpTransportClient();
@@ -68,15 +53,7 @@ public class VkBot extends LongPollBot implements ChatBot {
      */
     @Override
     public String getAccessToken() {
-        Properties prop = new Properties();
-        String access_token = null;
-        try {
-            prop.load(VkBot.class.getClassLoader().getResourceAsStream(CONFIG_FILENAME));
-            access_token = prop.getProperty(CONFIG_ACCESS_TOKEN_VARIABLE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return access_token;
+        return System.getenv("VK_BOT_TOKEN");
     }
 
     /**
@@ -86,15 +63,7 @@ public class VkBot extends LongPollBot implements ChatBot {
      */
     @Override
     public int getGroupId() {
-        Properties prop = new Properties();
-        Integer groupId = null;
-        try {
-            prop.load(VkBot.class.getClassLoader().getResourceAsStream(CONFIG_FILENAME));
-            groupId = Integer.valueOf(prop.getProperty(CONFIG_GROUP_ID_VARIABLE));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return groupId;
+        return Integer.parseInt(System.getenv("GROUP_ID"));
     }
 
     /**
