@@ -17,54 +17,198 @@ import java.util.*;
  * @author Ксения Шорохова
  */
 public class MessagesHandler {
+    /**
+     * Константа - сообщение об отмене тренировки
+     */
     private static final String WORKOUT_CANCEL_MESSAGE = "Тренировка отменена!";
+    /**
+     * Константа - сообщение о завершении тренировки
+     */
     private static final String WORKOUT_FINISHED_MESSAGE = "Тренировка завершена!";
+    /**
+     * Константа - сообщение о начале отдыха
+     */
     private static final String START_REST_MESSAGE = "Отдых!";
+    /**
+     * Константа - сообщение о начале работы
+     */
     private static final String START_WORK_MESSAGE = "Paботаем!";
+    /**
+     * Константа - ответное сообщение бота на непонятное сообщение польователя
+     */
     private static final String MISUNDERSTAND_MESSAGE = "Извините, я вас не понял :(, попробуйте еще раз";
+    /**
+     * Константа - сообщение о выбранных группах мышц
+     */
     private static final String CHOSEN_GROUP_MESSAGE = "Вы выбрали следующую группу мышц: ";
+    /**
+     * Константа - сообщение о выбранном уровне сложности
+     */
     private static final String CHOSEN_LEVEL_MESSAGE = "Вы выбрали уровень ";
+    /**
+     * Константа - сообщение с пописание функционала бота (ответ на команду /help)
+     */
     private static final String HELP_MESSAGE = "Привет, я - бот для создания тренировок по методу табата! Табата – система тренировок, которая была придумана японским физиологом Изуми Табата. Он доказал, что интервальные тренировки при мощности работы на 70% от МПК (максимального потребления кислорода) способны одновременно привести к росту аэробной и анаэробной выносливости. Упражнения выполняются циклами. 1 цикл: 20 секунд работы, 10 секунд отдыха, 8 подходов. Количество пражнений в 1 раунде = колчество циклов. Я составлю тебе тренировку по выбранным тобою параметрам (уровень сложности, целевая группа мышц) Пиши /start, чтобы начать!";
+    /**
+     * Константа - сообщение c просьбой выбрать уровень сложности
+     */
     private static final String CHOOSE_LEVEL_REQUEST = "Выберите уровень сложности\nновичок : 1 раунд 6 циклов\nлюбитель : 2 раунда по 8 циклов\nпродвинутый : 3 раунда по 8 циклов";
+    /**
+     * Константа - команда help
+     */
     private static final String HELP_COMMAND = "/help";
+    /**
+     * Константа - команда start
+     */
     private static final String START_COMMAND = "/start";
+    /**
+     * Константа - сообщение о первом упражнении в раунде
+     */
     private static final String FIRST_EXERCISE_IN_ROUND_MESSAGE = " раунд! 1 упражнение: ";
+    /**
+     * Константа - список возможных групп мышц и их комбинаций
+     */
     private static final String[] GROUPS_TO_CHOOSE = new String[]{"ноги", "пресс", "руки+грудь+спина",
             "пресс, руки+грудь+спина", "ноги, пресс", "ноги, руки+грудь+спина"};
+    /**
+     * Константа - вопрос о начале подхода
+     */
     private static final String START_APPROACH_QUESTION = "! Начать?";
+    /**
+     * Константа - вопрос о начале тренировки
+     */
     private static final String START_WORKOUT_QUESTION = "Начать тренировку ?";
+    /**
+     * Константа - подпись кнопки старта
+     */
     private static final String START_OPTION = "начать";
+    /**
+     * Константа - подпись кнопки завершения тренировки
+     */
     private static final String FINISH_OPTION = "завершить тренировку";
+    /**
+     * Константа - подпись кнопки показа техники выполнения
+     */
     private static final String TECH_OPTION = "техника выполнения";
+    /**
+     * Константа - подпись кнопки отмены тренировки
+     */
     private static final String CANCEL_OPTION = "отменить";
+    /**
+     * Константа - сообщение c просьбой выбрать группу мышц
+     */
     private static final String CHOOSE_GROUP_REQUEST = "Выберите целевую группу мышц";
+    /**
+     * Константа - приветственное сообщение в уведомлении
+     */
     private static final String NOTIFYING_HELLO_MESSAGE = "Привет! На этой неделе осталось тренировок: ";
+    /**
+     * Константа - сообщение в уведомлении с группами мышц, на которые польователь же делал тренировки
+     */
     private static final String USER_DID_WORKOUTS_MESSAGE = " Вы уже делали тренировку на ";
+    /**
+     * Константа - сообщение в уведомлении с рекомендацией выбрать группу мышц из тех, которые еще не тренировал пользователь
+     */
     private static final String RECOMMENDATION_MESSAGE = "рекомендую выбрать дргую групп мышц";
+    /**
+     * Константа - название дня недели воскресенье на русском
+     */
     private static final String SUNDAY = "воскресенье";
+    /**
+     * Константа - коллбэк при выборе уровня
+     */
     private static final String CHOSEN_LEVEL_CALLBACK = "chosen level";
+    /**
+     * Константа - коллбэк при выборе группы мышц
+     */
     private static final String CHOSEN_GROUP_CALLBACK = "chosen group";
+    /**
+     * Константа - коллбэк при старте тренировки
+     */
     private static final String START_WORKOUT_CALLBACK = "start workout";
+    /**
+     * Константа - коллбэк при старте тренировки (вторая часть)
+     */
     private static final String START_WORKOUT_CALLBACK_SECOND_PART = "\":\"start\"}";
+    /**
+     * Константа - коллбэк при отмене тренировки
+     */
     private static final String CANCEL_WORKOUT_CALLBACK = "cancel";
+    /**
+     * Константа - коллбэк при отмена тренировки (вторая часть)
+     */
     private static final String CANCEL_WORKOUT_CALLBACK_SECOND_PART = "\":\"cancel\"}";
+    /**
+     * Константа - коллбэк при старте подхода
+     */
     private static final String START_APPROACH_CALLBACK = "start approach";
+    /**
+     * Константа - коллбэк при старте подхода (вторая часть)
+     */
     private static final String START_APPROACH_CALLBACK_SECOND_PART = "\":\"start\"}";
+    /**
+     * Константа - коллбэк при завершении тренировки
+     */
     private static final String STOP_WORKOUT_CALLBACK = "stop";
+    /**
+     * Константа - коллбэк при завершении тренировки (вторая часть)
+     */
     private static final String STOP_WORKOUT_CALLBACK_SECOND_PART = "\":\"stop\"}";
+    /**
+     * Константа - коллбэк при показе техники выполнения
+     */
     private static final String TECH_CALLBACK = "tech";
+    /**
+     * Константа - коллбэк при показе техники выполнения (вторая часть)
+     */
     private static final String TECH_CALLBACK_SECOND_PART = "\":\"show\"}";
+    /**
+     * Константа - коллбэк при начале отдыха
+     */
     private static final String START_REST_CALLBACK = "start rest";
+    /**
+     * Константа - сообщение о том, что прошло 60 секнуд
+     */
     private static final String SIXTY_SECONDS_PASSED_MESSAGE = "60 секунд прошло! ";
+    /**
+     * Константа - сообщение о том, что прошло 10 секнуд
+     */
     private static final String TEN_SECONDS_PASSED_MESSAGE = "10 секунд прошло! ";
+    /**
+     * Константа - сообщение о текущем упражнении
+     */
     private static final String CURRENT_EXERCISE_MESSAGE = " упражнение: ";
+    /**
+     * Константа - сообщение о начале подхода
+     */
     private static final String START_CURRENT_APPROACH_MESSAGE = " подход?";
+    /**
+     * Константа - сообщение старте
+     */
     private static final String START_MESSAGE = "Начать ";
+    /**
+     * Константа - сообщение о начале отдыха между раундами
+     */
     private static final String START_REST_BETWEEN_ROUNDS_MESSAGE = "20 секунд прошло! Начать отдых между раундами 60 секунд?";
+    /**
+     * Константа - сообщение о начале отдыха между упражнениями
+     */
     private static final String START_REST_BETWEEN_EXERCISES_MESSAGE = "20 секунд прошло! Начать отдых между упражнениями 10 секунд?";
+    /**
+     * Константа - сообщение о начале отдыха между подходами
+     */
     private static final String START_REST_BETWEEN_APPROACHES_MESSAGE = "20 секунд прошло! Начать отдых между подходами 10 секунд?";
+    /**
+     * Константа - количество подходов
+     */
     private static final int APPROACH_COUNT = 8;
+    /**
+     * Константа - время работы
+     */
     private static final int WORK_TIME = 20*1000;
+    /**
+     * Константа - время между уведомлениями
+     */
     private static final int DAY_TIME = 24*60*60*1000;
 
     /**
