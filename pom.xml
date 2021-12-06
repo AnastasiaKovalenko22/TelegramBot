@@ -72,7 +72,7 @@
                         <include>target/FitnessBot-1.0-SNAPSHOT-jar-with-dependencies.jar</include>
                     </includes>
                     <processTypes>
-                        <worker>java -jar target/FitnessBot-1.0-SNAPSHOT-jar-with-dependencies.jar</worker>
+                        <web>java -jar target/FitnessBot-1.0-SNAPSHOT-jar-with-dependencies.jar</web>
                     </processTypes>
                 </configuration>
             </plugin>
