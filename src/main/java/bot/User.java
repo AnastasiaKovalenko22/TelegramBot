@@ -76,16 +76,12 @@ public class User {
         this.level = level;
         if (level.equals(WorkoutMaker.getBeginLevel())) {
             weeklyWorkoutCount = 3;
+            roundsCount = 1;
         } else if (level.equals(WorkoutMaker.getMediumLevel())) {
             weeklyWorkoutCount = 4;
-        } else
-            weeklyWorkoutCount = 5;
-        if (level.equals(WorkoutMaker.getBeginLevel())) {
-            roundsCount = 1;
-        }
-        if (level.equals(WorkoutMaker.getMediumLevel())) {
             roundsCount = 2;
         } else {
+            weeklyWorkoutCount = 5;
             roundsCount = 3;
         }
     }
@@ -192,7 +188,7 @@ public class User {
      */
     public void setCurrentExercise(int value) {
         if (value <= 7 && value >= 0) {
-            currentApproach = value;
+            currentExercise = value;
         } else
             throw new IllegalArgumentException();
     }
@@ -202,7 +198,7 @@ public class User {
      */
     public void setCurrentRound(int value) {
         if (value <= 3 && value >= 1) {
-            currentApproach = value;
+            currentRound = value;
         } else
             throw new IllegalArgumentException();
     }

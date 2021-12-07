@@ -251,7 +251,9 @@ public class MessagesHandler {
                 if (users.containsKey(chatId)){
                     users.get(chatId).getTimerForNotifying().cancel();
                 }
-                users.put(chatId, new User());
+                else{
+                    users.put(chatId, new User());
+                }
                 String [] levels = new String[]{WorkoutMaker.getBeginLevel(), WorkoutMaker.getMediumLevel(), WorkoutMaker.getAdvancedLevel()};
                 Map<String, String> callbacks = new HashMap<>();
                 for (String level : levels){
@@ -442,12 +444,14 @@ public class MessagesHandler {
             text = START_REST_BETWEEN_APPROACHES_MESSAGE;
         } else if (currentExercise < workout.size() - 1) {
             user.setCurrentApproach(1);
-            user.setCurrentExercise(currentExercise + 1);
+            currentExercise++;
+            user.setCurrentExercise(currentExercise);
             text = START_REST_BETWEEN_EXERCISES_MESSAGE;
         } else if (currentRound < roundsCount) {
             user.setCurrentApproach(1);
             user.setCurrentExercise(0);
-            user.setCurrentRound(currentRound + 1);
+            currentRound++;
+            user.setCurrentRound(currentRound);
             text = START_REST_BETWEEN_ROUNDS_MESSAGE;
         } else {
             user.setCurrentApproach(1);
