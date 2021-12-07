@@ -251,9 +251,7 @@ public class MessagesHandler {
                 if (users.containsKey(chatId)){
                     users.get(chatId).getTimerForNotifying().cancel();
                 }
-                else{
-                    users.put(chatId, new User());
-                }
+                users.put(chatId, new User());
                 String [] levels = new String[]{WorkoutMaker.getBeginLevel(), WorkoutMaker.getMediumLevel(), WorkoutMaker.getAdvancedLevel()};
                 Map<String, String> callbacks = new HashMap<>();
                 for (String level : levels){
