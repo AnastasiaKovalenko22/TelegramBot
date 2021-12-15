@@ -32,7 +32,32 @@ public class YoutubeApiController{
     /**
      * Константа - ссылка на видео
      */
-    public static final String YOUTUBE_WATCH_VIDEO_URL = "https://www.youtube.com/watch?v=";
+    private static final String YOUTUBE_WATCH_VIDEO_URL = "https://www.youtube.com/watch?v=";
+
+    /**
+     * Константа - GET-запрос
+     */
+    private static final String GET_REQUEST = "GET";
+
+    /**
+     * Константа - кодировка UTF-8
+     */
+    private static final String UTF8_ENCODING = "UTF-8";
+
+    /**
+     * Константа начала запроса для поиска упражнения
+     */
+    private static final String EXERCISE_KEYWORD_BEGINNING = "упражнение+";
+
+    /**
+     * Функция получения поля {@link YoutubeApiController#EXERCISE_KEYWORD_BEGINNING}
+     * @return - значение поля EXERCISE_KEYWORD_BEGINNING
+     */
+    public static String getExerciseKeywordBeginning(){
+        return  EXERCISE_KEYWORD_BEGINNING;
+    }
+
+
 
     /**
      * Функция получения видео по ключевому слову
@@ -42,10 +67,10 @@ public class YoutubeApiController{
      */
     public String getVideos(String keyword) throws IOException {
 
-        String urlStr = YOUTUBE_SEARCH_URL + URLEncoder.encode(keyword, "UTF-8") + YOUTUBE_SEARCH_URL_KEY;
+        String urlStr = YOUTUBE_SEARCH_URL + URLEncoder.encode(keyword, UTF8_ENCODING) + YOUTUBE_SEARCH_URL_KEY;
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
+        connection.setRequestMethod(GET_REQUEST);
         StringBuffer response = new StringBuffer();
         try (BufferedReader in =
                     new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
