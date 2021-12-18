@@ -70,10 +70,11 @@ public class TelegramBot extends TelegramLongPollingBot implements ChatBot {
                         message.getEntities().stream().filter(e -> "bot_command".equals(e.getType())).findFirst();
                 String command = message.getText().substring(commandEntity.get().getOffset(), commandEntity.get().getLength());
                 if (commandEntity.isPresent()) {
-                    messagesHandler.handleCommandMessage(command, chatId);
+                    messagesHandler.handleTextMessage(command, chatId);
                 }
             } else {
-                messagesHandler.handleUnclearMessage(chatId);
+                String text = message.getText();
+                messagesHandler.handleTextMessage(text, chatId);
             }
         }
     }

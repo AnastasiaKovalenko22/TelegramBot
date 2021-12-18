@@ -80,7 +80,7 @@ public class VkBot extends LongPollBot implements ChatBot {
             messagesHandler.handleCallback(callback, chatId);
         } else {
             String text = message.getText();
-            messagesHandler.handleCommandMessage(text, chatId);
+            messagesHandler.handleTextMessage(text, chatId);
         }
     }
 

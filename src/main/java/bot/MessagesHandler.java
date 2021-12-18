@@ -220,6 +220,8 @@ public class MessagesHandler {
      * Поле контроллера YouTubeApi
      */
     private YoutubeApiController youtubeApiController = new YoutubeApiController();
+
+    private StatisticCalculator statisticCalculator = new StatisticCalculator();
     /**
      * поле бот
      */
@@ -239,29 +241,54 @@ public class MessagesHandler {
     public MessagesHandler(){}
 
     /** Процедура обработки сообщений пользователя, содержащих команду
-     * @param command - сообщение пользователя, текстовая команда
+     * @param message - сообщение пользователя, текстовая команда
      * @param chatId - id чата
      */
-    public void handleCommandMessage(String command, String chatId) {
-        switch (command) {
-            case HELP_COMMAND:
-                bot.sendTextMessage(HELP_MESSAGE, chatId);
-                break;
-            case START_COMMAND:
-                if (users.containsKey(chatId)){
-                    users.get(chatId).getTimerForNotifying().cancel();
-                }
-                users.put(chatId, new User());
-                String [] levels = new String[]{WorkoutMaker.getBeginLevel(), WorkoutMaker.getMediumLevel(), WorkoutMaker.getAdvancedLevel()};
-                Map<String, String> callbacks = new HashMap<>();
-                for (String level : levels){
-                    callbacks.put(level, "{\"" + CHOSEN_LEVEL_CALLBACK + "\":\"" + level + "\"}");
-                }
-                bot.sendMessageWithButtons(CHOOSE_LEVEL_REQUEST, chatId, levels, callbacks);
-                break;
-            default:
-                handleUnclearMessage(chatId);
-                break;
+    public void handleTextMessage(String message, String chatId) {
+        if(message.startsWith("имя -")){
+            String username = message.split(" - ")[1];
+            if(statisticCalculator.isNotFreeUserName(username)){
+                bot.sendTextMessage("имя " + username + " уже занято, попробуйте другое", chatId);
+            }
+            else {
+                statisticCalculator.setUserName(chatId, username);
+                bot.sendTextMessage("Вам присвоено имя: "+username, chatId);
+            }
+        }
+        else {
+            switch (message) {
+                case HELP_COMMAND:
+                    bot.sendTextMessage(HELP_MESSAGE, chatId);
+                    break;
+                case START_COMMAND:
+                    if (users.containsKey(chatId)) {
+                        users.get(chatId).getTimerForNotifying().cancel();
+                    }
+                    users.put(chatId, new User());
+                    String[] levels = new String[]{WorkoutMaker.getBeginLevel(), WorkoutMaker.getMediumLevel(), WorkoutMaker.getAdvancedLevel()};
+                    Map<String, String> callbacks = new HashMap<>();
+                    for (String level : levels) {
+                        callbacks.put(level, "{\"" + CHOSEN_LEVEL_CALLBACK + "\":\"" + level + "\"}");
+                    }
+                    bot.sendMessageWithButtons(CHOOSE_LEVEL_REQUEST, chatId, levels, callbacks);
+                    break;
+                case "/top":
+                    if (!statisticCalculator.userHasUserName(chatId)) {
+                        bot.sendTextMessage("Вам необходимо выбрать имя пользователя для того, чтобы участвовать в рейтингах пользователей. Пришлите сообщение в формате: имя - ваше имя, которое вы хотите видеть в статистике(пример: имя - Вася Пупкин)", chatId);
+                    } else {
+                        String[] statTypes = new String[]{"общая", "ноги", "пресс", "руки+грудь+спина",
+                                "пресс, руки+грудь+спина", "ноги, пресс", "ноги, руки+грудь+спина"};
+                        callbacks = new HashMap<>();
+                        for (String type : statTypes) {
+                            callbacks.put(type, "{\"" + "chosen statType" + "\":\"" + type + "\"}");
+                        }
+                        bot.sendMessageWithButtons("Выберите тип статистики, который вы хотите увидеть", chatId, statTypes, callbacks);
+                    }
+                    break;
+                default:
+                    handleUnclearMessage(chatId);
+                    break;
+            }
         }
     }
 
@@ -326,6 +353,9 @@ public class MessagesHandler {
                 break;
             case STOP_WORKOUT_CALLBACK:
                 bot.sendTextMessage(WORKOUT_FINISHED_MESSAGE, chatId);
+                break;
+            case "chosen statType":
+                bot.sendTextMessage(statisticCalculator.getStatisticForUser(chatId, value), chatId);
                 break;
         }
     }
@@ -457,6 +487,15 @@ public class MessagesHandler {
             user.setCurrentRound(1);
             text = WORKOUT_FINISHED_MESSAGE;
             user.setFinishedWorkoutCount(user.getFinishedWorkoutCount() + 1);
+            String[] targetGroups = user.getTargetGroups();
+            String statType = "";
+            if(targetGroups.length == 2){
+                statType = targetGroups[0] + ", " + targetGroups[1];
+            }
+            else{
+                statType = targetGroups[0];
+            }
+            statisticCalculator.updateStat(chatId, statType);
             addTrainedGroup(chatId);
         }
         return text;
