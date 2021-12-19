@@ -1,10 +1,5 @@
 package bot;
 
-
-import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-import org.telegram.telegrambots.meta.api.objects.Message;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -212,21 +207,45 @@ public class MessagesHandler {
      */
     private static final int DAY_TIME = 24*60*60*1000;
 
+    /**
+     * Просьба выбрать имя для статистики
+     */
     private static final String CHOOSE_NAME_REQUEST = "Вам необходимо выбрать имя пользователя для того, чтобы участвовать в рейтингах пользователей. Пришлите сообщение в формате: имя - ваше имя, которое вы хотите видеть в статистике(пример: имя - Вася Пупкин)";
 
+    /**
+     * Типы статистики
+     */
     private static final String[] STATISTIC_TYPES =  new String[]{"общая", "ноги", "пресс", "руки+грудь+спина",
             "пресс, руки+грудь+спина", "ноги, пресс", "ноги, руки+грудь+спина"};
 
+    /**
+     * Коллбэк при нажатии на кнопку для выбора статистики
+     */
     private static final String CHOSEN_STAT_TYPE_CALLBACK = "chosen statType";
 
+    /**
+     * Просьба выбрать тип статистики
+     */
     private static final String CHOOSE_STATISTIC_REQUEST = "Выберите тип статистики, который вы хотите увидеть";
 
+    /**
+     * Команда для показа статистики
+     */
     private static final String TOP_COMMAND = "/top";
 
+    /**
+     * Начало сообщения о том, что имя, которое выбрал пользователь, занято
+     */
     private static final String NAME = "имя ";
 
+    /**
+     * Конец сообщения о том, что имя, которое выбрал пользователь, занято
+     */
     private static final String BUSY_NAME_MESSAGE = " уже занято, попробуйте другое";
 
+    /**
+     * Сообщении о присваивани имени для статистики
+     */
     private static final String YOUR_NAME_MESSAGE = "Вам присвоено имя: ";
     /**
      * Поле словарь пользователей (ключ - id чата, значение - экземпляр класса пользователь)
@@ -238,35 +257,14 @@ public class MessagesHandler {
      */
     private YoutubeApiController youtubeApiController = new YoutubeApiController();
 
+    /**
+     * Поле калькулятор статистики
+     */
     private StatisticCalculator statisticCalculator = new StatisticCalculator();
     /**
      * поле бот
      */
     private ChatBot bot;
-
-    public String getHelpMessage(){
-        return HELP_MESSAGE;
-    }
-
-    public String getMisunderstandMessage(){
-        return MISUNDERSTAND_MESSAGE;
-    }
-
-    public String getChooseLevelRequest(){
-        return CHOOSE_LEVEL_REQUEST;
-    }
-
-    public String getChooseNameRequest(){
-        return CHOOSE_NAME_REQUEST;
-    }
-
-    public String getYourNameMessage(){
-        return YOUR_NAME_MESSAGE;
-    }
-
-    public String getChooseStatisticRequest(){
-        return CHOOSE_STATISTIC_REQUEST;
-    }
 
     /**
      * конструктор - создание нового объекта

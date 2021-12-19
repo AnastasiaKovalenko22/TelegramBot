@@ -26,10 +26,6 @@ public class Main {
                 TelegramBotsApi telegramBotsApi = null;
                 try {
                     telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
-                try {
                     telegramBotsApi.registerBot(telegramBot);
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
@@ -39,11 +35,8 @@ public class Main {
         telegramThread.start();
         try {
             new BotsLongPoll(new VkBot()).run();
-        } catch (BotsLongPollHttpException e) {
-            e.printStackTrace();
-        } catch (BotsLongPollException e) {
+        } catch (BotsLongPollHttpException | BotsLongPollException e) {
             e.printStackTrace();
         }
-
     }
 }

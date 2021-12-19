@@ -40,7 +40,7 @@ public class MessageHandlerTests {
         MessagesHandler messagesHandler = new MessagesHandler(fakeBot);
         FakeBot.botMessages = new ArrayList<>();
         messagesHandler.handleTextMessage("/help", "123");
-        Assert.assertTrue(messagesHandler.getHelpMessage().equals(FakeBot.botMessages.get(0)));
+        Assert.assertTrue("Привет, я - бот для создания тренировок по методу табата! Табата – система тренировок, которая была придумана японским физиологом Изуми Табата. Он доказал, что интервальные тренировки при мощности работы на 70% от МПК (максимального потребления кислорода) способны одновременно привести к росту аэробной и анаэробной выносливости. Упражнения выполняются циклами. 1 цикл: 20 секунд работы, 10 секунд отдыха, 8 подходов. Количество пражнений в 1 раунде = колчество циклов. Я составлю тебе тренировку по выбранным тобою параметрам (уровень сложности, целевая группа мышц) Пиши /start, чтобы начать!".equals(FakeBot.botMessages.get(0)));
     }
     /**
      * Тест на корректную обработку непонятного сообщения
@@ -51,7 +51,7 @@ public class MessageHandlerTests {
         MessagesHandler messagesHandler = new MessagesHandler(fakeBot);
         FakeBot.botMessages = new ArrayList<>();
         messagesHandler.handleTextMessage("abraboooo", "555");
-        Assert.assertTrue(messagesHandler.getMisunderstandMessage().equals(FakeBot.botMessages.get(0)));
+        Assert.assertTrue("Извините, я вас не понял :(, попробуйте еще раз".equals(FakeBot.botMessages.get(0)));
     }
     /**
      * Тест на корректную обработку команды start
@@ -62,7 +62,7 @@ public class MessageHandlerTests {
         MessagesHandler messagesHandler = new MessagesHandler(fakeBot);
         FakeBot.botMessages = new ArrayList<>();
         messagesHandler.handleTextMessage("/start", "333");
-        Assert.assertTrue(messagesHandler.getChooseLevelRequest().equals(FakeBot.botMessages.get(0)));
+        Assert.assertTrue("Выберите уровень сложности\nновичок : 1 раунд 6 циклов\nлюбитель : 2 раунда по 8 циклов\nпродвинутый : 3 раунда по 8 циклов".equals(FakeBot.botMessages.get(0)));
     }
     /**
      * Тест на корректную обработку команды top и все, что с ней связано
@@ -73,11 +73,11 @@ public class MessageHandlerTests {
         MessagesHandler messagesHandler = new MessagesHandler(fakeBot);
         FakeBot.botMessages = new ArrayList<>();
         messagesHandler.handleTextMessage("/top", "333");
-        Assert.assertTrue(messagesHandler.getChooseNameRequest().equals(FakeBot.botMessages.get(0)));
+        Assert.assertTrue("Вам необходимо выбрать имя пользователя для того, чтобы участвовать в рейтингах пользователей. Пришлите сообщение в формате: имя - ваше имя, которое вы хотите видеть в статистике(пример: имя - Вася Пупкин)".equals(FakeBot.botMessages.get(0)));
         messagesHandler.handleTextMessage("имя - Петя", "333");
-        Assert.assertTrue((messagesHandler.getYourNameMessage() + "Петя").equals(FakeBot.botMessages.get(1)));
+        Assert.assertTrue(("Вам присвоено имя: " + "Петя").equals(FakeBot.botMessages.get(1)));
         messagesHandler.handleTextMessage("/top", "333");
-        Assert.assertTrue(messagesHandler.getChooseStatisticRequest().equals(FakeBot.botMessages.get(2)));
+        Assert.assertTrue("Выберите тип статистики, который вы хотите увидеть".equals(FakeBot.botMessages.get(2)));
         messagesHandler.handleTextMessage("имя - Петя", "333");
         Assert.assertTrue(("имя Петя уже занято, попробуйте другое").equals(FakeBot.botMessages.get(3)));
     }

@@ -94,9 +94,7 @@ public class VkBot extends LongPollBot implements ChatBot {
     public void sendTextMessage(String text, String chatId) {
         try {
             vk.messages().send(actor).message(text).peerId(Math.toIntExact(Long.parseLong(chatId))).randomId(random.nextInt(10000)).execute();
-        } catch (ApiException e) {
-            e.printStackTrace();
-        } catch (ClientException e) {
+        } catch (ApiException | ClientException e) {
             e.printStackTrace();
         }
     }
@@ -115,9 +113,7 @@ public class VkBot extends LongPollBot implements ChatBot {
         keyboard.setButtons(makeButtons(options, callbacks));
         try {
             vk.messages().send(actor).message(text).peerId(Math.toIntExact(Long.parseLong(chatId))).randomId(random.nextInt(10000)).keyboard(keyboard).execute();
-        } catch (ApiException e) {
-            e.printStackTrace();
-        } catch (ClientException e) {
+        } catch (ApiException | ClientException e) {
             e.printStackTrace();
         }
     }
