@@ -1,6 +1,7 @@
 package bot;
 
 
+import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -211,6 +212,22 @@ public class MessagesHandler {
      */
     private static final int DAY_TIME = 24*60*60*1000;
 
+    private static final String CHOOSE_NAME_REQUEST = "Вам необходимо выбрать имя пользователя для того, чтобы участвовать в рейтингах пользователей. Пришлите сообщение в формате: имя - ваше имя, которое вы хотите видеть в статистике(пример: имя - Вася Пупкин)";
+
+    private static final String[] STATISTIC_TYPES =  new String[]{"общая", "ноги", "пресс", "руки+грудь+спина",
+            "пресс, руки+грудь+спина", "ноги, пресс", "ноги, руки+грудь+спина"};
+
+    private static final String CHOSEN_STAT_TYPE_CALLBACK = "chosen statType";
+
+    private static final String CHOOSE_STATISTIC_REQUEST = "Выберите тип статистики, который вы хотите увидеть";
+
+    private static final String TOP_COMMAND = "/top";
+
+    private static final String NAME = "имя ";
+
+    private static final String BUSY_NAME_MESSAGE = " уже занято, попробуйте другое";
+
+    private static final String YOUR_NAME_MESSAGE = "Вам присвоено имя: ";
     /**
      * Поле словарь пользователей (ключ - id чата, значение - экземпляр класса пользователь)
      */
@@ -226,6 +243,30 @@ public class MessagesHandler {
      * поле бот
      */
     private ChatBot bot;
+
+    public String getHelpMessage(){
+        return HELP_MESSAGE;
+    }
+
+    public String getMisunderstandMessage(){
+        return MISUNDERSTAND_MESSAGE;
+    }
+
+    public String getChooseLevelRequest(){
+        return CHOOSE_LEVEL_REQUEST;
+    }
+
+    public String getChooseNameRequest(){
+        return CHOOSE_NAME_REQUEST;
+    }
+
+    public String getYourNameMessage(){
+        return YOUR_NAME_MESSAGE;
+    }
+
+    public String getChooseStatisticRequest(){
+        return CHOOSE_STATISTIC_REQUEST;
+    }
 
     /**
      * конструктор - создание нового объекта
@@ -248,11 +289,11 @@ public class MessagesHandler {
         if(message.startsWith("имя -")){
             String username = message.split(" - ")[1];
             if(statisticCalculator.isNotFreeUserName(username)){
-                bot.sendTextMessage("имя " + username + " уже занято, попробуйте другое", chatId);
+                bot.sendTextMessage(NAME + username + BUSY_NAME_MESSAGE, chatId);
             }
             else {
                 statisticCalculator.setUserName(chatId, username);
-                bot.sendTextMessage("Вам присвоено имя: "+username, chatId);
+                bot.sendTextMessage(YOUR_NAME_MESSAGE + username, chatId);
             }
         }
         else {
@@ -272,17 +313,16 @@ public class MessagesHandler {
                     }
                     bot.sendMessageWithButtons(CHOOSE_LEVEL_REQUEST, chatId, levels, callbacks);
                     break;
-                case "/top":
+                case TOP_COMMAND:
                     if (!statisticCalculator.userHasUserName(chatId)) {
-                        bot.sendTextMessage("Вам необходимо выбрать имя пользователя для того, чтобы участвовать в рейтингах пользователей. Пришлите сообщение в формате: имя - ваше имя, которое вы хотите видеть в статистике(пример: имя - Вася Пупкин)", chatId);
+                        bot.sendTextMessage(CHOOSE_NAME_REQUEST, chatId);
                     } else {
-                        String[] statTypes = new String[]{"общая", "ноги", "пресс", "руки+грудь+спина",
-                                "пресс, руки+грудь+спина", "ноги, пресс", "ноги, руки+грудь+спина"};
+                        String[] statTypes = STATISTIC_TYPES;
                         callbacks = new HashMap<>();
                         for (String type : statTypes) {
-                            callbacks.put(type, "{\"" + "chosen statType" + "\":\"" + type + "\"}");
+                            callbacks.put(type, "{\"" + CHOSEN_STAT_TYPE_CALLBACK + "\":\"" + type + "\"}");
                         }
-                        bot.sendMessageWithButtons("Выберите тип статистики, который вы хотите увидеть", chatId, statTypes, callbacks);
+                        bot.sendMessageWithButtons(CHOOSE_STATISTIC_REQUEST, chatId, statTypes, callbacks);
                     }
                     break;
                 default:
@@ -354,7 +394,7 @@ public class MessagesHandler {
             case STOP_WORKOUT_CALLBACK:
                 bot.sendTextMessage(WORKOUT_FINISHED_MESSAGE, chatId);
                 break;
-            case "chosen statType":
+            case CHOSEN_STAT_TYPE_CALLBACK:
                 bot.sendTextMessage(statisticCalculator.getStatisticForUser(chatId, value), chatId);
                 break;
         }
