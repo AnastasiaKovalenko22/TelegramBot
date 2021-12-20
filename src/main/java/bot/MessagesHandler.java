@@ -28,7 +28,7 @@ public class MessagesHandler {
     /**
      * Константа - сообщение о начале работы
      */
-    private static final String START_WORK_MESSAGE = "Paботаем!";
+    private static final String START_WORK_MESSAGE = "Работаем!";
     /**
      * Константа - ответное сообщение бота на непонятное сообщение польователя
      */
@@ -141,7 +141,7 @@ public class MessagesHandler {
     /**
      * Константа - коллбэк при старте подхода (вторая часть)
      */
-    private static final String START_APPROACH_CALLBACK_SECOND_PART = "\":\"start\"}";
+    private static final String START_APPROACH_CALLBACK_SECOND_PART = "\":\"20000\"}";
     /**
      * Константа - коллбэк при завершении тренировки
      */
@@ -198,10 +198,7 @@ public class MessagesHandler {
      * Константа - количество подходов
      */
     private static final int APPROACH_COUNT = 8;
-    /**
-     * Константа - время работы
-     */
-    private static final int WORK_TIME = 20*1000;
+
     /**
      * Константа - время между уведомлениями
      */
@@ -345,7 +342,7 @@ public class MessagesHandler {
                     callbacks.put(group, "{\"" + CHOSEN_GROUP_CALLBACK + "\":\"" + group + "\"}");
                 }
                 users.get(chatId).setLevel(value);
-                setNotifications(chatId);
+                setNotifications(DAY_TIME, DAY_TIME, chatId);
                 bot.sendTextMessage(CHOSEN_LEVEL_MESSAGE + value, chatId);
                 bot.sendMessageWithButtons(CHOOSE_GROUP_REQUEST, chatId, GROUPS_TO_CHOOSE, callbacks);
                 break;
@@ -371,7 +368,7 @@ public class MessagesHandler {
                 break;
             case START_APPROACH_CALLBACK:
                 bot.sendTextMessage(START_WORK_MESSAGE, chatId);
-                doExercise(chatId);
+                doExercise(Integer.parseInt(value), chatId);
                 break;
             case START_REST_CALLBACK:
                 bot.sendTextMessage(START_REST_MESSAGE, chatId);
@@ -409,13 +406,13 @@ public class MessagesHandler {
      * Процедура установки таймера для работы
      * @param chatId - ID чата пользователя
      */
-    private void doExercise(String chatId) {
+    private void doExercise(int workTime, String chatId) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             public void run() {
                 startRest(chatId);
             }
-        }, WORK_TIME);
+        }, workTime);
 
     }
 
@@ -429,7 +426,7 @@ public class MessagesHandler {
             String[] textWords = text.split(" ");
             String[] options = new String[]{START_OPTION, FINISH_OPTION};
             Map<String, String> callbacks = new HashMap<>();
-            callbacks.put(START_OPTION, "{\"" + START_REST_CALLBACK + "\":\"" + textWords[textWords.length - 2] + "\"}");
+            callbacks.put(START_OPTION, "{\"" + START_REST_CALLBACK + "\":\"" + textWords[textWords.length - 2] + "000\"}");
             callbacks.put(FINISH_OPTION, "{\"" + STOP_WORKOUT_CALLBACK + STOP_WORKOUT_CALLBACK_SECOND_PART);
             bot.sendMessageWithButtons(text, chatId, options, callbacks);
         } else {
@@ -448,7 +445,7 @@ public class MessagesHandler {
             public void run() {
                 startWork(chatId);
             }
-        }, restTime * 1000);
+        }, restTime);
     }
 
     /**
@@ -558,12 +555,12 @@ public class MessagesHandler {
      * Процедура установки таймера для уведомлений
      * @param chatId - ID чата пользователя
      */
-    private void setNotifications(String chatId) {
+    private void setNotifications(long delay, long period, String chatId) {
         users.get(chatId).getTimerForNotifying().scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 notifyUser(chatId);
             }
-        }, DAY_TIME, DAY_TIME);
+        }, delay, period);
     }
 
     /**

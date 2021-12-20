@@ -16,7 +16,11 @@ public class FakeBot implements ChatBot {
     /**
      * список ответов бота
      */
-    public List<String> botMessages = new ArrayList<>();
+    private List<String> botMessages = new ArrayList<>();
+
+    public List<String> getBotMessages(){
+        return botMessages;
+    }
 
     /**
      * Процедура отправки текстовых сообщений
