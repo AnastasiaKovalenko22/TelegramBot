@@ -1,5 +1,5 @@
 /**
- * Класс WorkoutMakerTests - тесты на для сборщика тренировки
+ * Класс WorkoutMakerTests
  * <p>
  * 17.10.2021
  *
@@ -11,7 +11,9 @@ import bot.WorkoutMaker;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class WorkoutMakerTests {
     /**
@@ -21,7 +23,7 @@ public class WorkoutMakerTests {
     public void NotCorrectGroup() {
         boolean throwException = false;
         try {
-            WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{"уши"});
+            WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.BEGIN_LEVEL, new String[]{"уши"});
         } catch (IllegalArgumentException e) {
             throwException = true;
         } finally {
@@ -37,7 +39,7 @@ public class WorkoutMakerTests {
     public void NotCorrectLevel() {
         boolean throwException = false;
         try {
-            WorkoutMaker workoutMaker = new WorkoutMaker("superchel", new String[]{WorkoutMaker.getArmsGroup()});
+            WorkoutMaker workoutMaker = new WorkoutMaker("superchel", new String[]{WorkoutMaker.ARMS_GROUP});
         } catch (IllegalArgumentException e) {
             throwException = true;
         } finally {
@@ -53,7 +55,7 @@ public class WorkoutMakerTests {
     public void EmptyGroupsArray() {
         boolean throwException = false;
         try {
-            WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{});
+            WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.BEGIN_LEVEL, new String[]{});
         } catch (IllegalArgumentException e) {
             throwException = true;
         } finally {
@@ -67,13 +69,16 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForBeginnerPress() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{WorkoutMaker.getPressGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.BEGIN_LEVEL, new String[]{WorkoutMaker.PRESS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (String item :
                 workout) {
-            Assert.assertTrue(WorkoutMaker.getPressExercises().contains(item));
+            differentExercises.add(item);
+            Assert.assertTrue(WorkoutMaker.PRESS_EXERCISES.contains(item));
         }
+        Assert.assertEquals(6, differentExercises.size());
     }
 
     /**
@@ -81,13 +86,16 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForBeginnerLegs() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{WorkoutMaker.getLegsGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.BEGIN_LEVEL, new String[]{WorkoutMaker.LEGS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (String item :
                 workout) {
-            Assert.assertTrue(WorkoutMaker.getLegsExercises().contains(item));
+            differentExercises.add(item);
+            Assert.assertTrue(WorkoutMaker.LEGS_EXERCISES.contains(item));
         }
+        Assert.assertEquals(6, differentExercises.size());
     }
 
     /**
@@ -95,13 +103,16 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForBeginnerArms() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{WorkoutMaker.getArmsGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.BEGIN_LEVEL, new String[]{WorkoutMaker.ARMS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(6, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (String item :
                 workout) {
-            Assert.assertTrue(WorkoutMaker.getArmsExercises().contains(item));
+            differentExercises.add(item);
+            Assert.assertTrue(WorkoutMaker.ARMS_EXERCISES.contains(item));
         }
+        Assert.assertEquals(6, differentExercises.size());
     }
 
     /**
@@ -109,13 +120,16 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForAmateurArms() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getMediumLevel(), new String[]{WorkoutMaker.getArmsGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.MEDIUM_LEVEL, new String[]{WorkoutMaker.ARMS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (String item :
                 workout) {
-            Assert.assertTrue(WorkoutMaker.getArmsExercises().contains(item));
+            differentExercises.add(item);
+            Assert.assertTrue(WorkoutMaker.ARMS_EXERCISES.contains(item));
         }
+        Assert.assertEquals(8, differentExercises.size());
     }
 
     /**
@@ -123,13 +137,16 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForAmateurPress() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getMediumLevel(), new String[]{WorkoutMaker.getPressGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.MEDIUM_LEVEL, new String[]{WorkoutMaker.PRESS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (String item :
                 workout) {
-            Assert.assertTrue(WorkoutMaker.getPressExercises().contains(item));
+            differentExercises.add(item);
+            Assert.assertTrue(WorkoutMaker.PRESS_EXERCISES.contains(item));
         }
+        Assert.assertEquals(8, differentExercises.size());
     }
 
     /**
@@ -137,13 +154,16 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForAdvancedLegs() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getAdvancedLevel(), new String[]{WorkoutMaker.getLegsGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.ADVANCED_LEVEL, new String[]{WorkoutMaker.LEGS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
         Assert.assertEquals(8, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (String item :
                 workout) {
-            Assert.assertTrue(WorkoutMaker.getLegsExercises().contains(item));
+            differentExercises.add(item);
+            Assert.assertTrue(WorkoutMaker.LEGS_EXERCISES.contains(item));
         }
+        Assert.assertEquals(8, differentExercises.size());
     }
 
     /**
@@ -151,14 +171,18 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForBeginnerLegsAndPress() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getBeginLevel(), new String[]{WorkoutMaker.getLegsGroup(), WorkoutMaker.getPressGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.BEGIN_LEVEL, new String[]{WorkoutMaker.LEGS_GROUP, WorkoutMaker.PRESS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
+        Assert.assertEquals(6, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (int i = 0; i < 6; i++) {
+            differentExercises.add(workout.get(i));
             if (i < 3)
-                Assert.assertTrue(WorkoutMaker.getLegsExercises().contains(workout.get(i)));
+                Assert.assertTrue(WorkoutMaker.LEGS_EXERCISES.contains(workout.get(i)));
             else
-                Assert.assertTrue(WorkoutMaker.getPressExercises().contains(workout.get(i)));
+                Assert.assertTrue(WorkoutMaker.PRESS_EXERCISES.contains(workout.get(i)));
         }
+        Assert.assertEquals(6, differentExercises.size());
     }
 
     /**
@@ -166,14 +190,18 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForAmateurArmsAndPress() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getMediumLevel(), new String[]{WorkoutMaker.getArmsGroup(), WorkoutMaker.getPressGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.MEDIUM_LEVEL, new String[]{WorkoutMaker.ARMS_GROUP, WorkoutMaker.PRESS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
+        Assert.assertEquals(8, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (int i = 0; i < 8; i++) {
+            differentExercises.add(workout.get(i));
             if (i < 4)
-                Assert.assertTrue(WorkoutMaker.getArmsExercises().contains(workout.get(i)));
+                Assert.assertTrue(WorkoutMaker.ARMS_EXERCISES.contains(workout.get(i)));
             else
-                Assert.assertTrue(WorkoutMaker.getPressExercises().contains(workout.get(i)));
+                Assert.assertTrue(WorkoutMaker.PRESS_EXERCISES.contains(workout.get(i)));
         }
+        Assert.assertEquals(8, differentExercises.size());
     }
 
     /**
@@ -181,13 +209,17 @@ public class WorkoutMakerTests {
      */
     @Test
     public void createWorkoutForAdvancedLegsAndArms() {
-        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.getAdvancedLevel(), new String[]{WorkoutMaker.getLegsGroup(), WorkoutMaker.getArmsGroup()});
+        WorkoutMaker workoutMaker = new WorkoutMaker(WorkoutMaker.ADVANCED_LEVEL, new String[]{WorkoutMaker.LEGS_GROUP, WorkoutMaker.ARMS_GROUP});
         List<String> workout = workoutMaker.createWorkout();
+        Assert.assertEquals(8, workout.size());
+        Set<String> differentExercises = new HashSet<>();
         for (int i = 0; i < 8; i++) {
+            differentExercises.add(workout.get(i));
             if (i < 4)
-                Assert.assertTrue(WorkoutMaker.getLegsExercises().contains(workout.get(i)));
+                Assert.assertTrue(WorkoutMaker.LEGS_EXERCISES.contains(workout.get(i)));
             else
-                Assert.assertTrue(WorkoutMaker.getArmsExercises().contains(workout.get(i)));
+                Assert.assertTrue(WorkoutMaker.ARMS_EXERCISES.contains(workout.get(i)));
         }
+        Assert.assertEquals(8, differentExercises.size());
     }
 }

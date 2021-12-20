@@ -74,10 +74,10 @@ public class User {
      */
     public void setLevel(String level) {
         this.level = level;
-        if (level.equals(WorkoutMaker.getBeginLevel())) {
+        if (level.equals(WorkoutMaker.BEGIN_LEVEL)) {
             weeklyWorkoutCount = 3;
             roundsCount = 1;
-        } else if (level.equals(WorkoutMaker.getMediumLevel())) {
+        } else if (level.equals(WorkoutMaker.MEDIUM_LEVEL)) {
             weeklyWorkoutCount = 4;
             roundsCount = 2;
         } else {
@@ -89,7 +89,7 @@ public class User {
     /**
      * функция получения значения поля уровень
      *
-     * @return значение поле{@link User#level}
+     * @return значение поля{@link User#level}
      */
     public String getLevel() {
         return level;
@@ -97,7 +97,7 @@ public class User {
     /**
      * функция получения значения поля количество тренировок в неделю
      *
-     * @return значение поле{@link User#weeklyWorkoutCount}
+     * @return значение поля{@link User#weeklyWorkoutCount}
      */
     public int getWeeklyWorkoutCount() {
         return weeklyWorkoutCount;
@@ -105,7 +105,7 @@ public class User {
     /**
      * функция получения значения поля количество выполненных тренировок в неделю
      *
-     * @return значение поле{@link User#finishedWorkoutCount}
+     * @return значение поля{@link User#finishedWorkoutCount}
      */
     public int getFinishedWorkoutCount() {
         return finishedWorkoutCount;
@@ -125,14 +125,14 @@ public class User {
     /**
      * функция получения значения поля уже тренированные группы мышц
      *
-     * @return значение поле{@link User#trainedGroups}
+     * @return значение поля{@link User#trainedGroups}
      */
     public String getTrainedGroups() {
         return trainedGroups;
     }
 
     /**
-     * Процедура присваивания значения полю тренированным группам мышц
+     * Процедура присваивания значения полю тренированные группы мышц
      * @param value - присваевоемое значение
      */
     public void setTrainedGroups(String value) {
@@ -149,7 +149,7 @@ public class User {
     /**
      * функция получения значения поля тренировка
      *
-     * @return значение поле{@link User#workout}
+     * @return значение поля{@link User#workout}
      */
     public List<String> getWorkout() {
         return workout;
@@ -157,7 +157,7 @@ public class User {
     /**
      * функция получения значения поля текущий раунд
      *
-     * @return значение поле{@link User#currentRound}
+     * @return значение поля{@link User#currentRound}
      */
     public int getCurrentRound() {
         return currentRound;
@@ -176,7 +176,7 @@ public class User {
     /**
      * функция получения значения поля текущее упражнение
      *
-     * @return значение поле{@link User#currentExercise}
+     * @return значение поля{@link User#currentExercise}
      */
     public int getCurrentExercise() {
         return currentExercise;
@@ -205,7 +205,7 @@ public class User {
     /**
      * функция получения значения поля количество раундов
      *
-     * @return значение поле{@link User#roundsCount}
+     * @return значение поля{@link User#roundsCount}
      */
     public int getRoundsCount() {
         return roundsCount;
@@ -218,7 +218,7 @@ public class User {
     public void setTargetGroups(String[] value) {
         for (String group :
                 value) {
-            if (!(group.equals(WorkoutMaker.getPressGroup()) || group.equals(WorkoutMaker.getArmsGroup()) || group.equals(WorkoutMaker.getLegsGroup()))) {
+            if (!(group.equals(WorkoutMaker.PRESS_GROUP) || group.equals(WorkoutMaker.ARMS_GROUP) || group.equals(WorkoutMaker.LEGS_GROUP))) {
                 throw new IllegalArgumentException();
             }
         }
@@ -227,7 +227,7 @@ public class User {
     /**
      * функция получения значения поля текущий подход
      *
-     * @return значение поле{@link User#currentApproach}
+     * @return значение поля{@link User#currentApproach}
      */
     public int getCurrentApproach() {
         return currentApproach;
@@ -235,14 +235,14 @@ public class User {
     /**
      * функция получения значения поля целевые группы мышц
      *
-     * @return значение поле{@link User#targetGroups}
+     * @return значение поля{@link User#targetGroups}
      */
     public String[] getTargetGroups() {
         return targetGroups;
     }
 
     /**
-     * Поле таймер для уведомнений о количестве оставшихся тренировок на неделе
+     * Поле таймер для уведомлений о количестве оставшихся тренировок на неделе
      */
     private Timer timerForNotifying = new Timer();
 
@@ -256,7 +256,7 @@ public class User {
 
     /**
      * функция получения уведомлений
-     * @return значение поле{@link User#timerForNotifying}
+     * @return значение поля{@link User#timerForNotifying}
      */
     public Timer getTimerForNotifying() {
         return timerForNotifying;

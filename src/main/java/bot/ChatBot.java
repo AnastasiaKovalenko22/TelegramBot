@@ -11,14 +11,14 @@ import java.util.Map;
  */
 public interface ChatBot {
     /**
-     * Процедура отправки текстового сообщения ползователю
+     * Процедура отправки текстового сообщения пользователю
      * @param text - текст сообщения
      * @param chatId - id чата
      */
     void sendTextMessage(String text, String chatId);
 
     /**
-     * Процедура отправки сообщений с кнопками
+     * Процедура отправки сообщения с кнопками
      * @param text - текст сообщения
      * @param chatId - id чата
      * @param options - подписи кнопок

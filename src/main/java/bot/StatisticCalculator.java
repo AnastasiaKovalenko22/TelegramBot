@@ -84,7 +84,7 @@ public class StatisticCalculator {
     /**
      * Процедура увеличения колисчества выолненных тренировок на 1
      * @param chatId - id чата
-     * @param data - данные в которых нужно увеличить количество тренировок
+     * @param data - данные, в которых нужно увеличить количество тренировок
      */
     private void addFinishedWorkoutToStatData(String chatId, Map<String, Integer> data){
         if (!generalStatData.containsKey(chatId)){

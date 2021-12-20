@@ -12,7 +12,7 @@ import org.junit.Test;
  */
 public class StatisticCalculatorTests {
     /**
-     * Тест на корректное сообщние осо статистикой в лучае если пользователь в топе
+     * Тест на корректное сообщение со статистикой в случае, если пользователь в топе
      */
     @Test
     public void returnsCorrectStatisticMessageWhenUserIsInTop(){
@@ -25,7 +25,7 @@ public class StatisticCalculatorTests {
                 calculator.updateStat(chatId + i, "пресс");
             }
         }
-        Assert.assertTrue(("1) Имя пользователя: user10, количество тренировок: 10\n" +
+        Assert.assertEquals(("1) Имя пользователя: user10, количество тренировок: 10\n" +
                 "2) Имя пользователя: user9, количество тренировок: 9\n" +
                 "3) Имя пользователя: user8, количество тренировок: 8\n" +
                 "4) Имя пользователя: user7, количество тренировок: 7\n" +
@@ -35,11 +35,11 @@ public class StatisticCalculatorTests {
                 "8) Имя пользователя: user3, количество тренировок: 3\n" +
                 "9) Имя пользователя: user2, количество тренировок: 2\n" +
                 "10) Имя пользователя: user1, количество тренировок: 1\n" +
-                "Вы на 8 месте, чтобы догнать ближайшего соперника необходимо сделать тренировок: 1").equals(calculator.getStatisticForUser(chatId + 3, "пресс")));
+                "Вы на 8 месте, чтобы догнать ближайшего соперника необходимо сделать тренировок: 1"), calculator.getStatisticForUser(chatId + 3, "пресс"));
     }
 
     /**
-     * Тест на корректное сообщние осо статистикой в лучае если пользователь не в топе
+     * Тест на корректное сообщние со статистикой в случае, если пользователь не в топе
      */
     @Test
     public void returnsCorrectStatisticMessageWhenUserIsNotInTop(){
@@ -52,7 +52,7 @@ public class StatisticCalculatorTests {
                 calculator.updateStat(chatId + i, "ноги");
             }
         }
-        Assert.assertTrue(("1) Имя пользователя: user15, количество тренировок: 15\n" +
+        Assert.assertEquals(("1) Имя пользователя: user15, количество тренировок: 15\n" +
                 "2) Имя пользователя: user14, количество тренировок: 14\n" +
                 "3) Имя пользователя: user13, количество тренировок: 13\n" +
                 "4) Имя пользователя: user12, количество тренировок: 12\n" +
@@ -62,11 +62,11 @@ public class StatisticCalculatorTests {
                 "8) Имя пользователя: user8, количество тренировок: 8\n" +
                 "9) Имя пользователя: user7, количество тренировок: 7\n" +
                 "10) Имя пользователя: user6, количество тренировок: 6\n" +
-                "Вы на 13 месте, чтобы догнать ближайшего соперника необходимо сделать тренировок: 1").equals(calculator.getStatisticForUser(chatId + 3, "ноги")));
+                "Вы на 13 месте, чтобы догнать ближайшего соперника необходимо сделать тренировок: 1"), calculator.getStatisticForUser(chatId + 3, "ноги"));
     }
 
     /**
-     * Тест на корректное сообщние осо статистикой в лучае если пользователь не сделал тренировку для участия в данном типе статистики
+     * Тест на корректное сообщние со статистикой в случае, если пользователь не сделал тренировку для участия в данном типе статистики
      */
     @Test
     public void returnsCorrectStatisticMessageWhenUserHasNotDoneWorkout(){
@@ -79,6 +79,6 @@ public class StatisticCalculatorTests {
                 calculator.updateStat(chatId + i, "ноги");
             }
         }
-        Assert.assertTrue(("Вы еще не сделали ни одной тренировки в этой категории").equals(calculator.getStatisticForUser(chatId + 1, "ноги")));
+        Assert.assertEquals("Вы еще не сделали ни одной тренировки в этой категории", calculator.getStatisticForUser(chatId + 1, "ноги"));
     }
 }

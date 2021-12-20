@@ -42,7 +42,7 @@ public class MessagesHandler {
      */
     private static final String CHOSEN_LEVEL_MESSAGE = "Вы выбрали уровень ";
     /**
-     * Константа - сообщение с пописание функционала бота (ответ на команду /help)
+     * Константа - сообщение с описанием функционала бота (ответ на команду /help)
      */
     private static final String HELP_MESSAGE = "Привет, я - бот для создания тренировок по методу табата! Табата – система тренировок, которая была придумана японским физиологом Изуми Табата. Он доказал, что интервальные тренировки при мощности работы на 70% от МПК (максимального потребления кислорода) способны одновременно привести к росту аэробной и анаэробной выносливости. Упражнения выполняются циклами. 1 цикл: 20 секунд работы, 10 секунд отдыха, 8 подходов. Количество пражнений в 1 раунде = колчество циклов. Я составлю тебе тренировку по выбранным тобою параметрам (уровень сложности, целевая группа мышц) Пиши /start, чтобы начать!";
     /**
@@ -99,7 +99,7 @@ public class MessagesHandler {
      */
     private static final String NOTIFYING_HELLO_MESSAGE = "Привет! На этой неделе осталось тренировок: ";
     /**
-     * Константа - сообщение в уведомлении с группами мышц, на которые польователь же делал тренировки
+     * Константа - сообщение в уведомлении с группами мышц, на которые пользователь уже делал тренировки
      */
     private static final String USER_DID_WORKOUTS_MESSAGE = " Вы уже делали тренировку на ";
     /**
@@ -131,7 +131,7 @@ public class MessagesHandler {
      */
     private static final String CANCEL_WORKOUT_CALLBACK = "cancel";
     /**
-     * Константа - коллбэк при отмена тренировки (вторая часть)
+     * Константа - коллбэк при отмене тренировки (вторая часть)
      */
     private static final String CANCEL_WORKOUT_CALLBACK_SECOND_PART = "\":\"cancel\"}";
     /**
@@ -179,7 +179,7 @@ public class MessagesHandler {
      */
     private static final String START_CURRENT_APPROACH_MESSAGE = " подход?";
     /**
-     * Константа - сообщение старте
+     * Константа - сообщение о старте
      */
     private static final String START_MESSAGE = "Начать ";
     /**
@@ -244,7 +244,7 @@ public class MessagesHandler {
     private static final String BUSY_NAME_MESSAGE = " уже занято, попробуйте другое";
 
     /**
-     * Сообщении о присваивани имени для статистики
+     * Сообщение о присваивании имени для статистики
      */
     private static final String YOUR_NAME_MESSAGE = "Вам присвоено имя: ";
     /**
@@ -304,7 +304,7 @@ public class MessagesHandler {
                         users.get(chatId).getTimerForNotifying().cancel();
                     }
                     users.put(chatId, new User());
-                    String[] levels = new String[]{WorkoutMaker.getBeginLevel(), WorkoutMaker.getMediumLevel(), WorkoutMaker.getAdvancedLevel()};
+                    String[] levels = new String[]{WorkoutMaker.BEGIN_LEVEL, WorkoutMaker.MEDIUM_LEVEL, WorkoutMaker.ADVANCED_LEVEL};
                     Map<String, String> callbacks = new HashMap<>();
                     for (String level : levels) {
                         callbacks.put(level, "{\"" + CHOSEN_LEVEL_CALLBACK + "\":\"" + level + "\"}");
@@ -380,7 +380,7 @@ public class MessagesHandler {
             case TECH_CALLBACK:
                 String text = null;
                 try {
-                    text = youtubeApiController.getVideos(YoutubeApiController.getExerciseKeywordBeginning() + users.get(chatId).getExerciseName().replaceAll(" ", "+"));
+                    text = youtubeApiController.getVideos(YoutubeApiController.EXERCISE_KEYWORD_BEGINNING + users.get(chatId).getExerciseName().replaceAll(" ", "+"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -420,7 +420,7 @@ public class MessagesHandler {
     }
 
     /**
-     * Процедура отправки поьзователю сообщений о завершении рабочего времени
+     * Процедура отправки пользователю сообщений о завершении рабочего времени
      * @param chatId - ID чата пользователя
      */
     private void startRest(String chatId) {
