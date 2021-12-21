@@ -18,6 +18,10 @@ public class FakeBot implements ChatBot {
      */
     private List<String> botMessages = new ArrayList<>();
 
+    /**
+     * Функция получения значения поля{@link FakeBot#botMessages}
+     * @return значение поля{@link FakeBot#botMessages}
+     */
     public List<String> getBotMessages(){
         return botMessages;
     }

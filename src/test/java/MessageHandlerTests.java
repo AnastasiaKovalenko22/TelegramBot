@@ -1,12 +1,7 @@
-import bot.ChatBot;
 import bot.MessagesHandler;
-import bot.User;
-import bot.WorkoutMaker;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.imageio.spi.ImageInputStreamSpi;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -172,6 +167,9 @@ public class MessageHandlerTests {
         Assert.assertEquals("Вы еще не сделали ни одной тренировки в этой категории", fakeBot.getBotMessages().get(1));
     }
 
+    /**
+     * Тест на корректное сообщение о начале отдыха между подходами
+     */
     @Test
     public void returnsCorrectStartRestBetweenApproachesQuestion() {
         FakeBot fakeBot = new FakeBot();
@@ -189,6 +187,9 @@ public class MessageHandlerTests {
         Assert.assertEquals("20 секунд прошло! Начать отдых между подходами 10 секунд?", fakeBot.getBotMessages().get(fakeBot.getBotMessages().size() - 1));
     }
 
+    /**
+     * Тест на корректное сообщение о начале отдыха между упражнениями
+     */
     @Test
     public void returnsCorrectStartRestBetweenExercisesQuestion() {
         FakeBot fakeBot = new FakeBot();
@@ -212,6 +213,9 @@ public class MessageHandlerTests {
         Assert.assertEquals("20 секунд прошло! Начать отдых между упражнениями 10 секунд?", fakeBot.getBotMessages().get(fakeBot.getBotMessages().size() - 1));
     }
 
+    /**
+     * Тест на корректное сообщение о начале отдыха между раундами
+     */
     @Test
     public void returnsCorrectStartRestBetweenRoundsQuestion() {
         FakeBot fakeBot = new FakeBot();
@@ -234,7 +238,9 @@ public class MessageHandlerTests {
         }
         Assert.assertEquals("20 секунд прошло! Начать отдых между раундами 60 секунд?", fakeBot.getBotMessages().get(fakeBot.getBotMessages().size() - 1));
     }
-
+    /**
+     * Тест на корректное сообщение о начале первого упражнения в раунде
+     */
     @Test
     public void returnsCorrectStartFirstExerciseQuestion() {
         FakeBot fakeBot = new FakeBot();
@@ -248,6 +254,9 @@ public class MessageHandlerTests {
         Assert.assertTrue(matcher.find());
     }
 
+    /**
+     * Тест на корректное сообщение о начале не первого подхода
+     */
     @Test
     public void returnsCorrectStartNotFirstApproachQuestion() {
         FakeBot fakeBot = new FakeBot();
@@ -267,6 +276,9 @@ public class MessageHandlerTests {
         Assert.assertEquals("10 секунд прошло! Начать 2 подход?", fakeBot.getBotMessages().get(fakeBot.getBotMessages().size() - 1));
     }
 
+    /**
+     * Тест на корректное сообщение о начале очередного упражнения
+     */
     @Test
     public void returnsCorrectStartExerciseQuestion() {
         FakeBot fakeBot = new FakeBot();
