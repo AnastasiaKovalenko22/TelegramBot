@@ -22,42 +22,32 @@ public class YoutubeApiController{
     /**
      * Константа - часть ссылки для поиска видео до ключевого слова
      */
-    private static final String YOUTUBE_SEARCH_URL = "https://youtube.googleapis.com/youtube/v3/search?part=id&maxResults=10&q=";
+    public static final String YOUTUBE_SEARCH_URL = "https://youtube.googleapis.com/youtube/v3/search?part=id&maxResults=10&q=";
 
     /**
      * Константа - продолжение ссыллки после ключевого слова
      */
-    private static final String YOUTUBE_SEARCH_URL_KEY = "&key=AIzaSyAr-Ldoe67-ByfDlWRrj3Rx2iTCObxVe6A";
+    public static final String YOUTUBE_SEARCH_URL_KEY = "&key=AIzaSyAr-Ldoe67-ByfDlWRrj3Rx2iTCObxVe6A";
 
     /**
      * Константа - ссылка на видео
      */
-    private static final String YOUTUBE_WATCH_VIDEO_URL = "https://www.youtube.com/watch?v=";
+    public static final String YOUTUBE_WATCH_VIDEO_URL = "https://www.youtube.com/watch?v=";
 
     /**
      * Константа - GET-запрос
      */
-    private static final String GET_REQUEST = "GET";
+    public static final String GET_REQUEST = "GET";
 
     /**
      * Константа - кодировка UTF-8
      */
-    private static final String UTF8_ENCODING = "UTF-8";
+    public static final String UTF8_ENCODING = "UTF-8";
 
     /**
-     * Константа начала запроса для поиска упражнения
+     * Константа - начало запроса для поиска упражнения
      */
-    private static final String EXERCISE_KEYWORD_BEGINNING = "упражнение+";
-
-    /**
-     * Функция получения поля {@link YoutubeApiController#EXERCISE_KEYWORD_BEGINNING}
-     * @return - значение поля EXERCISE_KEYWORD_BEGINNING
-     */
-    public static String getExerciseKeywordBeginning(){
-        return  EXERCISE_KEYWORD_BEGINNING;
-    }
-
-
+    public static final String EXERCISE_KEYWORD_BEGINNING = "упражнение+";
 
     /**
      * Функция получения видео по ключевому слову

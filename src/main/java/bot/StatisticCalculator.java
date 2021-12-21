@@ -13,43 +13,98 @@ import java.util.concurrent.PriorityBlockingQueue;
  * @author Ксения Шорохова
  */
 public class StatisticCalculator {
+
     /**
-     * Поле данные для общей статистики
+     * Константа - общий тип статистики
+     */
+    private static final String GENERAL_STAT_TYPE = "общая";
+
+    /**
+     * Константа - тип статистики пресс
+     */
+    private static final String PRESS_STAT_TYPE = "пресс";
+
+    /**
+     * Константа - тип статистики ноги
+     */
+    private static final String LEGS_STAT_TYPE = "ноги";
+
+    /**
+     * Константа - тип статистики руки, грудь и спина
+     */
+    private static final String ARMS_STAT_TYPE = "руки+грудь+спина";
+
+    /**
+     * Константа - тип статистики пресс и руки,грудь и спина
+     */
+    private static final String PRESS_AND_ARMS_STAT_TYPE = "пресс, руки+грудь+спина";
+
+    /**
+     * Константа - тип статистики пресс и ноги
+     */
+    private static final String LEGS_AND_PRESS_STAT_TYPE = "ноги, пресс";
+
+    /**
+     * Константа - тип статистики ноги и руки,грудь и спина
+     */
+    private static final String LEGS_AND_ARMS_STAT_TYPE = "ноги, руки+грудь+спина";
+
+    /**
+     * Константа - сообщение о том, что пользователь еще не сделал ни одной тренировки
+     */
+    private static final String YOU_HAVE_NOT_DONE_ANY_WORKOUTS_MESSAGE = "Вы еще не сделали ни одной тренировки в этой категории";
+
+    /**
+     * Константа - сообщение о том, что пользователь на первом месте
+     */
+    private static final String FIRST_PLACE_MESSAGE = "Вы на 1 месте, поздравляю!";
+
+    /**
+     * Константа - начало сообщения о месте пользователя
+     */
+    private static final String YOUR_PLACE_MESSAGE = "Вы на ";
+
+    /**
+     * Константа - конец сообщения о месте пользователя
+     */
+    private static final String YOUR_PLACE_MESSAGE_SECOND_PART = " месте, чтобы догнать ближайшего соперника необходимо сделать тренировок: ";
+    /**
+     * Поле данные для общей статистики, (ключ - id чата, значение - количество тренировок)
      */
     private Map<String, Integer> generalStatData = new HashMap<>();
 
     /**
-     * Поле данные для статистики по тренировкам на пресс
+     * Поле данные для статистики по тренировкам на пресс, (ключ - id чата, значение - количество тренировок)
      */
     private Map<String, Integer> pressStatData = new HashMap<>();
 
     /**
-     * Поле данные для статистики по тренировкам на ноги
+     * Поле данные для статистики по тренировкам на ноги, (ключ - id чата, значение - количество тренировок)
      */
     private Map<String, Integer> legsStatData = new HashMap<>();
 
     /**
-     * Поле данные для статистики по тренировкам на руки, грудь и спину
+     * Поле данные для статистики по тренировкам на руки, грудь и спину, (ключ - id чата, значение - количество тренировок)
      */
     private Map<String, Integer> armsStatData = new HashMap<>();
 
     /**
-     * Поле данные для статистики по тренировкам на пресс и руки, грудь и спину
+     * Поле данные для статистики по тренировкам на пресс и руки, грудь и спину, (ключ - id чата, значение - количество тренировок)
      */
     private Map<String, Integer> pressAndArmsStatData = new HashMap<>();
 
     /**
-     * Поле данные для статистики по тренировкам на ноги и пресс
+     * Поле данные для статистики по тренировкам на ноги и пресс, (ключ - id чата, значение - количество тренировок)
      */
     private Map<String, Integer> pressAndLegsStatData = new HashMap<>();
 
     /**
-     * Поле данные для статистики по тренировкам на ноги и руки, грудь и спину
+     * Поле данные для статистики по тренировкам на ноги и руки, грудь и спину, (ключ - id чата, значение - количество тренировок)
      */
     private Map<String, Integer> armsAndLegsStatData = new HashMap<>();
 
     /**
-     * Поле данные о имени пользователя для соответствующего id чата пользователя
+     * Поле данные о имени пользователя для соответствующего id чата пользователя, (ключ - id чата, значение - имя пользователя)
      */
     private Map<String, String> userNames = new HashMap<>();
 
@@ -60,23 +115,26 @@ public class StatisticCalculator {
      */
     public void updateStat(String chatId, String statType){
         switch (statType){
-            case "пресс":
+            case PRESS_STAT_TYPE:
                 addFinishedWorkoutToStatData(chatId, pressStatData);
                 break;
-            case "ноги":
+            case LEGS_STAT_TYPE:
                 addFinishedWorkoutToStatData(chatId, legsStatData);
                 break;
-            case "руки+грудь+спина":
+            case ARMS_STAT_TYPE:
                 addFinishedWorkoutToStatData(chatId, armsStatData);
                 break;
-            case "пресс, руки+грудь+спина":
+            case PRESS_AND_ARMS_STAT_TYPE:
                 addFinishedWorkoutToStatData(chatId, pressAndArmsStatData);
                 break;
-            case "ноги, пресс":
+            case LEGS_AND_PRESS_STAT_TYPE:
                 addFinishedWorkoutToStatData(chatId, pressAndLegsStatData);
                 break;
-            case "ноги, руки+грудь+спина":
+            case LEGS_AND_ARMS_STAT_TYPE:
                 addFinishedWorkoutToStatData(chatId, armsAndLegsStatData);
+                break;
+            case GENERAL_STAT_TYPE:
+                addFinishedWorkoutToStatData(chatId, generalStatData);
                 break;
         }
     }
@@ -84,7 +142,7 @@ public class StatisticCalculator {
     /**
      * Процедура увеличения колисчества выолненных тренировок на 1
      * @param chatId - id чата
-     * @param data - данные в которых нужно увеличить количество тренировок
+     * @param data - данные, в которых нужно увеличить количество тренировок
      */
     private void addFinishedWorkoutToStatData(String chatId, Map<String, Integer> data){
         if (!generalStatData.containsKey(chatId)){
@@ -93,11 +151,12 @@ public class StatisticCalculator {
         else {
             generalStatData.put(chatId, generalStatData.get(chatId) + 1);
         }
-        if (!data.containsKey(chatId)){
-            data.put(chatId, 1);
-        }
-        else{
-            data.put(chatId, data.get(chatId) + 1);
+        if (!data.equals(generalStatData)) {
+            if (!data.containsKey(chatId)) {
+                data.put(chatId, 1);
+            } else {
+                data.put(chatId, data.get(chatId) + 1);
+            }
         }
     }
 
@@ -137,25 +196,25 @@ public class StatisticCalculator {
     public String getStatisticForUser(String chatId, String statType){
         String result = "";
         switch (statType){
-            case "общая":
+            case GENERAL_STAT_TYPE:
                 result = createStat(chatId, generalStatData);
                 break;
-            case "пресс":
+            case PRESS_STAT_TYPE:
                 result = createStat(chatId, pressStatData);
                 break;
-            case "ноги":
+            case LEGS_STAT_TYPE:
                 result = createStat(chatId, legsStatData);
                 break;
-            case "руки+грудь+спина":
+            case ARMS_STAT_TYPE:
                 result = createStat(chatId, armsStatData);
                 break;
-            case "пресс, руки+грудь+спина":
+            case PRESS_AND_ARMS_STAT_TYPE:
                 result = createStat(chatId, pressAndArmsStatData);
                 break;
-            case "ноги, пресс":
+            case LEGS_AND_PRESS_STAT_TYPE:
                 result = createStat(chatId, pressAndLegsStatData);
                 break;
-            case "ноги, руки+грудь+спина":
+            case LEGS_AND_ARMS_STAT_TYPE:
                 result = createStat(chatId, armsAndLegsStatData);
                 break;
         }
@@ -170,7 +229,7 @@ public class StatisticCalculator {
      */
     private String createStat(String chatId, Map<String, Integer> data){
         if (!data.containsKey(chatId)){
-            return "Вы еще не сделали ни одной тренировки в этой категории";
+            return YOU_HAVE_NOT_DONE_ANY_WORKOUTS_MESSAGE;
         }
         String result = "";
         Queue<StatisticInfo> rating = new PriorityBlockingQueue<>();
@@ -178,30 +237,36 @@ public class StatisticCalculator {
              data.entrySet()) {
             rating.add(new StatisticInfo(userNames.get(entry.getKey()), entry.getValue()));
         }
-        Integer previous = null;
+        Integer closestOpponentResult = null;
         Integer currentUserPlace = null;
-        Integer currentUserResult = data.get(chatId);
+        int currentUserResult = data.get(chatId);
+        int lowestResult = rating.peek().getFinishedWorkoutsCount();
+        int place = 1;
         int size = rating.size();
         for (int i = 1; i <= size; i++){
             StatisticInfo currentPlaceInfo = rating.poll();
+            if(currentPlaceInfo.getFinishedWorkoutsCount() < lowestResult){
+                lowestResult = currentPlaceInfo.getFinishedWorkoutsCount();
+                place++;
+            }
             if (i <= 10) {
-                result += i + ") " + currentPlaceInfo + "\n";
+                result += place + ") " + currentPlaceInfo + "\n";
             }
             if (currentPlaceInfo.getFinishedWorkoutsCount() == currentUserResult && currentPlaceInfo.getUserName().equals(userNames.get(chatId))){
-                currentUserPlace = i;
+                currentUserPlace = place;
                 if (i > 10) {
                     break;
                 }
             }
             else if (currentUserPlace == null && currentPlaceInfo.getFinishedWorkoutsCount() > currentUserResult){
-                previous = currentPlaceInfo.getFinishedWorkoutsCount();
+                closestOpponentResult = currentPlaceInfo.getFinishedWorkoutsCount();
             }
         }
-        if (previous != null){
-            result += "Вы на " + currentUserPlace + " месте, чтобы догнать ближайшего соперника необходимо сделать тренировок: " + (previous - currentUserResult);
+        if (closestOpponentResult != null){
+            result += YOUR_PLACE_MESSAGE + currentUserPlace + YOUR_PLACE_MESSAGE_SECOND_PART + (closestOpponentResult - currentUserResult);
         }
         else{
-            result += "Вы на 1 месте, поздравляю!";
+            result += FIRST_PLACE_MESSAGE;
         }
         return result;
     }

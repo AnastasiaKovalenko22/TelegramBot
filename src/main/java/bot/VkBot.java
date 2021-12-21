@@ -13,7 +13,6 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.messages.*;
 import com.vk.api.sdk.objects.messages.KeyboardButton;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
